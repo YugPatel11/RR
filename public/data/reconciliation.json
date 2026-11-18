@@ -1,0 +1,162 @@
+{
+  "raw_ball_rows": 200999,
+  "raw_unique_matches_in_ball_by_ball": 867,
+  "raw_matches_in_matches_csv": 883,
+  "innings_greater_than_2_rows": 38,
+  "super_over_matches": 6,
+  "balls_after_super_overs": 200961,
+  "no_result_matches_excluded_count": 24,
+  "no_result_balls_excluded_count": 1753,
+  "analyzed_balls": 199208,
+  "analyzed_matches": 843,
+  "target_balls": 199208,
+  "target_matches": 843,
+  "reconciled": true,
+  "explanation": "The difference between the raw count (200,999 balls, 867 matches) and the analyzed dataset (199,208 balls, 843 matches) is fully explained by two explicit filter criteria: (1) Exclusion of 38 Super Over balls (innings 3 & 4) across 6 fixtures to avoid unrepresentative leverage distortion; (2) Exclusion of 1,753 balls from 24 incomplete/abandoned matches marked as 'No Result' or 'Abandoned' in matches.csv where win-probability and required-run-rate equations cannot be computed. Calculation: 200,999 raw balls - 38 super over balls - 1,753 no-result balls = exactly 199,208 balls across 843 decisive matches.",
+  "excluded_matches": [
+    {
+      "match_id": 15410,
+      "match_date": "2022-06-19",
+      "result": "Match Abandoned",
+      "balls": 22
+    },
+    {
+      "match_id": 15546,
+      "match_date": "2022-07-02",
+      "result": "No Result",
+      "balls": 82
+    },
+    {
+      "match_id": 17765,
+      "match_date": "2022-10-14",
+      "result": "No Result",
+      "balls": 100
+    },
+    {
+      "match_id": 20226,
+      "match_date": "2023-05-03",
+      "result": "Match Abandoned",
+      "balls": 118
+    },
+    {
+      "match_id": 21406,
+      "match_date": "2023-04-20",
+      "result": "Match Abandoned",
+      "balls": 118
+    },
+    {
+      "match_id": 28333,
+      "match_date": "2023-12-29",
+      "result": "No Result",
+      "balls": 66
+    },
+    {
+      "match_id": 31707,
+      "match_date": "2024-04-18",
+      "result": "No Result",
+      "balls": 2
+    },
+    {
+      "match_id": 35424,
+      "match_date": "2024-08-24",
+      "result": "No Result",
+      "balls": 125
+    },
+    {
+      "match_id": 37353,
+      "match_date": "2024-11-18",
+      "result": "No Result",
+      "balls": 30
+    },
+    {
+      "match_id": 39983,
+      "match_date": "2025-02-22",
+      "result": "No Result",
+      "balls": 56
+    },
+    {
+      "match_id": 39985,
+      "match_date": "2025-02-25",
+      "result": "No Result",
+      "balls": 113
+    },
+    {
+      "match_id": 40737,
+      "match_date": "2025-04-26",
+      "result": "No Result",
+      "balls": 130
+    },
+    {
+      "match_id": 40748,
+      "match_date": "2025-05-05",
+      "result": "No Result",
+      "balls": 123
+    },
+    {
+      "match_id": 40751,
+      "match_date": "2025-05-08",
+      "result": "No Result",
+      "balls": 63
+    },
+    {
+      "match_id": 41975,
+      "match_date": "2025-10-29",
+      "result": "No Result",
+      "balls": 60
+    },
+    {
+      "match_id": 41979,
+      "match_date": "2025-11-08",
+      "result": "No Result",
+      "balls": 29
+    },
+    {
+      "match_id": 45390,
+      "match_date": "2026-07-01",
+      "result": "No Result",
+      "balls": 122
+    },
+    {
+      "match_id": 45908,
+      "match_date": "2025-09-03",
+      "result": "No Result",
+      "balls": 114
+    },
+    {
+      "match_id": 46311,
+      "match_date": "2025-10-03",
+      "result": "No Result",
+      "balls": 13
+    },
+    {
+      "match_id": 46747,
+      "match_date": "2025-10-18",
+      "result": "No Result",
+      "balls": 124
+    },
+    {
+      "match_id": 46749,
+      "match_date": "2025-10-23",
+      "result": "No Result",
+      "balls": 25
+    },
+    {
+      "match_id": 47968,
+      "match_date": "2025-11-10",
+      "result": "No Result",
+      "balls": 41
+    },
+    {
+      "match_id": 50136,
+      "match_date": "2026-04-06",
+      "result": "No Result",
+      "balls": 22
+    },
+    {
+      "match_id": 50408,
+      "match_date": "2026-10-17",
+      "result": "No Result",
+      "balls": 55
+    }
+  ]
+}

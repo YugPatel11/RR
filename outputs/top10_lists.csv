@@ -1,0 +1,21 @@
+category,rank,player_name,team,pressure_rating,key_stat,top10_stability_pct
+batter,1,Vaibhav Sooryavanshi,India,0.896,SR under pressure: 256.1,99.4
+batter,2,Ashutosh Sharma,Delhi Capitals,0.674,SR under pressure: 180.2,67.0
+batter,3,Reeza Hendricks,South Africa,0.658,SR under pressure: 178.8,61.2
+batter,4,Glenn Maxwell,Australia,0.646,SR under pressure: 180.6,66.2
+batter,5,Shubham Dubey,Rajasthan Royals,0.634,SR under pressure: 181.3,66.4
+batter,6,Dinesh Karthik,Royal Challengers Bengaluru,0.631,SR under pressure: 186.0,79.6
+batter,7,Riyan Parag,Rajasthan Royals,0.615,SR under pressure: 163.7,7.2
+batter,8,Travis Head,Australia,0.607,SR under pressure: 170.2,32.2
+batter,9,Tim David,Australia,0.605,SR under pressure: 187.7,91.6
+batter,10,David Miller,Delhi Capitals,0.595,SR under pressure: 164.6,5.6
+bowler,1,Sufiyan Muqeem,Pakistan,0.867,Economy under pressure: 5.0,99.6
+bowler,2,Jamie Overton,England,0.768,Economy under pressure: 6.5,58.4
+bowler,3,Abrar Ahmed,Pakistan,0.733,Economy under pressure: 5.3,98.6
+bowler,4,Matheesha Pathirana,Sri Lanka,0.723,Economy under pressure: 6.9,21.4
+bowler,5,Blessing Muzarabani,Zimbabwe,0.699,Economy under pressure: 7.9,11.0
+bowler,6,Mohammad Rishad Hossain,Bangladesh,0.684,Economy under pressure: 6.9,35.8
+bowler,7,Shaheen Afridi,Pakistan,0.682,Economy under pressure: 6.5,64.8
+bowler,8,Gerald Coetzee,South Africa,0.679,Economy under pressure: 7.4,12.6
+bowler,9,Anshul Kamboj,Chennai Super Kings,0.673,Economy under pressure: 7.3,23.6
+bowler,10,Mohammad Nawaz,Pakistan,0.658,Economy under pressure: 6.3,70.8

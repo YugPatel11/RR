@@ -1,0 +1,106 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 800" width="800" height="800">
+  <defs>
+    <!-- Dark Navy to RR Pink Background Gradient -->
+    <linearGradient id="bgGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#070B1E" />
+      <stop offset="50%" stop-color="#0B133A" />
+      <stop offset="100%" stop-color="#280826" />
+    </linearGradient>
+    
+    <!-- Gold Metallic Gradient -->
+    <linearGradient id="goldGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#FFE27A" />
+      <stop offset="35%" stop-color="#D4AF37" />
+      <stop offset="70%" stop-color="#997A1E" />
+      <stop offset="100%" stop-color="#D4AF37" />
+    </linearGradient>
+
+    <!-- RR Pink Radial Glow -->
+    <radialGradient id="pinkGlow" cx="50%" cy="50%" r="50%">
+      <stop offset="0%" stop-color="#EA1A85" stop-opacity="0.35" />
+      <stop offset="70%" stop-color="#EA1A85" stop-opacity="0.05" />
+      <stop offset="100%" stop-color="#EA1A85" stop-opacity="0" />
+    </radialGradient>
+    
+    <!-- Text Gold Gradient -->
+    <linearGradient id="textGold" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" stop-color="#FFFFFF" />
+      <stop offset="60%" stop-color="#FFDE82" />
+      <stop offset="100%" stop-color="#D4AF37" />
+    </linearGradient>
+  </defs>
+
+  <!-- Deep Canvas -->
+  <rect width="800" height="800" fill="url(#bgGrad)" />
+
+  <!-- Radial Pink Ambience -->
+  <circle cx="400" cy="380" r="320" fill="url(#pinkGlow)" />
+
+  <!-- Concentric Stepwell Line Patterns -->
+  <g opacity="0.12" stroke="#D4AF37" stroke-width="1.5" fill="none">
+    <rect x="40" y="40" width="720" height="720" />
+    <rect x="70" y="70" width="660" height="660" />
+    <rect x="100" y="100" width="600" height="600" />
+    <line x1="40" y1="40" x2="100" y2="100" />
+    <line x1="760" y1="40" x2="700" y2="100" />
+    <line x1="40" y1="760" x2="100" y2="700" />
+    <line x1="760" y1="760" x2="700" y2="700" />
+  </g>
+
+  <!-- Outer Fine Gold Frame -->
+  <rect x="30" y="30" width="740" height="740" fill="none" stroke="url(#goldGrad)" stroke-width="2" rx="4" />
+  <rect x="38" y="38" width="724" height="724" fill="none" stroke="#EA1A85" stroke-width="1" opacity="0.6" rx="2" />
+
+  <!-- Corner Rajasthani Diamond Accents -->
+  <g fill="url(#goldGrad)">
+    <polygon points="30,30 45,30 30,45" />
+    <polygon points="770,30 755,30 770,45" />
+    <polygon points="30,770 45,770 30,755" />
+    <polygon points="770,770 755,770 770,755" />
+    <circle cx="400" cy="55" r="4" />
+    <circle cx="400" cy="745" r="4" />
+  </g>
+
+  <!-- Central Crest Rings -->
+  <circle cx="400" cy="360" r="185" fill="#0B133A" stroke="#EA1A85" stroke-width="2" opacity="0.8" />
+  <circle cx="400" cy="360" r="175" fill="none" stroke="url(#goldGrad)" stroke-width="2.5" stroke-dasharray="6,4" />
+  <circle cx="400" cy="360" r="155" fill="#070B1E" stroke="#EA1A85" stroke-width="1.5" />
+
+  <!-- Monogram Initials -->
+  <text x="400" y="415" 
+        font-family="'Fraunces', 'Times New Roman', serif" 
+        font-size="140" 
+        font-weight="700" 
+        letter-spacing="6" 
+        fill="url(#textGold)" 
+        text-anchor="middle"
+        filter="drop-shadow(0px 8px 16px rgba(0,0,0,0.8))">SD</text>
+
+  <!-- Royal Star Ornament -->
+  <text x="400" y="240" font-family="sans-serif" font-size="20" fill="url(#goldGrad)" text-anchor="middle">★ ★ ★</text>
+
+  <!-- Player Name Banner -->
+  <text x="400" y="585" 
+        font-family="'Barlow Condensed', 'Arial Black', sans-serif" 
+        font-size="34" 
+        font-weight="700" 
+        letter-spacing="4" 
+        fill="#FFFFFF" 
+        text-anchor="middle">SHUBHAM DUBEY</text>
+
+  <!-- Role / Subtitle -->
+  <text x="400" y="625" 
+        font-family="'Barlow Condensed', sans-serif" 
+        font-size="20" 
+        font-weight="600" 
+        letter-spacing="3" 
+        fill="#D4AF37" 
+        text-anchor="middle">MIDDLE-ORDER BATTER</text>
+
+  <text x="400" y="655" 
+        font-family="'JetBrains Mono', monospace" 
+        font-size="13" 
+        letter-spacing="2" 
+        fill="#EA1A85" 
+        text-anchor="middle">RAJASTHAN ROYALS · WAR ROOM SHORTLIST</text>
+</svg>

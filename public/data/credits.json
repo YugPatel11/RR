@@ -1,0 +1,196 @@
+{
+  "credits": [
+    {
+      "player": "Vaibhav Sooryavanshi",
+      "file": "img/players/vaibhav-sooryavanshi.jpg",
+      "author": "Prime Minister's Office (GODL-India)",
+      "license": "GODL-India (Government Open Data License)",
+      "source_url": "https://commons.wikimedia.org/wiki/File:Prime_Minister_of_Bharat,_Shri_Narendra_Damodardas_Modi_meets_young_cricketing_sensation_Vaibhav_Suryavanshi.jpg",
+      "fallback": false
+    },
+    {
+      "player": "Ashutosh Sharma",
+      "file": "img/players/ashutosh-sharma.svg",
+      "author": "RR Analytics War Room (Handcrafted Monogram)",
+      "license": "CC0 / Custom Monogram",
+      "source_url": "Local Asset",
+      "fallback": true,
+      "fallback_reason": "No cricketer portrait on Commons (only namesake professor/government secretary)"
+    },
+    {
+      "player": "Reeza Hendricks",
+      "file": "img/players/reeza-hendricks.jpg",
+      "author": "NAPARAZZI",
+      "license": "CC BY-SA 2.0",
+      "source_url": "https://commons.wikimedia.org/wiki/File:REEZA_HENDRICKS_(15519916117).jpg",
+      "fallback": false
+    },
+    {
+      "player": "Glenn Maxwell",
+      "file": "img/players/glenn-maxwell.jpg",
+      "author": "www.davidmolloyphotography.com from Sydney, Australia",
+      "license": "CC BY 2.0",
+      "source_url": "https://commons.wikimedia.org/wiki/File:2018.02.03.22.38.28-Glenn_Maxwell-0003_(25557926667)_(cropped).jpg",
+      "fallback": false
+    },
+    {
+      "player": "Shubham Dubey",
+      "file": "img/players/shubham-dubey.svg",
+      "author": "RR Analytics War Room (Handcrafted Monogram)",
+      "license": "CC0 / Custom Monogram",
+      "source_url": "Local Asset",
+      "fallback": true,
+      "fallback_reason": "No photo available on Wikimedia Commons"
+    },
+    {
+      "player": "Dinesh Karthik",
+      "file": "img/players/dinesh-karthik.jpg",
+      "author": "Anand Anil",
+      "license": "CC BY-SA 4.0",
+      "source_url": "https://commons.wikimedia.org/wiki/File:Dinesh.Karthik.jpg",
+      "fallback": false
+    },
+    {
+      "player": "Riyan Parag",
+      "file": "img/players/riyan-parag.svg",
+      "author": "RR Analytics War Room (Handcrafted Monogram)",
+      "license": "CC0 / Custom Monogram",
+      "source_url": "Local Asset",
+      "fallback": true,
+      "fallback_reason": "No freely licensed photo available on Wikimedia Commons"
+    },
+    {
+      "player": "Travis Head",
+      "file": "img/players/travis-head.jpg",
+      "author": "Calistemon",
+      "license": "CC BY-SA 4.0",
+      "source_url": "https://commons.wikimedia.org/wiki/File:Travis_Head_bowling_at_Perth_Stadium,_First_Test_Australia_versus_West_Indies,_2_December_2022_01.jpg",
+      "fallback": false
+    },
+    {
+      "player": "Tim David",
+      "file": "img/players/tim-david.svg",
+      "author": "RR Analytics War Room (Handcrafted Monogram)",
+      "license": "CC0 / Custom Monogram",
+      "source_url": "Local Asset",
+      "fallback": true,
+      "fallback_reason": "No freely licensed cricketer portrait on Commons"
+    },
+    {
+      "player": "David Miller",
+      "file": "img/players/david-miller.jpg",
+      "author": "NAPARAZZI",
+      "license": "CC BY-SA 2.0",
+      "source_url": "https://commons.wikimedia.org/wiki/File:DAVID_MILLER_(15085495183).jpg",
+      "fallback": false
+    },
+    {
+      "player": "Sufiyan Muqeem",
+      "file": "img/players/sufiyan-muqeem.svg",
+      "author": "RR Analytics War Room (Handcrafted Monogram)",
+      "license": "CC0 / Custom Monogram",
+      "source_url": "Local Asset",
+      "fallback": true,
+      "fallback_reason": "No photo available on Wikimedia Commons"
+    },
+    {
+      "player": "Jamie Overton",
+      "file": "img/players/jamie-overton.jpg",
+      "author": "Tomthebruce",
+      "license": "CC BY-SA 4.0",
+      "source_url": "https://commons.wikimedia.org/wiki/File:Jamie_Overton_Surrey.jpg",
+      "fallback": false
+    },
+    {
+      "player": "Abrar Ahmed",
+      "file": "img/players/abrar-ahmed.jpg",
+      "author": "Nazly Ahmed",
+      "license": "CC BY-SA 4.0",
+      "source_url": "https://commons.wikimedia.org/wiki/File:Abrar_Ahmed_bowling_2023_(cropped).jpg",
+      "fallback": false
+    },
+    {
+      "player": "Matheesha Pathirana",
+      "file": "img/players/matheesha-pathirana.svg",
+      "author": "RR Analytics War Room (Handcrafted Monogram)",
+      "license": "CC0 / Custom Monogram",
+      "source_url": "Local Asset",
+      "fallback": true,
+      "fallback_reason": "No freely licensed photo available on Wikimedia Commons"
+    },
+    {
+      "player": "Blessing Muzarabani",
+      "file": "img/players/blessing-muzarabani.jpg",
+      "author": "Castor722",
+      "license": "CC BY-SA 4.0",
+      "source_url": "https://commons.wikimedia.org/wiki/File:PCC_XI_v_Zimbabwe_2025_06.jpg",
+      "fallback": false
+    },
+    {
+      "player": "Mohammad Rishad Hossain",
+      "file": "img/players/mohammad-rishad-hossain.jpg",
+      "author": "Press Information Department",
+      "license": "Public domain",
+      "source_url": "https://commons.wikimedia.org/wiki/File:Rishad_Hossain,_2025-02-08_Fortune_Barishal_BPL_2025_Champions_Trophy_Presentation_Dhaka_(PID-0003668)_(cropped).jpg",
+      "fallback": false
+    },
+    {
+      "player": "Shaheen Afridi",
+      "file": "img/players/shaheen-afridi.jpg",
+      "author": "BBC News \u0627\u0631\u062f\u0648",
+      "license": "CC BY 3.0",
+      "source_url": "https://commons.wikimedia.org/wiki/File:Shaheen_Afridi.jpg",
+      "fallback": false
+    },
+    {
+      "player": "Gerald Coetzee",
+      "file": "img/players/gerald-coetzee.jpg",
+      "author": "EGilham",
+      "license": "CC BY-SA 4.0",
+      "source_url": "https://commons.wikimedia.org/wiki/File:RSA_vs_AUS_Day_2_-_Gerald_Coetzee.jpg",
+      "fallback": false
+    },
+    {
+      "player": "Anshul Kamboj",
+      "file": "img/players/anshul-kamboj.svg",
+      "author": "RR Analytics War Room (Handcrafted Monogram)",
+      "license": "CC0 / Custom Monogram",
+      "source_url": "Local Asset",
+      "fallback": true,
+      "fallback_reason": "No photo available on Wikimedia Commons"
+    },
+    {
+      "player": "Mohammad Nawaz",
+      "file": "img/players/mohammad-nawaz.svg",
+      "author": "RR Analytics War Room (Handcrafted Monogram)",
+      "license": "CC0 / Custom Monogram",
+      "source_url": "Local Asset",
+      "fallback": true,
+      "fallback_reason": "No freely licensed cricketer portrait on Commons"
+    },
+    {
+      "asset": "Sawai Mansingh Stadium, Jaipur",
+      "file": "img/backgrounds/sawai-mansingh-stadium.jpg",
+      "author": "Bholi Aman",
+      "license": "CC0",
+      "source_url": "https://commons.wikimedia.org/wiki/File:Sawai-Mansingh-Stadium-Jaipur.jpg",
+      "fallback": false
+    },
+    {
+      "asset": "Chand Baori Stepwell, Rajasthan",
+      "file": "img/backgrounds/chand-baori-stepwell.jpg",
+      "author": "QuaintRaahi",
+      "license": "CC BY-SA 4.0",
+      "source_url": "https://commons.wikimedia.org/wiki/File:Chand_Baori,_Abhaneri_13_stories.jpg",
+      "fallback": false
+    },
+    {
+      "asset": "Hawa Mahal, Jaipur",
+      "file": "img/backgrounds/hawa-mahal-jaipur.jpg",
+      "author": "Chainwit.",
+      "license": "CC BY-SA 4.0",
+      "source_url": "https://commons.wikimedia.org/wiki/File:East_facade_Hawa_Mahal_Jaipur_from_ground_level_(July_2022)_-_img_01.jpg",
+      "fallback": false
+    }
+  ]
+}

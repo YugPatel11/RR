@@ -1,0 +1,400 @@
+/* SupeRR Selector Season 2 — Style Sheet */
+/* RR palette: Deep Royal Blue #1A2456, RR Pink #EA1A85, White #FFF, Light Gray #F4F5F7 */
+
+:root {
+  --rr-blue: #1A2456;
+  --rr-blue-light: #2A3670;
+  --rr-pink: #EA1A85;
+  --rr-pink-light: #FF3CA0;
+  --rr-white: #FFFFFF;
+  --rr-gray: #F4F5F7;
+  --rr-dark-gray: #3A3F4B;
+  --rr-text: #1E2128;
+  --rr-text-muted: #6B7280;
+  --rr-border: #E1E4E8;
+  --rr-gold: #D4A843;
+  --rr-green: #059669;
+  --rr-red: #DC2626;
+}
+
+* { margin: 0; padding: 0; box-sizing: border-box; }
+
+body {
+  font-family: 'Segoe UI', system-ui, -apple-system, sans-serif;
+  background: var(--rr-gray);
+  color: var(--rr-text);
+  line-height: 1.6;
+  -webkit-font-smoothing: antialiased;
+}
+
+/* Header */
+.header {
+  background: linear-gradient(135deg, var(--rr-blue) 0%, var(--rr-blue-light) 100%);
+  color: var(--rr-white);
+  padding: 3rem 2rem 2.5rem;
+  text-align: center;
+  position: relative;
+  overflow: hidden;
+}
+
+.header::after {
+  content: '';
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  height: 4px;
+  background: linear-gradient(90deg, var(--rr-pink), var(--rr-gold), var(--rr-pink));
+}
+
+.header h1 {
+  font-size: 2.2rem;
+  font-weight: 700;
+  letter-spacing: -0.02em;
+  margin-bottom: 0.5rem;
+}
+
+.header .subtitle {
+  font-size: 1.05rem;
+  opacity: 0.9;
+  font-weight: 400;
+  max-width: 700px;
+  margin: 0 auto;
+}
+
+.header .badge {
+  display: inline-block;
+  background: var(--rr-pink);
+  color: white;
+  padding: 0.25rem 0.75rem;
+  border-radius: 20px;
+  font-size: 0.75rem;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  margin-bottom: 1rem;
+}
+
+/* Main container */
+.container {
+  max-width: 1100px;
+  margin: 0 auto;
+  padding: 0 1.5rem;
+}
+
+/* Section */
+.section {
+  margin: 2rem 0;
+}
+
+.section-title {
+  font-size: 1.5rem;
+  font-weight: 700;
+  color: var(--rr-blue);
+  margin-bottom: 1rem;
+  padding-bottom: 0.5rem;
+  border-bottom: 3px solid var(--rr-pink);
+  display: inline-block;
+}
+
+/* Methodology card */
+.methodology {
+  background: white;
+  border-radius: 12px;
+  padding: 2rem;
+  margin: 2rem 0;
+  box-shadow: 0 1px 3px rgba(0,0,0,0.08);
+  border-left: 4px solid var(--rr-pink);
+}
+
+.methodology h3 {
+  color: var(--rr-blue);
+  margin-bottom: 0.75rem;
+  font-size: 1.1rem;
+}
+
+.methodology p {
+  color: var(--rr-dark-gray);
+  font-size: 0.95rem;
+  margin-bottom: 0.5rem;
+}
+
+/* Stats row */
+.stats-row {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  gap: 1rem;
+  margin: 1.5rem 0;
+}
+
+.stat-card {
+  background: white;
+  border-radius: 10px;
+  padding: 1.25rem;
+  text-align: center;
+  box-shadow: 0 1px 3px rgba(0,0,0,0.06);
+}
+
+.stat-card .stat-value {
+  font-size: 2rem;
+  font-weight: 700;
+  color: var(--rr-blue);
+}
+
+.stat-card .stat-label {
+  font-size: 0.8rem;
+  color: var(--rr-text-muted);
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+  margin-top: 0.25rem;
+}
+
+/* Rankings table */
+.ranking-table-wrapper {
+  background: white;
+  border-radius: 12px;
+  overflow: hidden;
+  box-shadow: 0 1px 4px rgba(0,0,0,0.08);
+  margin: 1rem 0 2rem;
+}
+
+.ranking-table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 0.88rem;
+}
+
+.ranking-table thead {
+  background: var(--rr-blue);
+  color: var(--rr-white);
+}
+
+.ranking-table th {
+  padding: 0.8rem 0.75rem;
+  text-align: left;
+  font-weight: 600;
+  font-size: 0.78rem;
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+  white-space: nowrap;
+}
+
+.ranking-table td {
+  padding: 0.7rem 0.75rem;
+  border-bottom: 1px solid var(--rr-border);
+  vertical-align: middle;
+}
+
+.ranking-table tbody tr:hover {
+  background: #F9FAFB;
+}
+
+.ranking-table .rank-cell {
+  font-weight: 700;
+  color: var(--rr-pink);
+  font-size: 1rem;
+  width: 40px;
+  text-align: center;
+}
+
+.ranking-table .player-name {
+  font-weight: 600;
+  color: var(--rr-blue);
+}
+
+.ranking-table .player-team {
+  font-size: 0.78rem;
+  color: var(--rr-text-muted);
+}
+
+.ranking-table .rating-cell {
+  font-weight: 700;
+  color: var(--rr-pink);
+}
+
+.slot-badge {
+  display: inline-block;
+  padding: 0.15rem 0.5rem;
+  border-radius: 12px;
+  font-size: 0.7rem;
+  font-weight: 600;
+  text-transform: uppercase;
+}
+
+.slot-indian { background: #FFF3E0; color: #E65100; }
+.slot-overseas { background: #E8F5E9; color: #2E7D32; }
+
+.ci-text {
+  font-size: 0.75rem;
+  color: var(--rr-text-muted);
+}
+
+.stability-bar {
+  display: inline-block;
+  height: 6px;
+  border-radius: 3px;
+  background: var(--rr-border);
+  width: 60px;
+  position: relative;
+  vertical-align: middle;
+  margin-right: 4px;
+}
+
+.stability-fill {
+  height: 100%;
+  border-radius: 3px;
+  background: var(--rr-green);
+}
+
+/* Charts area */
+.chart-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 1.5rem;
+  margin: 1.5rem 0;
+}
+
+.chart-card {
+  background: white;
+  border-radius: 12px;
+  padding: 1.5rem;
+  box-shadow: 0 1px 3px rgba(0,0,0,0.06);
+}
+
+.chart-card h4 {
+  color: var(--rr-blue);
+  font-size: 0.95rem;
+  margin-bottom: 1rem;
+}
+
+/* RR Fit cards */
+.fit-cards {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+  gap: 1rem;
+  margin: 1.5rem 0;
+}
+
+.fit-card {
+  background: white;
+  border-radius: 12px;
+  padding: 1.25rem;
+  box-shadow: 0 1px 3px rgba(0,0,0,0.06);
+  border-top: 3px solid var(--rr-pink);
+  transition: transform 0.15s ease;
+}
+
+.fit-card:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+}
+
+.fit-card .player-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 0.75rem;
+}
+
+.fit-card .player-header h4 {
+  color: var(--rr-blue);
+  font-size: 1rem;
+}
+
+.fit-card .fit-detail {
+  font-size: 0.85rem;
+  color: var(--rr-dark-gray);
+  margin-bottom: 0.4rem;
+}
+
+.fit-card .fit-detail strong {
+  color: var(--rr-blue);
+}
+
+.risk-tag {
+  display: inline-block;
+  padding: 0.15rem 0.5rem;
+  border-radius: 8px;
+  font-size: 0.72rem;
+  font-weight: 600;
+}
+
+.risk-low { background: #E8F5E9; color: #2E7D32; }
+.risk-medium { background: #FFF3E0; color: #E65100; }
+.risk-high { background: #FFEBEE; color: #C62828; }
+
+/* Pressure chart */
+.pressure-bar-chart {
+  display: flex;
+  align-items: flex-end;
+  gap: 12px;
+  height: 160px;
+  padding: 0 1rem;
+  margin-top: 0.5rem;
+}
+
+.pressure-bar {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: flex-end;
+  height: 100%;
+}
+
+.pressure-bar .bar {
+  width: 100%;
+  max-width: 60px;
+  border-radius: 4px 4px 0 0;
+  transition: height 0.3s ease;
+}
+
+.pressure-bar .bar-label {
+  font-size: 0.7rem;
+  color: var(--rr-text-muted);
+  margin-top: 6px;
+  text-align: center;
+}
+
+.pressure-bar .bar-value {
+  font-size: 0.75rem;
+  font-weight: 600;
+  color: var(--rr-blue);
+  margin-bottom: 4px;
+}
+
+/* Footer */
+.footer {
+  background: var(--rr-blue);
+  color: rgba(255,255,255,0.8);
+  padding: 2rem;
+  margin-top: 3rem;
+  font-size: 0.82rem;
+  line-height: 1.7;
+}
+
+.footer h4 {
+  color: var(--rr-white);
+  font-size: 1rem;
+  margin-bottom: 0.75rem;
+}
+
+.footer a { color: var(--rr-pink-light); }
+
+/* Responsive */
+@media (max-width: 768px) {
+  .header h1 { font-size: 1.5rem; }
+  .header .subtitle { font-size: 0.9rem; }
+  .chart-grid { grid-template-columns: 1fr; }
+  .fit-cards { grid-template-columns: 1fr; }
+  .ranking-table { font-size: 0.78rem; }
+  .ranking-table th, .ranking-table td { padding: 0.5rem 0.4rem; }
+  .stats-row { grid-template-columns: repeat(2, 1fr); }
+  .container { padding: 0 0.75rem; }
+}
+
+@media (max-width: 480px) {
+  .header { padding: 2rem 1rem; }
+  .stats-row { grid-template-columns: 1fr; }
+}
+

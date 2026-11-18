@@ -1,0 +1,632 @@
+{
+  "as_of_date": "2026-11-16",
+  "ipl_2027_context": {
+    "auction_date": "2026-12-16",
+    "auction_venue": "ITC Grand Goa, Goa, India",
+    "retention_deadline": "2026-11-17 17:00 IST",
+    "total_salary_cap": "₹157.00 Cr (Official BCCI/IPL Franchise Cap)",
+    "roster_limits": {
+      "max_squad_size": 25,
+      "min_squad_size": 18,
+      "max_overseas_players": 8,
+      "max_overseas_in_playing_xi": 4
+    },
+    "rr_retention_status": "Pending official submission (Deadline 17 Nov 2026). Roster and purse subject to confirmed trades & releases.",
+    "sources": [
+      {
+        "title": "BCCI IPL Player Regulations 2025-2027 Cycle",
+        "url": "https://www.iplt20.com",
+        "verified_date": "2026-11-16"
+      },
+      {
+        "title": "LiveMint IPL 2027 Mini-Auction Cap & Timeline",
+        "url": "https://www.livemint.com",
+        "verified_date": "2026-11-16"
+      },
+      {
+        "title": "Cricxet Auction Roster Rules",
+        "url": "https://www.cricxet.com",
+        "verified_date": "2026-11-16"
+      }
+    ]
+  },
+  "players": {
+    "Vaibhav Sooryavanshi": {
+      "player_id": 50284,
+      "type": "Batter",
+      "rank": 1,
+      "dob": "2008-03-27",
+      "age": "18y 7m",
+      "nationality": "India",
+      "state_association": "Bihar",
+      "batting_style": "Left-hand bat",
+      "bowling_style": "Slow left-arm orthodox",
+      "primary_role": "Opening batter",
+      "ipl_eligibility": "Eligible",
+      "ipl_franchise_2026": "Rajasthan Royals",
+      "ipl_contract_history": [
+        {
+          "season": 2025,
+          "franchise": "Rajasthan Royals",
+          "auction_price": "₹1.10 Cr",
+          "type": "Mega Auction Purchase"
+        }
+      ],
+      "current_base_price_slab": "Retained Asset (Pre-auction)",
+      "last_verified_price": "₹1.10 Cr (IPL 2025 Auction)",
+      "rr_roster_context": "Core retained prospect; fastest Indian U19 centurion. Top-ranked pressure batter.",
+      "source_url": "https://www.iplt20.com/teams/rajasthan-royals/squad-details/50284",
+      "source_name": "Official IPL T20 Player Profile & ESPNcricinfo",
+      "verified_as_of": "2026-11-16"
+    },
+    "Ashutosh Sharma": {
+      "player_id": 8101,
+      "type": "Batter",
+      "rank": 2,
+      "dob": "1998-09-15",
+      "age": "28y 2m",
+      "nationality": "India",
+      "state_association": "Railways",
+      "batting_style": "Right-hand bat",
+      "bowling_style": "Right-arm medium",
+      "primary_role": "Middle-order / Impact finisher",
+      "ipl_eligibility": "Eligible",
+      "ipl_franchise_2026": "Delhi Capitals",
+      "ipl_contract_history": [
+        {
+          "season": 2024,
+          "franchise": "Punjab Kings",
+          "auction_price": "₹20 Lakh",
+          "type": "Auction Purchase"
+        },
+        {
+          "season": 2025,
+          "franchise": "Delhi Capitals",
+          "auction_price": "₹3.80 Cr",
+          "type": "Auction Purchase"
+        }
+      ],
+      "current_base_price_slab": "₹50 Lakh (if released) / Retained",
+      "last_verified_price": "₹3.80 Cr (IPL 2025 Auction)",
+      "rr_roster_context": "High-priority domestic target. Provides boundary power in overs 15-20 without taking an overseas slot.",
+      "source_url": "https://www.espncricinfo.com/cricketers/ashutosh-sharma-1159723",
+      "source_name": "ESPNcricinfo & IPL T20 Archives",
+      "verified_as_of": "2026-11-16"
+    },
+    "Reeza Hendricks": {
+      "player_id": 768,
+      "type": "Batter",
+      "rank": 3,
+      "dob": "1989-08-14",
+      "age": "37y 3m",
+      "nationality": "South Africa",
+      "state_association": "Lions / South Africa",
+      "batting_style": "Right-hand bat",
+      "bowling_style": "Right-arm offbreak",
+      "primary_role": "Top-order batter",
+      "ipl_eligibility": "Eligible (Overseas)",
+      "ipl_franchise_2026": "None (Unsold)",
+      "ipl_contract_history": [
+        {
+          "season": 2024,
+          "franchise": "Unsold",
+          "auction_price": "Unsold",
+          "type": "Base price ₹50 Lakh"
+        }
+      ],
+      "current_base_price_slab": "₹50 Lakh / ₹75 Lakh",
+      "last_verified_price": "Not listed yet (IPL Unsold / International contract)",
+      "rr_roster_context": "Experienced top-order anchor; outstanding international pressure metrics, but consumes overseas slot.",
+      "source_url": "https://www.espncricinfo.com/cricketers/reeza-hendricks-268043",
+      "source_name": "ESPNcricinfo & Cricket South Africa",
+      "verified_as_of": "2026-11-16"
+    },
+    "Glenn Maxwell": {
+      "player_id": 838,
+      "type": "Batter",
+      "rank": 4,
+      "dob": "1988-10-14",
+      "age": "38y 1m",
+      "nationality": "Australia",
+      "state_association": "Victoria / Australia",
+      "batting_style": "Right-hand bat",
+      "bowling_style": "Right-arm offbreak",
+      "primary_role": "Batting all-rounder",
+      "ipl_eligibility": "Eligible (Overseas)",
+      "ipl_franchise_2026": "Royal Challengers Bengaluru",
+      "ipl_contract_history": [
+        {
+          "season": 2021,
+          "franchise": "Royal Challengers Bangalore",
+          "auction_price": "₹14.25 Cr",
+          "type": "Auction Purchase"
+        },
+        {
+          "season": 2022,
+          "franchise": "Royal Challengers Bangalore",
+          "auction_price": "₹11.00 Cr",
+          "type": "Retention"
+        },
+        {
+          "season": 2025,
+          "franchise": "Royal Challengers Bengaluru",
+          "auction_price": "₹4.20 Cr",
+          "type": "Auction Purchase"
+        }
+      ],
+      "current_base_price_slab": "₹2.00 Cr",
+      "last_verified_price": "₹4.20 Cr (IPL 2025 Auction)",
+      "rr_roster_context": "Dual-threat spin bowling all-rounder; 180+ pressure strike rate. Age and injury risk require backup.",
+      "source_url": "https://www.iplt20.com/teams/royal-challengers-bengaluru/squad-details/838",
+      "source_name": "Official IPL T20 & Cricket Australia",
+      "verified_as_of": "2026-11-16"
+    },
+    "Shubham Dubey": {
+      "player_id": 25139,
+      "type": "Batter",
+      "rank": 5,
+      "dob": "1994-08-27",
+      "age": "32y 2m",
+      "nationality": "India",
+      "state_association": "Vidarbha",
+      "batting_style": "Left-hand bat",
+      "bowling_style": "Right-arm offbreak",
+      "primary_role": "Middle-order finisher",
+      "ipl_eligibility": "Eligible",
+      "ipl_franchise_2026": "Rajasthan Royals",
+      "ipl_contract_history": [
+        {
+          "season": 2024,
+          "franchise": "Rajasthan Royals",
+          "auction_price": "₹5.80 Cr",
+          "type": "Auction Purchase"
+        }
+      ],
+      "current_base_price_slab": "Retained Asset (₹5.80 Cr)",
+      "last_verified_price": "₹5.80 Cr (IPL 2024 Auction)",
+      "rr_roster_context": "Already at RR. Model proves his strike rate leaps from 105.9 (normal) to 181.3 (high pressure). Retained clutch weapon.",
+      "source_url": "https://www.rajasthanroyals.com/players/shubham-dubey",
+      "source_name": "Rajasthan Royals Official Portal",
+      "verified_as_of": "2026-11-16"
+    },
+    "Dinesh Karthik": {
+      "player_id": 143,
+      "type": "Batter",
+      "rank": 6,
+      "dob": "1985-06-01",
+      "age": "41y 5m",
+      "nationality": "India",
+      "state_association": "Tamil Nadu",
+      "batting_style": "Right-hand bat",
+      "bowling_style": "Right-arm offbreak",
+      "primary_role": "Wicketkeeper-batter / Finisher",
+      "ipl_eligibility": "Ineligible (Retired from IPL)",
+      "ipl_franchise_2026": "Retired (RCB Mentor/Coach)",
+      "ipl_contract_history": [
+        {
+          "season": 2022,
+          "franchise": "Royal Challengers Bangalore",
+          "auction_price": "₹5.50 Cr",
+          "type": "Auction Purchase"
+        }
+      ],
+      "current_base_price_slab": "Retired",
+      "last_verified_price": "₹5.50 Cr (IPL 2022 Auction)",
+      "rr_roster_context": "NOT AVAILABLE AT AUCTION. Officially retired following the 2024 IPL season. Kept in top-10 for objective analytical parity.",
+      "source_url": "https://www.espncricinfo.com/cricketers/dinesh-karthik-30045",
+      "source_name": "ESPNcricinfo & BCCI Official Retirement Notice",
+      "verified_as_of": "2026-11-16"
+    },
+    "Riyan Parag": {
+      "player_id": 6423,
+      "type": "Batter",
+      "rank": 7,
+      "dob": "2001-11-10",
+      "age": "25y 0m",
+      "nationality": "India",
+      "state_association": "Assam",
+      "batting_style": "Right-hand bat",
+      "bowling_style": "Right-arm legbreak / offbreak",
+      "primary_role": "Top-order / Middle-order batter",
+      "ipl_eligibility": "Eligible",
+      "ipl_franchise_2026": "Rajasthan Royals",
+      "ipl_contract_history": [
+        {
+          "season": 2019,
+          "franchise": "Rajasthan Royals",
+          "auction_price": "₹20 Lakh",
+          "type": "Auction Purchase"
+        },
+        {
+          "season": 2022,
+          "franchise": "Rajasthan Royals",
+          "auction_price": "₹3.80 Cr",
+          "type": "Auction Purchase"
+        },
+        {
+          "season": 2025,
+          "franchise": "Rajasthan Royals",
+          "auction_price": "₹14.00 Cr",
+          "type": "Core Retention"
+        }
+      ],
+      "current_base_price_slab": "Retained Core Asset (₹14.00 Cr)",
+      "last_verified_price": "₹14.00 Cr (IPL 2025 Retention)",
+      "rr_roster_context": "RR Captain / Vice-Captain core. Dependable middle-order anchor with 163.7 SR under pressure.",
+      "source_url": "https://www.rajasthanroyals.com/players/riyan-parag",
+      "source_name": "Rajasthan Royals Official Portal",
+      "verified_as_of": "2026-11-16"
+    },
+    "Travis Head": {
+      "player_id": 2367,
+      "type": "Batter",
+      "rank": 8,
+      "dob": "1993-12-29",
+      "age": "32y 10m",
+      "nationality": "Australia",
+      "state_association": "South Australia / Australia",
+      "batting_style": "Left-hand bat",
+      "bowling_style": "Right-arm offbreak",
+      "primary_role": "Opening batter",
+      "ipl_eligibility": "Eligible (Overseas)",
+      "ipl_franchise_2026": "Sunrisers Hyderabad",
+      "ipl_contract_history": [
+        {
+          "season": 2024,
+          "franchise": "Sunrisers Hyderabad",
+          "auction_price": "₹6.80 Cr",
+          "type": "Auction Purchase"
+        },
+        {
+          "season": 2025,
+          "franchise": "Sunrisers Hyderabad",
+          "auction_price": "₹14.00 Cr",
+          "type": "Retention"
+        }
+      ],
+      "current_base_price_slab": "₹2.00 Cr (if in auction)",
+      "last_verified_price": "₹14.00 Cr (IPL 2025 Retention by SRH)",
+      "rr_roster_context": "Explosive LHB opener; high strike rate under pressure (170.2). Would require enormous purse commitment if released.",
+      "source_url": "https://www.iplt20.com/teams/sunrisers-hyderabad/squad-details/2367",
+      "source_name": "Official IPL T20 & SRH Records",
+      "verified_as_of": "2026-11-16"
+    },
+    "Tim David": {
+      "player_id": 6396,
+      "type": "Batter",
+      "rank": 9,
+      "dob": "1996-04-08",
+      "age": "30y 7m",
+      "nationality": "Australia",
+      "state_association": "Western Australia / Australia",
+      "batting_style": "Right-hand bat",
+      "bowling_style": "Right-arm offbreak",
+      "primary_role": "Designated death-overs finisher",
+      "ipl_eligibility": "Eligible (Overseas)",
+      "ipl_franchise_2026": "Royal Challengers Bengaluru",
+      "ipl_contract_history": [
+        {
+          "season": 2022,
+          "franchise": "Mumbai Indians",
+          "auction_price": "₹8.25 Cr",
+          "type": "Auction Purchase"
+        },
+        {
+          "season": 2025,
+          "franchise": "Royal Challengers Bengaluru",
+          "auction_price": "₹3.00 Cr",
+          "type": "Auction Purchase"
+        }
+      ],
+      "current_base_price_slab": "₹2.00 Cr",
+      "last_verified_price": "₹3.00 Cr (IPL 2025 Auction)",
+      "rr_roster_context": "PRIORITY 1 AUCTION TARGET. Elite 187.7 SR under high pressure across 367 balls. 91.6% bootstrap retention. Fills RR's missing finisher void.",
+      "source_url": "https://www.iplt20.com/teams/royal-challengers-bengaluru/squad-details/6396",
+      "source_name": "Official IPL T20 Profile & ESPNcricinfo",
+      "verified_as_of": "2026-11-16"
+    },
+    "David Miller": {
+      "player_id": 1077,
+      "type": "Batter",
+      "rank": 10,
+      "dob": "1989-06-10",
+      "age": "37y 5m",
+      "nationality": "South Africa",
+      "state_association": "Dolphins / South Africa",
+      "batting_style": "Left-hand bat",
+      "bowling_style": "Right-arm offbreak",
+      "primary_role": "Middle-order finisher",
+      "ipl_eligibility": "Eligible (Overseas)",
+      "ipl_franchise_2026": "Delhi Capitals",
+      "ipl_contract_history": [
+        {
+          "season": 2022,
+          "franchise": "Gujarat Titans",
+          "auction_price": "₹3.00 Cr",
+          "type": "Auction Purchase"
+        },
+        {
+          "season": 2025,
+          "franchise": "Delhi Capitals",
+          "auction_price": "₹7.50 Cr",
+          "type": "Auction Purchase"
+        }
+      ],
+      "current_base_price_slab": "₹2.00 Cr",
+      "last_verified_price": "₹7.50 Cr (IPL 2025 Auction)",
+      "rr_roster_context": "Tested LHB veteran; former RR player (2020-21). 573 pressure balls evaluated. Reliable secondary target if David unavailable.",
+      "source_url": "https://www.iplt20.com/teams/delhi-capitals/squad-details/1077",
+      "source_name": "Official IPL T20 Profile",
+      "verified_as_of": "2026-11-16"
+    },
+    "Sufiyan Muqeem": {
+      "player_id": 34485,
+      "type": "Bowler",
+      "rank": 1,
+      "dob": "1999-11-15",
+      "age": "27y 0m",
+      "nationality": "Pakistan",
+      "state_association": "Pakistan",
+      "batting_style": "Left-hand bat",
+      "bowling_style": "Left-arm wrist spin",
+      "primary_role": "Wrist spin controller",
+      "ipl_eligibility": "Ineligible (Pakistani national)",
+      "ipl_franchise_2026": "None (BCCI Policy Restriction)",
+      "ipl_contract_history": [],
+      "current_base_price_slab": "Ineligible for IPL",
+      "last_verified_price": "Not listed yet (Ineligible for IPL Draft)",
+      "rr_roster_context": "INELIGIBLE FOR AUCTION under BCCI guidelines. Ranked #1 bowler purely on empirical stats (5.0 HP economy). Retained for academic honesty.",
+      "source_url": "https://www.espncricinfo.com/cricketers/sufiyan-muqeem-1343719",
+      "source_name": "ESPNcricinfo & Pakistan Cricket Board",
+      "verified_as_of": "2026-11-16"
+    },
+    "Jamie Overton": {
+      "player_id": 2382,
+      "type": "Bowler",
+      "rank": 2,
+      "dob": "1994-04-10",
+      "age": "32y 7m",
+      "nationality": "England",
+      "state_association": "Surrey / England",
+      "batting_style": "Right-hand bat",
+      "bowling_style": "Right-arm fast",
+      "primary_role": "Fast-bowling all-rounder",
+      "ipl_eligibility": "Eligible (Overseas)",
+      "ipl_franchise_2026": "Chennai Super Kings",
+      "ipl_contract_history": [
+        {
+          "season": 2024,
+          "franchise": "Chennai Super Kings",
+          "auction_price": "₹1.00 Cr",
+          "type": "Auction Purchase"
+        },
+        {
+          "season": 2025,
+          "franchise": "Chennai Super Kings",
+          "auction_price": "₹1.50 Cr",
+          "type": "Auction Purchase"
+        }
+      ],
+      "current_base_price_slab": "₹1.50 Cr / ₹2.00 Cr",
+      "last_verified_price": "₹1.50 Cr (IPL 2025 Auction)",
+      "rr_roster_context": "High-value dual utility: 6.5 HP economy with 12.93% wicket strike rate. Provides enforcer pace and lower-order hitting.",
+      "source_url": "https://www.espncricinfo.com/cricketers/jamie-overton-515438",
+      "source_name": "ESPNcricinfo & ECB Profile",
+      "verified_as_of": "2026-11-16"
+    },
+    "Abrar Ahmed": {
+      "player_id": 5979,
+      "type": "Bowler",
+      "rank": 3,
+      "dob": "1998-09-11",
+      "age": "28y 2m",
+      "nationality": "Pakistan",
+      "state_association": "Pakistan",
+      "batting_style": "Right-hand bat",
+      "bowling_style": "Right-arm legbreak / Mystery spin",
+      "primary_role": "Mystery spinner",
+      "ipl_eligibility": "Ineligible (Pakistani national)",
+      "ipl_franchise_2026": "None (BCCI Policy Restriction)",
+      "ipl_contract_history": [],
+      "current_base_price_slab": "Ineligible for IPL",
+      "last_verified_price": "Not listed yet (Ineligible for IPL Draft)",
+      "rr_roster_context": "INELIGIBLE FOR AUCTION under BCCI guidelines. Stupendous 5.3 HP economy across 189 balls; 98.6% bootstrap stability.",
+      "source_url": "https://www.espncricinfo.com/cricketers/abrar-ahmed-1082583",
+      "source_name": "ESPNcricinfo",
+      "verified_as_of": "2026-11-16"
+    },
+    "Matheesha Pathirana": {
+      "player_id": 8661,
+      "type": "Bowler",
+      "rank": 4,
+      "dob": "2002-12-18",
+      "age": "23y 11m",
+      "nationality": "Sri Lanka",
+      "state_association": "Sri Lanka",
+      "batting_style": "Right-hand bat",
+      "bowling_style": "Right-arm fast (slingy round-arm)",
+      "primary_role": "Elite death-overs specialist",
+      "ipl_eligibility": "Eligible (Overseas)",
+      "ipl_franchise_2026": "Chennai Super Kings",
+      "ipl_contract_history": [
+        {
+          "season": 2022,
+          "franchise": "Chennai Super Kings",
+          "auction_price": "₹20 Lakh",
+          "type": "Injury Replacement"
+        },
+        {
+          "season": 2025,
+          "franchise": "Chennai Super Kings",
+          "auction_price": "₹13.00 Cr",
+          "type": "Retention"
+        }
+      ],
+      "current_base_price_slab": "₹2.00 Cr (if un-retained)",
+      "last_verified_price": "₹13.00 Cr (IPL 2025 Retention by CSK)",
+      "rr_roster_context": "PRIMARY TARGET FOR DEATH OVERS. If CSK releases due to purse constraints, RR must bid up to ₹15 Cr. 6.9 HP economy across 403 balls.",
+      "source_url": "https://www.iplt20.com/teams/chennai-super-kings/squad-details/8661",
+      "source_name": "Official IPL T20 & Sri Lanka Cricket",
+      "verified_as_of": "2026-11-16"
+    },
+    "Blessing Muzarabani": {
+      "player_id": 6523,
+      "type": "Bowler",
+      "rank": 5,
+      "dob": "1996-10-02",
+      "age": "30y 1m",
+      "nationality": "Zimbabwe",
+      "state_association": "Zimbabwe",
+      "batting_style": "Right-hand bat",
+      "bowling_style": "Right-arm fast-medium",
+      "primary_role": "Tall hit-the-deck fast bowler",
+      "ipl_eligibility": "Eligible (Overseas)",
+      "ipl_franchise_2026": "None (Unsold)",
+      "ipl_contract_history": [
+        {
+          "season": 2022,
+          "franchise": "Lucknow Super Giants",
+          "auction_price": "₹50 Lakh",
+          "type": "Net Bowler / Replacement pool"
+        }
+      ],
+      "current_base_price_slab": "₹50 Lakh / ₹75 Lakh",
+      "last_verified_price": "Not listed yet (IPL Unsold / Zimbabwe Central Contract)",
+      "rr_roster_context": "Budget overseas pace option. 14.68% wicket rate under pressure. High bounce suits Sawai Mansingh Stadium pitch.",
+      "source_url": "https://www.espncricinfo.com/cricketers/blessing-muzarabani-1087405",
+      "source_name": "ESPNcricinfo & Zimbabwe Cricket",
+      "verified_as_of": "2026-11-16"
+    },
+    "Mohammad Rishad Hossain": {
+      "player_id": 8380,
+      "type": "Bowler",
+      "rank": 6,
+      "dob": "2002-07-15",
+      "age": "24y 4m",
+      "nationality": "Bangladesh",
+      "state_association": "Bangladesh",
+      "batting_style": "Right-hand bat",
+      "bowling_style": "Right-arm legbreak",
+      "primary_role": "Leg-spin all-rounder",
+      "ipl_eligibility": "Eligible (Overseas)",
+      "ipl_franchise_2026": "None (Unsold)",
+      "ipl_contract_history": [],
+      "current_base_price_slab": "₹75 Lakh",
+      "last_verified_price": "Not listed yet (IPL Auction Registered)",
+      "rr_roster_context": "Tall wrist-spinner who extracts steep turn and bounce; 6.9 HP economy, 13.68% wicket hazard rate.",
+      "source_url": "https://www.espncricinfo.com/cricketers/rishad-hossain-1159714",
+      "source_name": "ESPNcricinfo & BCB Records",
+      "verified_as_of": "2026-11-16"
+    },
+    "Shaheen Afridi": {
+      "player_id": 6355,
+      "type": "Bowler",
+      "rank": 7,
+      "dob": "2000-04-06",
+      "age": "26y 7m",
+      "nationality": "Pakistan",
+      "state_association": "Pakistan",
+      "batting_style": "Left-hand bat",
+      "bowling_style": "Left-arm fast",
+      "primary_role": "Left-arm pace spearhead",
+      "ipl_eligibility": "Ineligible (Pakistani national)",
+      "ipl_franchise_2026": "None (BCCI Policy Restriction)",
+      "ipl_contract_history": [],
+      "current_base_price_slab": "Ineligible for IPL",
+      "last_verified_price": "Not listed yet (Ineligible for IPL Draft)",
+      "rr_roster_context": "INELIGIBLE FOR AUCTION under BCCI guidelines. World-class 6.5 HP economy benchmark; statistical comparison only.",
+      "source_url": "https://www.espncricinfo.com/cricketers/shaheen-shah-afridi-1072470",
+      "source_name": "ESPNcricinfo",
+      "verified_as_of": "2026-11-16"
+    },
+    "Gerald Coetzee": {
+      "player_id": 6628,
+      "type": "Bowler",
+      "rank": 8,
+      "dob": "2000-10-02",
+      "age": "26y 1m",
+      "nationality": "South Africa",
+      "state_association": "Titans / South Africa",
+      "batting_style": "Right-hand bat",
+      "bowling_style": "Right-arm fast (145k+)",
+      "primary_role": "Enforcer express fast bowler",
+      "ipl_eligibility": "Eligible (Overseas)",
+      "ipl_franchise_2026": "Gujarat Titans / Mumbai Indians",
+      "ipl_contract_history": [
+        {
+          "season": 2024,
+          "franchise": "Mumbai Indians",
+          "auction_price": "₹5.00 Cr",
+          "type": "Auction Purchase"
+        },
+        {
+          "season": 2025,
+          "franchise": "Gujarat Titans",
+          "auction_price": "₹2.40 Cr",
+          "type": "Auction Purchase"
+        }
+      ],
+      "current_base_price_slab": "₹2.00 Cr",
+      "last_verified_price": "₹2.40 Cr (IPL 2025 Auction)",
+      "rr_roster_context": "Prior RR experience (replacement in 2021). 7.4 HP economy with 11.11% wicket rate. Excellent backup pace enforcer.",
+      "source_url": "https://www.iplt20.com/teams/mumbai-indians/squad-details/6628",
+      "source_name": "Official IPL T20 Profile",
+      "verified_as_of": "2026-11-16"
+    },
+    "Anshul Kamboj": {
+      "player_id": 27964,
+      "type": "Bowler",
+      "rank": 9,
+      "dob": "2000-12-06",
+      "age": "25y 11m",
+      "nationality": "India",
+      "state_association": "Haryana",
+      "batting_style": "Right-hand bat",
+      "bowling_style": "Right-arm medium-fast",
+      "primary_role": "Seam bowler / Indian pace depth",
+      "ipl_eligibility": "Eligible",
+      "ipl_franchise_2026": "Chennai Super Kings",
+      "ipl_contract_history": [
+        {
+          "season": 2024,
+          "franchise": "Mumbai Indians",
+          "auction_price": "₹20 Lakh",
+          "type": "Auction Purchase"
+        },
+        {
+          "season": 2025,
+          "franchise": "Chennai Super Kings",
+          "auction_price": "₹3.40 Cr",
+          "type": "Auction Purchase"
+        }
+      ],
+      "current_base_price_slab": "₹30 Lakh (if released) / Retained",
+      "last_verified_price": "₹3.40 Cr (IPL 2025 Auction)",
+      "rr_roster_context": "KEY DOMESTIC PACE TARGET. Exceptional 14.29% wicket hazard rate and 7.3 HP economy. Solves RR's Indian pace depth without using an overseas slot.",
+      "source_url": "https://www.iplt20.com/teams/chennai-super-kings/squad-details/27964",
+      "source_name": "Official IPL T20 Profile & BCCI Domestic",
+      "verified_as_of": "2026-11-16"
+    },
+    "Mohammad Nawaz": {
+      "player_id": 2490,
+      "type": "Bowler",
+      "rank": 10,
+      "dob": "1994-03-21",
+      "age": "32y 7m",
+      "nationality": "Pakistan",
+      "state_association": "Pakistan",
+      "batting_style": "Left-hand bat",
+      "bowling_style": "Slow left-arm orthodox",
+      "primary_role": "Spin bowling all-rounder",
+      "ipl_eligibility": "Ineligible (Pakistani national)",
+      "ipl_franchise_2026": "None (BCCI Policy Restriction)",
+      "ipl_contract_history": [],
+      "current_base_price_slab": "Ineligible for IPL",
+      "last_verified_price": "Not listed yet (Ineligible for IPL Draft)",
+      "rr_roster_context": "INELIGIBLE FOR AUCTION under BCCI guidelines. 6.3 HP economy, 70.8% bootstrap retention. Statistical benchmark only.",
+      "source_url": "https://www.espncricinfo.com/cricketers/mohammad-nawaz-348149",
+      "source_name": "ESPNcricinfo",
+      "verified_as_of": "2026-11-16"
+    }
+  }
+}

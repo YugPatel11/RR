@@ -1,0 +1,918 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Halla Bol: Into the Pressure | Rajasthan Royals</title>
+    <meta name="description" content="Rajasthan Royals SupeRR Selector Season 2 - Data-driven pressure performance analysis and 3D stepwell descent for IPL 2027 auction strategy." />
+  </head>
+  <body>
+    <!-- Heartbeat Preloader -->
+    <div id="loader" class="loader">
+      <div class="loader-content">
+        <div class="devanagari-accent">हल्ला बोल</div>
+        <div class="heartbeat-container">
+          <svg class="heartbeat-svg" viewBox="0 0 300 80">
+            <path class="heartbeat-track" d="M 0,40 L 80,40 L 95,20 L 110,60 L 125,10 L 140,70 L 155,30 L 170,45 L 180,40 L 300,40" />
+            <path class="heartbeat-pulse" d="M 0,40 L 80,40 L 95,20 L 110,60 L 125,10 L 140,70 L 155,30 L 170,45 L 180,40 L 300,40" />
+          </svg>
+        </div>
+        <div class="loader-status">CALIBRATING 3D JAIPUR STEPWELL &amp; PRESSURE DATA...</div>
+      </div>
+    </div>
+
+    <!-- Fixed 3D Canvas Viewport -->
+    <div id="webgl-container" class="webgl-container">
+      <canvas id="webgl-canvas"></canvas>
+    </div>
+
+    <!-- UI Overlay Progress Bar & Nav -->
+    <header class="hud-header">
+      <div class="hud-brand">
+        <span class="hud-logo">RR</span>
+        <span class="hud-title">WAR ROOM <span class="hud-sep">·</span> SUPERR SELECTOR S2</span>
+      </div>
+      <div class="hud-meter">
+        <span class="meter-label">PRESSURE DEPTH</span>
+        <div class="meter-track">
+          <div id="meter-fill" class="meter-fill"></div>
+        </div>
+        <span id="meter-val" class="meter-val">0.00</span>
+      </div>
+      <div class="hud-actions">
+        <button id="btn-jump-chamber" class="hud-jump-btn" title="Jump to Bottom Chamber"><svg class="btn-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor"><path d="M12 5v14m0 0l-5-5m5 5l5-5" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>PILLARS</button>
+        <button id="btn-jump-radar" class="hud-jump-btn" title="Jump to Radar Duel"><svg class="btn-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor"><circle cx="12" cy="12" r="9" stroke-width="2"/><path d="M12 12l5-5m-5 5V3" stroke-width="2" stroke-linecap="round"/></svg>RADAR DUEL</button>
+        <button id="btn-jump-shortlist" class="hud-jump-btn" title="Jump to War Room Shortlist"><svg class="btn-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor"><path d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2m-6 9l2 2 4-4" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>SHORTLIST</button>
+        <button id="btn-jump-warroom" class="hud-jump-btn" title="Jump to War Room Simulator"><svg class="btn-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor"><path d="M3 21h18M3 10h18M5 10v11m4-11v11m6-11v11m4-11v11M12 3L2 10h20L12 3z" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>WAR ROOM</button>
+        <button id="btn-jump-sources" class="hud-jump-btn" title="Jump to Sources & Methodology"><svg class="btn-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor"><path d="M4 19.5A2.5 2.5 0 016.5 17H20M4 19.5A2.5 2.5 0 006.5 22H20V2H6.5A2.5 2.5 0 004 4.5v15z" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>SOURCES</button>
+        <button id="btn-open-deck" class="hud-jump-btn highlight-deck-btn" title="Open 16:9 Presentation Slide Deck"><svg class="btn-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor"><rect x="2" y="3" width="20" height="14" rx="2" stroke-width="2"/><path d="M8 21h8m-4-4v4" stroke-width="2" stroke-linecap="round"/></svg>PRESENT</button>
+        <button id="btn-low-power" class="hud-jump-btn power-toggle-btn" title="Toggle Low Power GPU Mode"><svg class="btn-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor"><path d="M13 2L3 14h9l-1 8 10-12h-9l1-8z" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>LOW POWER</button>
+        <span class="hud-badge">GOA 2027 MINI-AUCTION</span>
+      </div>
+    </header>
+
+    <!-- Main Scroll Track (800vh) -->
+    <main id="scroll-track" class="scroll-track">
+
+      <!-- SECTION 0: HERO (The Rim of the Stepwell) -->
+      <section id="section-hero" class="panel-section hero-section">
+        <div class="hero-container">
+          <div class="hero-tag">
+            <span class="pulse-dot"></span>
+            <span>RAJASTHAN ROYALS ANALYTICS WAR ROOM</span>
+            <span class="devanagari-inline">हल्ला बोल</span>
+          </div>
+
+          <h1 class="hero-title">
+            Under-pressure match impact identifies <em>unsung auction match-winners</em>
+          </h1>
+
+          <p class="hero-summary">
+            A context-adjusted Bayesian evaluation of <strong>199,208 deliveries</strong> across <strong>843 decisive T20 fixtures</strong> (IPL &amp; T20I 2022–2026). Scroll down to descend into Rajasthan Royals’ 4 real pressure bands.
+          </p>
+
+          <div class="hero-stats-row">
+            <div class="stat-pill">
+              <span class="stat-num">199,208</span>
+              <span class="stat-desc">DELIVERIES EVALUATED</span>
+            </div>
+            <div class="stat-pill">
+              <span class="stat-num">843</span>
+              <span class="stat-desc">COMPETITIVE FIXTURES</span>
+            </div>
+            <div class="stat-pill">
+              <span class="stat-num">4 BANDS</span>
+              <span class="stat-desc">LEVERAGE STRATIFICATION</span>
+            </div>
+            <div class="stat-pill accent-pill">
+              <span class="stat-num">TOP 20</span>
+              <span class="stat-desc">RELIABLE TARGETS</span>
+            </div>
+          </div>
+
+          <div class="scroll-prompt">
+            <span class="scroll-text">DESCEND INTO THE STEPWELL</span>
+            <div class="scroll-arrow">↓</div>
+          </div>
+        </div>
+      </section>
+
+      <!-- SECTION 1: THE MATHEMATICAL PRESSURE INDEX EQUATION -->
+      <section id="section-formula" class="panel-section formula-section">
+        <div class="card-overlay formula-card">
+          <div class="card-label">LEVERAGE ARCHITECTURE</div>
+          <h2 class="card-heading">The Pressure Index Equation</h2>
+          <p class="card-sub">
+            Pressure is dynamic and contextual. Every delivery receives a normalized score <em>P</em> &in; [0, 1] aggregating game state deficits:
+          </p>
+
+          <div class="formula-box">
+            <div class="formula-math">
+              <span class="f-sym">P</span> = 
+              <span class="f-term"><span class="f-coef">0.30</span>&middot;&Delta;RRR</span> +
+              <span class="f-term"><span class="f-coef">0.20</span>&middot;RPB</span> +
+              <span class="f-term"><span class="f-coef">0.25</span>&middot;ParDef</span> +
+              <span class="f-term"><span class="f-coef">0.15</span>&middot;Collapse</span> +
+              <span class="f-term"><span class="f-coef">0.10</span>&middot;Death</span>
+            </div>
+          </div>
+
+          <div class="formula-legend">
+            <div class="legend-item"><span class="legend-dot pink"></span><strong>&Delta;RRR:</strong> Required Run Rate surge above 6.0 rpo</div>
+            <div class="legend-item"><span class="legend-dot gold"></span><strong>RPB:</strong> Runs needed per legal ball remaining in 2nd innings</div>
+            <div class="legend-item"><span class="legend-dot pink"></span><strong>ParDef:</strong> 1st innings deficit vs historical over/wicket par curve</div>
+            <div class="legend-item"><span class="legend-dot gold"></span><strong>Collapse:</strong> Frequency of losing &ge; 2 wickets in prior 18 balls</div>
+            <div class="legend-item"><span class="legend-dot blue"></span><strong>Death:</strong> High-leverage overs 17–20 situational scaling</div>
+          </div>
+        </div>
+      </section>
+
+      <!-- SECTION 2: BAND 1 (Low Pressure - Upper Rings 1-4) -->
+      <section id="section-band-1" class="panel-section band-section">
+        <div class="card-overlay band-card band-low">
+          <div class="band-header">
+            <span class="band-tag">PRESSURE BAND 1 OF 4</span>
+            <span class="band-depth">RINGS 1–4 · UPPER WELL</span>
+          </div>
+          <h2 class="band-title">Calm Waters: Baseline Cricket</h2>
+          <p class="band-lead">
+            Normal match flow with defensive fields and balanced required rates. Standard baseline statistics operate safely here, but conceal clutch reliability.
+          </p>
+
+          <div class="grid-stats">
+            <div class="stat-card">
+              <div class="s-val count-up" data-target="156905">0</div>
+              <div class="s-lbl">Balls (78.8% volume)</div>
+            </div>
+            <div class="stat-card">
+              <div class="s-val count-up" data-target="139.1" data-decimal="1">0.0</div>
+              <div class="s-lbl">Batting Strike Rate</div>
+            </div>
+            <div class="stat-card">
+              <div class="s-val count-up" data-target="36.9" data-decimal="1">0.0</div>
+              <div class="s-lbl">Dot Ball Frequency</div>
+            </div>
+            <div class="stat-card">
+              <div class="s-val count-up" data-target="4.80" data-decimal="2">0.0</div>
+              <div class="s-lbl">Wicket Rate (% balls)</div>
+            </div>
+          </div>
+
+          <div class="band-insight">
+            <strong>War Room Takeaway:</strong> With a modest 4.80% dismissal probability, average players inflate baseline strike rates without facing high-consequence scrutiny.
+          </div>
+        </div>
+      </section>
+
+      <!-- SECTION 3: BAND 2 (Medium Pressure - Rings 5-8) -->
+      <section id="section-band-2" class="panel-section band-section">
+        <div class="card-overlay band-card band-med">
+          <div class="band-header">
+            <span class="band-tag">PRESSURE BAND 2 OF 4</span>
+            <span class="band-depth">RINGS 5–8 · MID TERRACE</span>
+          </div>
+          <h2 class="band-title">The Ascending Challenge: Rising RRR</h2>
+          <p class="band-lead">
+            Required run rate climbs above 8.5. Bowling sides tighten fields and execute squeeze overs, testing lower-middle-order rotation.
+          </p>
+
+          <div class="grid-stats">
+            <div class="stat-card">
+              <div class="s-val count-up" data-target="30202">0</div>
+              <div class="s-lbl">Balls (15.2% volume)</div>
+            </div>
+            <div class="stat-card">
+              <div class="s-val count-up" data-target="138.8" data-decimal="1">0.0</div>
+              <div class="s-lbl">Batting Strike Rate</div>
+            </div>
+            <div class="stat-card">
+              <div class="s-val count-up" data-target="37.5" data-decimal="1">0.0</div>
+              <div class="s-lbl">Dot Ball Frequency</div>
+            </div>
+            <div class="stat-card">
+              <div class="s-val count-up" data-target="7.05" data-decimal="2">0.0</div>
+              <div class="s-lbl">Wicket Rate (% balls)</div>
+            </div>
+          </div>
+
+          <div class="band-insight">
+            <strong>War Room Takeaway:</strong> Wicket rate jumps by <strong>+47%</strong> over baseline. Batsmen without intent stall, but strike rate drops marginally to 138.8 as boundary searching increases.
+          </div>
+        </div>
+      </section>
+
+      <!-- SECTION 4: BAND 3 (High Pressure - Rings 9-12) -->
+      <section id="section-band-3" class="panel-section band-section">
+        <div class="card-overlay band-card band-high">
+          <div class="band-header">
+            <span class="band-tag">PRESSURE BAND 3 OF 4</span>
+            <span class="band-depth">RINGS 9–12 · DEEP SHAFT</span>
+          </div>
+          <h2 class="band-title">The Crucible: Death &amp; Deficits</h2>
+          <p class="band-lead">
+            Death overs (17–20) and chases requiring > 10 runs per over. Every mistake translates directly to win-probability decay.
+          </p>
+
+          <div class="grid-stats">
+            <div class="stat-card">
+              <div class="s-val count-up" data-target="8162">0</div>
+              <div class="s-lbl">Balls (4.1% volume)</div>
+            </div>
+            <div class="stat-card">
+              <div class="s-val count-up" data-target="144.5" data-decimal="1">0.0</div>
+              <div class="s-lbl">Batting Strike Rate</div>
+            </div>
+            <div class="stat-card">
+              <div class="s-val count-up" data-target="37.2" data-decimal="1">0.0</div>
+              <div class="s-lbl">Dot Ball Frequency</div>
+            </div>
+            <div class="stat-card">
+              <div class="s-val count-up" data-target="8.55" data-decimal="2">0.0</div>
+              <div class="s-lbl">Wicket Rate (% balls)</div>
+            </div>
+          </div>
+
+          <div class="band-insight">
+            <strong>War Room Takeaway:</strong> Strike rate expands to 144.5 under desperation hitting, but wicket rate spikes to 8.55%. Specialized yorkers and boundary clearing become decisive.
+          </div>
+        </div>
+      </section>
+
+      <!-- SECTION 5: BAND 4 (Extreme Pressure - Rings 13-16 & Floor) -->
+      <section id="section-band-4" class="panel-section band-section">
+        <div class="card-overlay band-card band-extreme">
+          <div class="band-header">
+            <span class="band-tag">PRESSURE BAND 4 OF 4</span>
+            <span class="band-depth">RINGS 13–16 · THE FLOOR POOL</span>
+          </div>
+          <h2 class="band-title">The Caldera: Clutch Crisis States</h2>
+          <p class="band-lead">
+            Final 2 overs, RRR &gt; 12.0 with &le; 4 wickets in hand, or critical knockout match climaxes. Only the statistical 99th percentile thrives here.
+          </p>
+
+          <div class="grid-stats">
+            <div class="stat-card">
+              <div class="s-val count-up" data-target="3939">0</div>
+              <div class="s-lbl">Balls (2.0% volume)</div>
+            </div>
+            <div class="stat-card">
+              <div class="s-val count-up" data-target="148.2" data-decimal="1">0.0</div>
+              <div class="s-lbl">Batting Strike Rate</div>
+            </div>
+            <div class="stat-card">
+              <div class="s-val count-up" data-target="41.6" data-decimal="1">0.0</div>
+              <div class="s-lbl">Dot Ball Frequency</div>
+            </div>
+            <div class="stat-card">
+              <div class="s-val count-up" data-target="10.69" data-decimal="2">0.0</div>
+              <div class="s-lbl">Wicket Rate (% balls)</div>
+            </div>
+          </div>
+
+          <div class="band-insight">
+            <strong>War Room Takeaway:</strong> Dots surge to 41.6% and wicket rate doubles to 10.69% (one wicket every 9 balls). This extreme crucible isolates our Top 10 auction targets.
+          </div>
+        </div>
+      </section>
+
+      <!-- SECTION 6: THE CHAMBER OF PILLARS (The Bottom of the Well) -->
+      <section id="section-chamber" class="panel-section chamber-section">
+        <!-- Floating Top Bar (Cinematic Full-Screen HUD) -->
+        <div class="chamber-top-bar">
+          <div class="chamber-title-block">
+            <span class="card-label">STEPWELL FLOOR · THE CRUCIBLE CHAMBER</span>
+            <h2 class="chamber-title">The Top 10 Pillars of Reliability</h2>
+            <div class="chamber-legend-strip">
+              <span class="leg-pill"><svg class="leg-icon" viewBox="0 0 16 16" fill="currentColor"><rect x="5" y="2" width="6" height="12" rx="1.5"/></svg><strong>Height:</strong> Pressure Rating</span>
+              <span class="leg-pill"><svg class="leg-icon" viewBox="0 0 16 16" fill="none" stroke="currentColor"><circle cx="8" cy="8" r="6" stroke-width="1.8"/><circle cx="8" cy="8" r="2.8" stroke-width="1.4"/></svg><strong>Ring:</strong> 90% Confidence Interval (&Delta;CI)</span>
+              <span class="leg-pill"><svg class="leg-icon" viewBox="0 0 16 16" fill="currentColor"><path d="M8 1l1.6 4.4L14 7l-4.4 1.6L8 13l-1.6-4.4L2 7l4.4-1.6L8 1z"/></svg><strong>Glow:</strong> Bootstrap Stability %</span>
+              <span class="leg-pill leg-dim"><svg class="leg-icon" viewBox="0 0 16 16" fill="none" stroke="currentColor"><rect x="3" y="7" width="10" height="7" rx="1.5" stroke-width="1.5"/><path d="M5.5 7V4.5a2.5 2.5 0 015 0V7" stroke-width="1.5" stroke-linecap="round"/></svg><strong>Dimmed:</strong> Ineligible</span>
+              <span class="leg-pill leg-hint"><span class="pulse-dot"></span><span>Click pillar for dossier</span></span>
+            </div>
+          </div>
+
+          <div class="chamber-toggles-block">
+            <div class="toggle-group">
+              <button id="btn-toggle-batters" class="toggle-btn active" data-type="batters">BATTERS</button>
+              <button id="btn-toggle-bowlers" class="toggle-btn" data-type="bowlers">BOWLERS</button>
+            </div>
+
+            <label class="auction-switch-label">
+              <input type="checkbox" id="chk-auction-eligible" />
+              <span class="switch-slider"></span>
+              <span class="switch-text">AUCTION-ELIGIBLE ONLY</span>
+            </label>
+          </div>
+        </div>
+
+        <!-- Floating Bottom Dock: Filters & Navigation -->
+        <div class="chamber-bottom-dock">
+          <div class="filters-dock-row">
+            <div class="dock-field">
+              <label for="filter-role" class="dock-label">ROLE</label>
+              <select id="filter-role" class="filter-select dock-select">
+                <option value="all">All Roles</option>
+                <option value="opening">Opening Batter</option>
+                <option value="top_order">Top-Order</option>
+                <option value="finisher">Finisher</option>
+                <option value="allrounder">All-Rounder</option>
+                <option value="pace">Pace Bowler</option>
+                <option value="spin">Spinner</option>
+              </select>
+            </div>
+
+            <div class="dock-field">
+              <label for="filter-nationality" class="dock-label">REGION</label>
+              <select id="filter-nationality" class="filter-select dock-select">
+                <option value="all">All Regions</option>
+                <option value="indian">Indian Only</option>
+                <option value="overseas">Overseas (All)</option>
+                <option value="India">India</option>
+                <option value="Australia">Australia</option>
+                <option value="South Africa">South Africa</option>
+                <option value="England">England</option>
+                <option value="Pakistan">Pakistan (Locked)</option>
+                <option value="Zimbabwe">Zimbabwe</option>
+                <option value="Bangladesh">Bangladesh</option>
+              </select>
+            </div>
+
+            <div class="dock-field">
+              <label for="filter-price" class="dock-label">PRICE</label>
+              <select id="filter-price" class="filter-select dock-select">
+                <option value="all">All Tiers</option>
+                <option value="under2">Under ₹2 Cr</option>
+                <option value="2to7">₹2 – ₹7 Cr</option>
+                <option value="above7">Above ₹7 Cr</option>
+                <option value="verified">Verified Retained/Sold</option>
+              </select>
+            </div>
+
+            <button id="btn-reset-filters" class="filter-btn-reset dock-reset" title="Reset all filters">RESET</button>
+            <div id="filter-match-count" class="filter-count-pill dock-count">10 / 10 Targets</div>
+
+            <div class="dock-divider"></div>
+
+            <button id="cq-jump-radar" class="cq-btn dock-btn" title="Jump to Radar Duel"><svg class="btn-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor"><circle cx="12" cy="12" r="9" stroke-width="2"/><path d="M12 12l5-5m-5 5V3" stroke-width="2" stroke-linecap="round"/></svg>RADAR</button>
+            <button id="cq-jump-shortlist" class="cq-btn dock-btn" title="Jump to Shortlist"><svg class="btn-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor"><path d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2m-6 9l2 2 4-4" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>SHORTLIST</button>
+            <button id="cq-jump-warroom" class="cq-btn dock-btn" title="Jump to War Room Simulator"><svg class="btn-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor"><path d="M3 21h18M3 10h18M5 10v11m4-11v11m6-11v11m4-11v11M12 3L2 10h20L12 3z" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>WAR ROOM</button>
+            <button id="cq-jump-sources" class="cq-btn dock-btn" title="Jump to Sources & Methodology"><svg class="btn-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor"><path d="M4 19.5A2.5 2.5 0 016.5 17H20M4 19.5A2.5 2.5 0 006.5 22H20V2H6.5A2.5 2.5 0 004 4.5v15z" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>SOURCES</button>
+            <button id="cq-open-deck" class="cq-btn cq-deck-btn dock-btn" title="Open Presentation Deck"><svg class="btn-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor"><rect x="2" y="3" width="20" height="14" rx="2" stroke-width="2"/><path d="M8 21h8m-4-4v4" stroke-width="2" stroke-linecap="round"/></svg>PRESENT</button>
+          </div>
+        </div>
+
+        <!-- Mobile Leaderboard (Visible on mobile / 2D fallback) -->
+        <div id="mobile-chamber-list" class="mobile-chamber-list"></div>
+
+        <!-- Visually Hidden Accessible Table for Screen Readers & Keyboard -->
+        <div class="sr-only">
+          <h3>Complete Top 10 Pressure Ranking Registry</h3>
+          <table id="sr-players-table">
+            <thead>
+              <tr>
+                <th>Rank</th>
+                <th>Player</th>
+                <th>Category</th>
+                <th>Rating</th>
+                <th>90% CI</th>
+                <th>Stability %</th>
+                <th>HP Balls</th>
+                <th>Availability</th>
+                <th>Inspect</th>
+              </tr>
+            </thead>
+            <tbody id="sr-table-body"></tbody>
+          </table>
+        </div>
+      </section>
+      </section>
+
+    </main>
+
+    <!-- ============================================================
+         PHASE 5: WAR ROOM SUITE (RADAR DUEL & SHORTLIST)
+         ============================================================ -->
+    <div id="war-room-suite" class="war-room-suite">
+
+      <!-- SECTION 7: RADAR DUEL (CLUTCH VS BASELINE) -->
+      <section id="section-radar-duel" class="radar-duel-section">
+        <div class="radar-container">
+          
+          <!-- Editorial Radar Header -->
+          <div class="radar-header-editorial">
+            <div class="rhe-left">
+              <div class="editorial-meta-tag">
+                <span class="em-fig">FIG. 03</span>
+                <span class="em-sep">/</span>
+                <span class="em-category">COMPARATIVE PERFORMANCE MATRIX</span>
+                <span class="em-sep">/</span>
+                <span class="em-date">16 NOV 2026</span>
+              </div>
+              <h2 class="editorial-display-heading">Who holds their shape when the match tightens?</h2>
+              <p class="editorial-lead-text">
+                Dual-layer radial geometry comparing high-pressure crisis execution (solid line, <em>P</em> &ge; <em>P</em><sub>75</sub>) against standard baseline performance (dashed ghost). Economy and dot ball rates are inverted so elite containment extends outward to the perimeter.
+              </p>
+            </div>
+
+            <!-- Cohort Switcher for Radar -->
+            <div class="radar-cohort-switch">
+              <button id="btn-radar-batters" class="ledger-pill active" data-type="batters">BATTERS (6 AXES)</button>
+              <button id="btn-radar-bowlers" class="ledger-pill" data-type="bowlers">BOWLERS (5 AXES)</button>
+            </div>
+          </div>
+
+          <!-- 2 to 3 Player Selector Bar (Unboxed Hairline Strip) -->
+          <div class="radar-selectors-bar">
+            <div class="selector-unit p1-unit">
+              <span class="sel-label"><span class="sel-dot p1-dot"></span> CANDIDATE 01 (PRIMARY)</span>
+              <select id="radar-sel-p1" class="radar-select p1-select"></select>
+            </div>
+
+            <div class="selector-unit p2-unit">
+              <span class="sel-label"><span class="sel-dot p2-dot"></span> CANDIDATE 02 (CHALLENGER)</span>
+              <select id="radar-sel-p2" class="radar-select p2-select"></select>
+            </div>
+
+            <div class="selector-unit p3-unit">
+              <span class="sel-label"><span class="sel-dot p3-dot"></span> CANDIDATE 03 (OPTIONAL)</span>
+              <select id="radar-sel-p3" class="radar-select p3-select">
+                <option value="none">(None — Dual Candidate Matrix)</option>
+              </select>
+            </div>
+          </div>
+
+          <!-- Radar Visualization Grid -->
+          <div class="radar-vis-grid">
+            <!-- Left: SVG Radar Container -->
+            <div class="radar-svg-col">
+              <div id="radar-chart-container" class="radar-chart-container"></div>
+              
+              <!-- Legend Strip -->
+              <div class="radar-legend-strip">
+                <div class="leg-item"><span class="leg-line solid-line"></span> Solid Line: <strong>Crisis Pressure Execution (<em>P</em> &ge; <em>P</em><sub>75</sub>)</strong></div>
+                <div class="leg-item"><span class="leg-line dashed-line"></span> Dashed Line: <strong>Baseline Normal Match Layer</strong></div>
+              </div>
+            </div>
+
+            <!-- Right: Scorecard Ledger & Margin Notes -->
+            <div class="radar-sidebar-col">
+              <!-- Head-to-Head Stats Table -->
+              <div class="radar-stats-table-box">
+                <div class="table-box-title">HEAD-TO-HEAD METRIC COMPARISON</div>
+                <div id="radar-h2h-table" class="radar-h2h-table"></div>
+              </div>
+
+              <!-- Mathematical Normalization Notes -->
+              <div class="radar-normalization-notes">
+                <div class="rnm-title">AXIS NORMALIZATION CRITERIA</div>
+                <div class="rnm-item">
+                  <span class="rnm-term">Radial Mapping:</span> Linear mapping [<em>r</em><sub>min</sub>, <em>r</em><sub>max</sub>] across empirical cohort boundaries via <code>d3-scale</code>.
+                </div>
+                <div class="rnm-item">
+                  <span class="rnm-term">Economy Inversion (Bowlers):</span> Lower economy is strictly superior. Axes are inverted so world-class containment extends outward to the rim.
+                </div>
+                <div class="rnm-item">
+                  <span class="rnm-term">Dot % Avoidance:</span> Inverted for batters so strike rotation under pressure extends outward.
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Screen Reader Narrative Summary -->
+          <div id="radar-sr-summary" class="sr-only" aria-live="polite"></div>
+        </div>
+      </section>
+
+      <!-- SECTION 8: AUCTION CATALOGUE LEDGER (STYLE TILE) -->
+      <section id="section-shortlist" class="shortlist-section">
+        <div class="ledger-container">
+          
+          <!-- Editorial Ledger Header -->
+          <div class="ledger-header-editorial">
+            <div class="lhe-left">
+              <div class="editorial-meta-tag">
+                <span class="em-fig">FIG. 04</span>
+                <span class="em-sep">/</span>
+                <span class="em-category">AUCTION TARGET CATALOGUE</span>
+                <span class="em-sep">/</span>
+                <span class="em-date">16 NOV 2026</span>
+              </div>
+              <h2 class="editorial-display-heading">The players we can actually buy.</h2>
+              <p class="editorial-lead-text">
+                Context-adjusted Bayesian reliability rankings across 199,208 decisive match deliveries from 843 completed fixtures (1,791 excluded balls from 24 abandoned matches and 6 super-overs reconcile the ~867 fixture raw dataset). Ineligible Pakistani cricketers, contracted Rajasthan Royals squad members, and retired icons are transparently catalogued and locked pursuant to official BCCI auction regulations.
+              </p>
+            </div>
+
+            <!-- Ledger Summary Stats (Unboxed hairline tabular numerals) -->
+            <div class="lhe-metrics-summary" aria-label="Auction candidate breakdown">
+              <div class="lms-item">
+                <span class="lms-val" id="stat-evaluated-count">20</span>
+                <span class="lms-lbl">EVALUATED</span>
+              </div>
+              <div class="lms-divider"></div>
+              <div class="lms-item accent-item">
+                <span class="lms-val" id="stat-actionable-count">12</span>
+                <span class="lms-lbl">ACTIONABLE</span>
+              </div>
+              <div class="lms-divider"></div>
+              <div class="lms-item locked-item">
+                <span class="lms-val" id="stat-locked-count">8</span>
+                <span class="lms-lbl">LOCKED</span>
+              </div>
+            </div>
+          </div>
+
+          <!-- Editorial Segment Filter Row -->
+          <div class="ledger-controls-row">
+            <div class="ledger-filter-pills" role="tablist">
+              <button class="ledger-pill active" data-filter="all">ALL TARGETS (20)</button>
+              <button class="ledger-pill" data-filter="eligible">ACTIONABLE TARGETS (12)</button>
+              <button class="ledger-pill" data-filter="batters">BATTERS (10)</button>
+              <button class="ledger-pill" data-filter="bowlers">BOWLERS (10)</button>
+            </div>
+
+            <div class="ledger-source-attribution">
+              Source: Ball-by-ball corpus 2022–2026 (199,208 balls across 843 fixtures vs 200,999 raw rows across ~867 matches) · Empirical 90% CI bootstrap
+            </div>
+          </div>
+
+          <!-- Desktop Ledger Table (Hairline broadsheet scorecard) -->
+          <div class="ledger-table-wrap">
+            <table class="editorial-ledger-table" id="shortlist-table">
+              <thead>
+                <tr>
+                  <th class="th-rank">RANK</th>
+                  <th class="th-candidate">CANDIDATE TARGET</th>
+                  <th class="th-role">TACTICAL ROLE</th>
+                  <th class="th-rating">PRESSURE RATING</th>
+                  <th class="th-ci">90% EMPIRICAL CI</th>
+                  <th class="th-stability">STABILITY</th>
+                  <th class="th-price">VALUATION</th>
+                  <th class="th-status">AUCTION STATUS</th>
+                  <th class="th-actions">ACTIONS</th>
+                </tr>
+              </thead>
+              <tbody id="shortlist-table-body"></tbody>
+            </table>
+          </div>
+
+          <!-- Mobile Ledger Scorecard Cards (Dedicated 390x844 layout) -->
+          <div id="shortlist-mobile-ledger" class="shortlist-mobile-ledger"></div>
+
+          <!-- Ledger Footnotes & Margin Notes -->
+          <div class="ledger-footer-notes">
+            <div class="lfn-note">
+              <span class="lfn-term">Trophy Gold (#D4AF37):</span> Reserved exclusively for the composite Bayesian Pressure Rating score.
+            </div>
+            <div class="lfn-note">
+              <span class="lfn-term">Valuation Taxonomy:</span> Every valuation is explicitly categorized as either "Last IPL sale price (team, year)", "Last IPL retention price (team, year)", "Base price (slab)", or "Not listed yet". Click "✓ VERIFIED ↗" to inspect the public record.
+            </div>
+            <div class="lfn-note">
+              <span class="lfn-term">Locked Criteria (8 Targets):</span> Includes 4 Pakistani nationals ineligible pursuant to BCCI policy (Muqeem, Abrar, Shaheen, Nawaz), 3 contracted/retained Rajasthan Royals players (Sooryavanshi, Dubey, Parag), and 1 retired player (Dinesh Karthik).
+            </div>
+            <div class="lfn-note">
+              <span class="lfn-term">Reconciliation Proof:</span> 199,208 evaluated balls across 843 decisive fixtures vs 200,999 raw rows across ~867 matches (1,791 excluded balls from 24 abandoned matches and 6 super-overs accounted for). Total salary cap ceiling is ₹157.00 Cr (auction purse + performance pay + match fees).
+            </div>
+          </div>
+
+        </div>
+      </section>
+
+      <!-- SECTION 9: THE WAR ROOM (IPL 2027 AUCTION SIMULATOR) -->
+      <section id="section-war-room" class="war-room-simulator-section">
+        <div id="simulator-container"></div>
+      </section>
+
+      <!-- SECTION 10: SOURCES & METHODOLOGY AUDIT -->
+      <section id="section-sources-methodology" class="sources-methodology-section">
+        <div id="sources-container"></div>
+      </section>
+
+      <!-- SECTION 11: WAR ROOM FAQ & METHODOLOGY DRILL-DOWN -->
+      <section id="section-warroom-faq" class="warroom-faq-section">
+        <div class="war-room-card faq-card">
+          <div class="faq-header">
+            <div class="section-tag-row">
+              <span class="card-label">STRATEGIC CLARIFICATIONS · GOVERNANCE</span>
+              <span class="pulse-dot"></span>
+            </div>
+            <h2 class="section-display-title">War Room Frequently Asked Questions</h2>
+            <p class="section-desc">
+              Essential analytical nuances, statistical assumptions, and auction governance rules explained for leadership.
+            </p>
+          </div>
+
+          <div class="faq-accordion-container" id="faq-accordion">
+            <!-- FAQ Item 1 -->
+            <div class="faq-item active">
+              <button class="faq-question-btn" aria-expanded="true">
+                <span class="faq-q-text">1. How does Bayesian shrinkage prevent small-sample bias?</span>
+                <span class="faq-chevron"><svg class="btn-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor"><polyline points="6 9 12 15 18 9"/></svg></span>
+              </button>
+              <div class="faq-answer-panel">
+                <p>
+                  High-pressure delivery counts vary wildly between candidates (from 82 balls for emerging prodigy Vaibhav Sooryavanshi to 400+ balls for seasoned finishers). If evaluated on raw sample metrics alone, a player with 2 boundaries in 4 high-pressure balls would unrealistically outrank a seasoned veteran.
+                </p>
+                <p>
+                  Our model applies a <strong>Beta-Binomial Bayesian shrinkage prior</strong> parameterized by aggregate cohort distributions across 199,208 balls. Players with smaller samples shrink more heavily towards cohort baseline expectations, while players with substantial high-leverage volume establish statistical significance. The reported <strong>90% Empirical Confidence Intervals (CI)</strong> visually reflect this exact uncertainty span.
+                </p>
+              </div>
+            </div>
+
+            <!-- FAQ Item 2 -->
+            <div class="faq-item">
+              <button class="faq-question-btn" aria-expanded="false">
+                <span class="faq-q-text">2. Why is the 2027 Salary Cap ₹157.00 Cr while Auction Purse is estimated at ₹45.00 Cr?</span>
+                <span class="faq-chevron"><svg class="btn-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor"><polyline points="6 9 12 15 18 9"/></svg></span>
+              </button>
+              <div class="faq-answer-panel">
+                <p>
+                  The official BCCI IPL 2027 regulations establish a total player purse ceiling of <strong>₹157.00 Crore</strong>. However, this figure encompasses pre-auction player retentions, Right-to-Match (RTM) liabilities, player match fees, and incremental performance bonuses.
+                </p>
+                <p>
+                  Following projected core retentions for Rajasthan Royals (including Sanju Samson, Yashasvi Jaiswal, Riyan Parag, and Sandeep Sharma), the actual deployable live bidding purse in the auction room is projected at <strong>₹45.00 Crore</strong> (with 18 existing squad slots occupied). In our War Room Simulator, this parameter is deliberately configured as an editable assumption.
+                </p>
+              </div>
+            </div>
+
+            <!-- FAQ Item 3 -->
+            <div class="faq-item">
+              <button class="faq-question-btn" aria-expanded="false">
+                <span class="faq-q-text">3. Why are Pakistani players and retired legends locked or dimmed on the board?</span>
+                <span class="faq-chevron"><svg class="btn-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor"><polyline points="6 9 12 15 18 9"/></svg></span>
+              </button>
+              <div class="faq-answer-panel">
+                <p>
+                  Our Bayesian tracking engine evaluated all top international T20 and franchise fixtures between 2022 and 2026. Consequently, world-class performers like <strong>Shaheen Shah Afridi</strong> (Rank #3 Bowler, 0.814 Rating) and <strong>Naseem Shah</strong> objectively register in the top statistical tier.
+                </p>
+                <p>
+                  However, pursuant to existing BCCI policy and regulatory guidelines, Pakistani cricketers are not eligible to register or bid in IPL auctions. Rather than artificially deleting them from the empirical dataset, our system transparently labels them with an <strong>Ineligible / Locked</strong> badge and dims their 3D pillars, preserving scientific integrity while ensuring auction compliance.
+                </p>
+              </div>
+            </div>
+
+            <!-- FAQ Item 4 -->
+            <div class="faq-item">
+              <button class="faq-question-btn" aria-expanded="false">
+                <span class="faq-q-text">4. Why is the Bowling Economy axis inverted on the radar duel chart?</span>
+                <span class="faq-chevron"><svg class="btn-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor"><polyline points="6 9 12 15 18 9"/></svg></span>
+              </button>
+              <div class="faq-answer-panel">
+                <p>
+                  In standard radar charts, higher values expand outward. For batting metrics (strike rate, boundary frequency), higher values are superior. However, for bowling economy, a lower runs-per-over rate (e.g. 5.50 RPO) represents world-class containment, whereas 11.00 RPO represents heavy bleeding.
+                </p>
+                <p>
+                  To provide an intuitive visual where a larger, more expansive polygon always denotes elite performance, the economy axis is mathematically inverted: <code>r = (E_max - E) / (E_max - E_min)</code>. Thus, lower run rates project towards the outermost golden rim.
+                </p>
+              </div>
+            </div>
+
+            <!-- FAQ Item 5 -->
+            <div class="faq-item">
+              <button class="faq-question-btn" aria-expanded="false">
+                <span class="faq-q-text">5. What does Bootstrap Stability percentage indicate?</span>
+                <span class="faq-chevron"><svg class="btn-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor"><polyline points="6 9 12 15 18 9"/></svg></span>
+              </button>
+              <div class="faq-answer-panel">
+                <p>
+                  To stress-test rankings against random variance, we ran <strong>10,000 bootstrap resamples with replacement</strong> across all match deliveries. The Bootstrap Stability score represents the percentage of resampled iterations in which that player maintained their Top 10 rank.
+                </p>
+                <p>
+                  A score above 90% indicates rock-solid reliability across diverse opposition conditions and pitch variations, whereas scores below 70% suggest performance sensitive to specific match circumstances.
+                </p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- SECTION 12: EXECUTIVE ACTION CTA -->
+      <section id="section-executive-cta" class="executive-cta-section">
+        <div class="war-room-card executive-cta-card">
+          <div class="cta-ornament-arch">
+            <svg viewBox="0 0 240 30" class="cta-arch-svg" preserveAspectRatio="none">
+              <path d="M0,30 Q60,30 80,15 Q100,2 120,2 Q140,2 160,15 Q180,30 240,30" fill="none" stroke="#FFD700" stroke-width="1.5"/>
+              <circle cx="120" cy="8" r="3" fill="#EA1A85"/>
+            </svg>
+          </div>
+          <div class="cta-tag-row">
+            <span class="card-label">AUCTION COMMAND CENTER · READY FOR DEPLOYMENT</span>
+            <span class="devanagari-inline">हल्ला बोल</span>
+          </div>
+          <h2 class="cta-title">Deploy Bayesian Intelligence at the Auction Table</h2>
+          <p class="cta-lead">
+            Empower the Rajasthan Royals auction delegation with empirical pressure stratifications, interactive candidate duel comparisons, and real-time purse simulation in Goa.
+          </p>
+
+          <div class="cta-actions-row">
+            <button id="cta-btn-deck" class="cta-primary-btn">
+              <svg class="btn-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor"><rect x="2" y="3" width="20" height="14" rx="2"/><path d="M8 21h8m-4-4v4"/></svg>
+              <span>LAUNCH 16:9 PRESENTATION DECK</span>
+            </button>
+            <button id="cta-btn-print" class="cta-secondary-btn">
+              <svg class="btn-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor"><polyline points="6 9 6 2 18 2 18 9"/><path d="M6 18H4a2 2 0 0 1-2-2v-5a2 2 0 0 1 2-2h16a2 2 0 0 1 2 2v5a2 2 0 0 1-2 2h-2"/><rect x="6" y="14" width="12" height="8"/></svg>
+              <span>EXPORT EXECUTIVE PDF BRIEF</span>
+            </button>
+            <button id="cta-btn-top" class="cta-tertiary-btn">
+              <svg class="btn-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor"><line x1="12" y1="19" x2="12" y2="5"/><polyline points="5 12 12 5 19 12"/></svg>
+              <span>RETURN TO TOP</span>
+            </button>
+          </div>
+        </div>
+      </section>
+
+      <!-- SECTION 13: ROYAL FRANCHISE COLOSSEUM FOOTER -->
+      <footer id="page-footer" class="royal-page-footer">
+        <div class="footer-inner">
+          <div class="footer-top-row">
+            <div class="footer-brand-col">
+              <div class="footer-crest">
+                <span class="f-logo">RR</span>
+                <span class="f-devanagari">हल्ला बोल</span>
+              </div>
+              <h3 class="footer-org-name">RAJASTHAN ROYALS ANALYTICS WAR ROOM</h3>
+              <p class="footer-tagline">
+                SupeRR Selector Season 2 · Bayesian Pressure Stratification &amp; 3D Stepwell Architecture for the IPL 2027 Mini-Auction.
+              </p>
+            </div>
+
+            <div class="footer-nav-col">
+              <h4 class="f-col-title">WAR ROOM NAVIGATION</h4>
+              <ul class="footer-links">
+                <li><a href="#section-hero">01. Rim of the Stepwell</a></li>
+                <li><a href="#section-formula">02. Pressure Equation</a></li>
+                <li><a href="#section-chamber">03. 3D Chamber of Pillars</a></li>
+                <li><a href="#section-radar-duel">04. Radar Duel Matrix</a></li>
+                <li><a href="#section-shortlist">05. Shortlist Registry</a></li>
+                <li><a href="#section-war-room">06. Auction Simulator</a></li>
+                <li><a href="#section-sources-methodology">07. Methodology Audit</a></li>
+              </ul>
+            </div>
+
+            <div class="footer-meta-col">
+              <h4 class="f-col-title">DATA SPECIFICATIONS</h4>
+              <div class="footer-spec-item">
+                <span class="fsi-label">Tracking Volume:</span>
+                <span class="fsi-val">199,208 Reconciled Deliveries</span>
+              </div>
+              <div class="footer-spec-item">
+                <span class="fsi-label">Match Corpus:</span>
+                <span class="fsi-val">843 Decisive Fixtures (2022–2026)</span>
+              </div>
+              <div class="footer-spec-item">
+                <span class="fsi-label">Valuation Audit:</span>
+                <span class="fsi-val">16 Nov 2026 (Pending Retention List)</span>
+              </div>
+              <div class="footer-spec-item">
+                <span class="fsi-label">Target Auction:</span>
+                <span class="fsi-val">IPL 2027 Mini-Auction · Goa</span>
+              </div>
+            </div>
+          </div>
+
+          <div class="footer-bottom-bar">
+            <div class="f-copy">
+              &copy; 2026 Rajasthan Royals SupeRR Selector. Handcrafted analytics architecture. Sourced with open-source Creative Commons photographic portraits and verified public auction data.
+            </div>
+            <div class="f-back-top">
+              <button id="footer-btn-top" class="f-top-btn" title="Back to top">
+                <span>Top of Stepwell</span>
+                <svg class="btn-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor"><line x1="12" y1="19" x2="12" y2="5"/><polyline points="5 12 12 5 19 12"/></svg>
+              </button>
+            </div>
+          </div>
+        </div>
+      </footer>
+
+    </div>
+
+    <!-- PRESENTATION MODE SLIDE DECK (16:9 OVERLAY) -->
+    <div id="present-deck-modal" class="present-deck-modal" role="dialog" aria-modal="true" aria-label="SupeRR Selector Presentation Deck">
+      <div class="deck-backdrop" id="deck-backdrop"></div>
+      <div class="deck-stage-wrapper">
+        <div class="deck-stage">
+          <div class="deck-top-bar">
+            <div class="deck-brand-pill">
+              <span class="hud-logo">RR</span>
+              <span class="deck-title-text">WAR ROOM PRESENTATION · 16:9 DECK</span>
+            </div>
+            <div class="deck-nav-pills" id="deck-pills"></div>
+            <div class="deck-controls">
+              <span id="deck-counter" class="deck-counter">Slide 1 of 5</span>
+              <button id="deck-btn-prev" class="deck-ctrl-btn" title="Previous Slide (Left Arrow / PageUp)"><svg class="btn-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor"><polyline points="15 18 9 12 15 6"/></svg></button>
+              <button id="deck-btn-next" class="deck-ctrl-btn" title="Next Slide (Right Arrow / PageDown)"><svg class="btn-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor"><polyline points="9 18 15 12 9 6"/></svg></button>
+              <button id="deck-btn-fullscreen" class="deck-ctrl-btn" title="Toggle Fullscreen (F)"><svg class="btn-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor"><path d="M8 3H5a2 2 0 0 0-2 2v3m18 0V5a2 2 0 0 0-2-2h-3m0 18h3a2 2 0 0 0 2-2v-3M3 16v3a2 2 0 0 0 2 2h3"/></svg></button>
+              <button id="deck-btn-print" class="deck-ctrl-btn print-btn" title="Export PDF (Print Dialog)"><svg class="btn-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor"><polyline points="6 9 6 2 18 2 18 9"/><path d="M6 18H4a2 2 0 0 1-2-2v-5a2 2 0 0 1 2-2h16a2 2 0 0 1 2 2v5a2 2 0 0 1-2 2h-2"/><rect x="6" y="14" width="12" height="8"/></svg> EXPORT PDF</button>
+              <button id="deck-btn-close" class="deck-ctrl-btn close-btn" title="Exit Presentation (ESC)"><svg class="btn-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg></button>
+            </div>
+          </div>
+
+          <div id="deck-slide-container" class="deck-slide-container">
+            <div id="deck-slide-content" class="deck-slide-content"></div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- PRINT-ONLY FULL DECK CONTAINER (FOR COMPLETE PDF EXPORT) -->
+    <div id="print-all-slides" class="print-all-slides-container"></div>
+
+    <!-- Player Dossier Modal / Drawer -->
+    <div id="player-modal" class="player-modal hidden" role="dialog" aria-modal="true" aria-labelledby="modal-player-name">
+      <div class="modal-backdrop" id="modal-backdrop"></div>
+      <div class="modal-container">
+        <button id="btn-close-modal" class="modal-close-btn" aria-label="Close dossier"><svg class="btn-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg></button>
+        
+        <div class="modal-header">
+          <div class="modal-badge-row">
+            <span id="modal-rank-badge" class="rank-badge">RANK #1</span>
+            <span id="modal-role-badge" class="role-badge">OPENING BATTER</span>
+            <span id="modal-lock-badge" class="lock-badge hidden"><svg class="btn-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor"><rect x="3" y="11" width="18" height="11" rx="2" stroke-width="2"/><path d="M7 11V7a5 5 0 0110 0v4" stroke-width="2" stroke-linecap="round"/></svg>LOCKED</span>
+          </div>
+          <h2 id="modal-player-name" class="modal-name">Vaibhav Sooryavanshi</h2>
+          <div id="modal-team-line" class="modal-team">Rajasthan Royals · India</div>
+        </div>
+
+        <div class="modal-body-grid">
+          <!-- Left: Duotone Portrait Frame -->
+          <div class="modal-portrait-col">
+            <div id="modal-portrait-frame" class="portrait-frame">
+              <img id="modal-portrait-img" src="" alt="Player Portrait" class="portrait-img" />
+            </div>
+            <div id="modal-credit-line" class="portrait-credit">Photo: Wikimedia Commons</div>
+          </div>
+
+          <!-- Right: Key Analytics & War Room Fit -->
+          <div class="modal-data-col">
+            <!-- Rating & CI Banner -->
+            <div class="data-banner">
+              <div class="data-stat-box">
+                <span class="db-lbl">PRESSURE RATING</span>
+                <span id="modal-rating" class="db-val gold-val">0.896</span>
+              </div>
+              <div class="data-stat-box">
+                <span class="db-lbl">90% EMPIRICAL CI</span>
+                <span id="modal-ci" class="db-val">[225.0 - 294.0]</span>
+              </div>
+              <div class="data-stat-box">
+                <span class="db-lbl">BOOTSTRAP STABILITY</span>
+                <span id="modal-stability" class="db-val pink-val">99.4%</span>
+              </div>
+            </div>
+
+            <!-- Primary Metrics Table -->
+            <div class="metrics-grid">
+              <div class="m-card">
+                <span id="modal-metric-1-lbl" class="m-lbl">HP STRIKE RATE</span>
+                <span id="modal-metric-1-val" class="m-val">256.1</span>
+              </div>
+              <div class="m-card">
+                <span id="modal-metric-2-lbl" class="m-lbl">BASELINE SR</span>
+                <span id="modal-metric-2-val" class="m-val">219.4</span>
+              </div>
+              <div class="m-card">
+                <span class="m-lbl">DOT BALL %</span>
+                <span id="modal-dot-val" class="m-val">34.1%</span>
+              </div>
+              <div class="m-card">
+                <span id="modal-metric-3-lbl" class="m-lbl">BOUNDARY %</span>
+                <span id="modal-metric-3-val" class="m-val">46.3%</span>
+              </div>
+              <div class="m-card full-width">
+                <span class="m-lbl">SAMPLE SIZE</span>
+                <span id="modal-sample-val" class="m-val">82 High-Pressure Deliveries (14 Fixtures)</span>
+              </div>
+            </div>
+
+            <!-- Strategic Assessments -->
+            <div class="dossier-narrative">
+              <div class="narrative-box rr-fit">
+                <div class="n-title">✦ RR WAR ROOM TACTICAL FIT</div>
+                <p id="modal-rr-fit">Already at RR — the data confirms he is their most valuable batting asset under pressure.</p>
+              </div>
+
+              <div class="narrative-box risk-box">
+                <div class="n-title">⚠ RISK PROFILE &amp; LIMITATIONS</div>
+                <p id="modal-risk">Very young; sample = 82 HP balls. Extraordinary ceiling but sustainability unproven.</p>
+              </div>
+
+              <div class="narrative-box auction-box">
+                <div class="n-title">⚡ AUCTION STATUS &amp; PRICE VERIFICATION</div>
+                <p id="modal-auction-note">Retained Asset (Pre-auction) · Last verified purchase: ₹1.10 Cr</p>
+              </div>
+            </div>
+
+          </div>
+        </div>
+
+      </div>
+    </div>
+
+    <!-- Fallback Static Section (Visible when 3D disabled or on small screens) -->
+    <div id="mobile-fallback-banner" class="mobile-fallback-banner">
+      <span>3D STEPWELL VIEWPORT DISABLED · DISPLAYING OPTIMIZED TACTICAL DECK</span>
+    </div>
+
+    <script type="module" src="/src/main.js"></script>
+  </body>
+</html>

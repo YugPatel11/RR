@@ -1,0 +1,404 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>SupeRR Selector Season 2 — Pressure Performance Rankings</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+  <!-- Header with one-line headline finding -->
+  <header class="header">
+    <div class="badge">SupeRR Selector Season 2 · Round 1 Analytics</div>
+    <h1>Under-Pressure Match Impact Identifies Unsung Auction Match-Winners</h1>
+    <p class="subtitle">A rigorous, multi-signal Bayesian evaluation of 199,208 deliveries across 843 T20 matches (IPL & T20I 2022–2026) for the Rajasthan Royals IPL 2027 War Room.</p>
+  </header>
+
+  <div class="container">
+
+    <!-- Section: How We Defined Pressure -->
+    <section class="section">
+      <h2 class="section-title">How We Defined Pressure</h2>
+      <div class="methodology">
+        <p>Pressure in T20 cricket is quantified using a multi-factor <strong>Pressure Index (0.0 to 1.0)</strong> calibrated across every delivery. In chases, it captures Required Run Rate stress, balls remaining, wickets in hand, and crisis thresholds (RRR &gt; 10 with &le; 4 wickets). In setting totals, it measures scoring deficit relative to empirical par-score curves, sudden batting collapses (2+ wickets in 18 balls), and death-over leverage. High-stakes knockout matches and close margins further elevate ball leverage, establishing the top 25% highest-stress deliveries as our high-pressure regime.</p>
+      </div>
+    </section>
+
+    <!-- Key Metrics Cards -->
+    <div class="stats-row" id="stats-row"></div>
+
+    <!-- Pressure Validation Diagram / Charts -->
+    <section class="section">
+      <h2 class="section-title">Pressure Validation: Stress vs Ordinary Match States</h2>
+      <p style="font-size:0.9rem; color:var(--rr-text-muted); margin-bottom:1rem;">Empirical proof separating high-pressure deliveries from baseline play: wicket hazard rates more than double and dot-ball concentration surges.</p>
+      <div class="chart-grid">
+        <div class="chart-card">
+          <h4>Wicket Probability by Pressure Quartile (%)</h4>
+          <div id="wkt-chart" class="pressure-bar-chart"></div>
+        </div>
+        <div class="chart-card">
+          <h4>Dot-Ball Concentration by Pressure Quartile (%)</h4>
+          <div id="dot-chart" class="pressure-bar-chart"></div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Top 10 Batters Table -->
+    <section class="section">
+      <h2 class="section-title">Top 10 Batters Under Pressure</h2>
+      <div class="ranking-table-wrapper">
+        <table class="ranking-table" id="bat-table">
+          <thead>
+            <tr>
+              <th>Rank</th>
+              <th>Player</th>
+              <th>Team</th>
+              <th>Pressure Rating</th>
+              <th>90% Confidence Band</th>
+              <th>Key Stat (HP vs Normal)</th>
+              <th>Category</th>
+              <th>Top 10 Stability</th>
+            </tr>
+          </thead>
+          <tbody></tbody>
+        </table>
+      </div>
+    </section>
+
+    <!-- Top 10 Bowlers Table -->
+    <section class="section">
+      <h2 class="section-title">Top 10 Bowlers Under Pressure</h2>
+      <div class="ranking-table-wrapper">
+        <table class="ranking-table" id="bowl-table">
+          <thead>
+            <tr>
+              <th>Rank</th>
+              <th>Player</th>
+              <th>Team</th>
+              <th>Pressure Rating</th>
+              <th>90% Confidence Band</th>
+              <th>Key Stat (HP vs Normal)</th>
+              <th>Category</th>
+              <th>Top 10 Stability</th>
+            </tr>
+          </thead>
+          <tbody></tbody>
+        </table>
+      </div>
+    </section>
+
+    <!-- Interactive Canvas Visualizations -->
+    <section class="section">
+      <h2 class="section-title">Performance Divergence Under Stress</h2>
+      <div class="chart-grid">
+        <div class="chart-card">
+          <h4>Batter Strike Rate: Normal vs High Pressure</h4>
+          <canvas id="bat-sr-chart" width="500" height="280"></canvas>
+        </div>
+        <div class="chart-card">
+          <h4>Bowler Economy: Normal vs High Pressure (Lower is Better)</h4>
+          <canvas id="bowl-econ-chart" width="500" height="280"></canvas>
+        </div>
+      </div>
+      <div class="chart-grid" style="margin-top: 1.5rem;">
+        <div class="chart-card">
+          <h4>Batter 90% Confidence Interval Spread (SR)</h4>
+          <canvas id="bat-ci-chart" width="500" height="260"></canvas>
+        </div>
+        <div class="chart-card">
+          <h4>Bowler 90% Confidence Interval Spread (Econ)</h4>
+          <canvas id="bowl-ci-chart" width="500" height="260"></canvas>
+        </div>
+      </div>
+    </section>
+
+    <!-- RR Squad Fit Cards -->
+    <section class="section">
+      <h2 class="section-title">Rajasthan Royals War Room: IPL 2027 Auction Fit</h2>
+      <div class="methodology" style="border-left-color: var(--rr-pink);">
+        <h3>RR Tactical Objectives & Roster Archetypes</h3>
+        <p><strong>Roster Context:</strong> ₹157 Cr team purse cap; 8 overseas maximum. Indian core solidified by Jaiswal, Parag, Jurel, and phenom Sooryavanshi, with Archer and Curran providing multi-phase value.</p>
+        <p><strong>Primary Auction Targets:</strong> (1) Specialized death-overs pacer with proven yorker/deception metrics. (2) High-tempo middle-order finisher. (3) Economical wicket-taking spin controller. (4) Domestic Indian pace depth.</p>
+      </div>
+      <div class="fit-cards" id="fit-cards"></div>
+    </section>
+
+  </div>
+
+  <!-- Footer with Methodology & Limitations -->
+  <footer class="footer">
+    <div class="container">
+      <h4>Methodology Summary & Technical Limitations</h4>
+      <p><strong>Data Scope:</strong> 199,208 legal and extra balls spanning 843 competitive fixtures across IPL (2022–2026) and T20I (2022–2026). Super Overs excluded; rain-shortened matches evaluated using revised targets and overs.</p>
+      <p><strong>Rating Architecture:</strong> Incorporates context-adjusted runs/economy above expectation, performance uplift, boundary/dot frequencies, and match-level consistency. Empirical Bayes shrinkage dampens low-sample outliers toward role priors.</p>
+      <p><strong>Stability & Verification:</strong> Evaluated via 500 match-level bootstrap iterations to establish 90% empirical confidence intervals and Top 10 retention rates.</p>
+      <p><strong>Key Limitations:</strong> (1) Ineligibility constraints: Pakistani bowlers (Muqeem, Abrar, Shaheen, Nawaz) excel in T20Is but remain unavailable for IPL auctions. (2) Retired players (Dinesh Karthik) must be filtered from auction strategy. (3) Opposition heterogeneity in bilateral T20Is requires ongoing strength adjustments. (4) Stadium boundary dimensions and pitch wear could not be isolated due to unstandardized venue metadata.</p>
+      <p style="margin-top:1rem; opacity:0.75;">Prepared for Rajasthan Royals Analytics War Room · SupeRR Selector Season 2</p>
+    </div>
+  </footer>
+
+  <script>
+    const DATA = INJECTED_DATA_PLACEHOLDER;
+
+    // Render Stats Row
+    const statsRow = document.getElementById('stats-row');
+    const stats = [
+      { value: DATA.methodology.total_matches.toLocaleString(), label: 'Matches Analyzed' },
+      { value: DATA.methodology.total_balls.toLocaleString(), label: 'Deliveries Evaluated' },
+      { value: DATA.methodology.hp_threshold, label: 'High-Pressure Threshold' },
+      { value: DATA.methodology.bootstrap_iterations + ' Iterations', label: 'Bootstrap Resampling' },
+    ];
+    stats.forEach(s => {
+      const card = document.createElement('div');
+      card.className = 'stat-card';
+      card.innerHTML = `<div class="stat-value">${s.value}</div><div class="stat-label">${s.label}</div>`;
+      statsRow.appendChild(card);
+    });
+
+    // Render Pressure Validation Bar Charts
+    function renderBarChart(containerId, data, key, color, suffix) {
+      const container = document.getElementById(containerId);
+      const labels = ['low', 'medium', 'high', 'very_high'];
+      const displayLabels = ['Low', 'Medium', 'High', 'Very High'];
+      const values = labels.map(l => data[l] ? data[l][key] : 0);
+      const maxVal = Math.max(...values) * 1.25;
+
+      labels.forEach((l, i) => {
+        const bar = document.createElement('div');
+        bar.className = 'pressure-bar';
+        const height = (values[i] / maxVal) * 100;
+        bar.innerHTML = `
+          <div class="bar-value">${values[i]}${suffix}</div>
+          <div class="bar" style="height:${height}%;background:${color};opacity:${0.45 + i * 0.18}"></div>
+          <div class="bar-label">${displayLabels[i]}</div>
+        `;
+        container.appendChild(bar);
+      });
+    }
+
+    renderBarChart('wkt-chart', DATA.pressure_validation, 'wicket_rate', '#EA1A85', '%');
+    renderBarChart('dot-chart', DATA.pressure_validation, 'dot_pct', '#1A2456', '%');
+
+    // Populate Batting Table
+    const batTbody = document.querySelector('#bat-table tbody');
+    DATA.top_batters.forEach(b => {
+      const slotClass = b.slot === 'Indian' ? 'slot-indian' : 'slot-overseas';
+      const tr = document.createElement('tr');
+      tr.innerHTML = `
+        <td class="rank-cell">${b.rank}</td>
+        <td><span class="player-name">${b.name}</span></td>
+        <td class="player-team">${b.team}</td>
+        <td class="rating-cell">${b.rating.toFixed(3)}</td>
+        <td class="ci-text">[${b.ci_low.toFixed(1)}, ${b.ci_high.toFixed(1)}]</td>
+        <td><strong>SR ${b.sr_hp.toFixed(1)}</strong> vs ${b.sr_lp.toFixed(1)} <span class="ci-text">(${b.hp_balls}b)</span></td>
+        <td><span class="slot-badge ${slotClass}">${b.slot}</span></td>
+        <td>
+          <span class="stability-bar"><span class="stability-fill" style="width:${Math.min(b.top10_pct, 100)}%"></span></span>
+          <span class="ci-text">${b.top10_pct.toFixed(1)}%</span>
+        </td>
+      `;
+      batTbody.appendChild(tr);
+    });
+
+    // Populate Bowling Table
+    const bowlTbody = document.querySelector('#bowl-table tbody');
+    DATA.top_bowlers.forEach(b => {
+      const slotClass = b.slot === 'Indian' ? 'slot-indian' : 'slot-overseas';
+      const tr = document.createElement('tr');
+      tr.innerHTML = `
+        <td class="rank-cell">${b.rank}</td>
+        <td><span class="player-name">${b.name}</span></td>
+        <td class="player-team">${b.team}</td>
+        <td class="rating-cell">${b.rating.toFixed(3)}</td>
+        <td class="ci-text">[${b.ci_low.toFixed(1)}, ${b.ci_high.toFixed(1)}]</td>
+        <td><strong>Econ ${b.econ_hp.toFixed(1)}</strong> vs ${b.econ_lp.toFixed(1)} <span class="ci-text">(${b.hp_balls}b)</span></td>
+        <td><span class="slot-badge ${slotClass}">${b.slot}</span></td>
+        <td>
+          <span class="stability-bar"><span class="stability-fill" style="width:${Math.min(b.top10_pct, 100)}%"></span></span>
+          <span class="ci-text">${b.top10_pct.toFixed(1)}%</span>
+        </td>
+      `;
+      bowlTbody.appendChild(tr);
+    });
+
+    // Canvas Chart 1 & 2: Performance Comparison
+    function drawComparisonChart(canvasId, players, hpKey, lpKey, label, isLowerBetter) {
+      const canvas = document.getElementById(canvasId);
+      const ctx = canvas.getContext('2d');
+      const W = canvas.width, H = canvas.height;
+      const pad = { top: 30, right: 20, bottom: 65, left: 45 };
+      const plotW = W - pad.left - pad.right;
+      const plotH = H - pad.top - pad.bottom;
+      const n = players.length;
+      const barW = Math.min(plotW / n / 2.6, 16);
+      const gap = plotW / n;
+
+      const allVals = players.flatMap(p => [p[hpKey], p[lpKey]]);
+      let minV = 0;
+      let maxV = Math.max(...allVals) * 1.15;
+
+      ctx.fillStyle = '#FFFFFF';
+      ctx.fillRect(0, 0, W, H);
+
+      // Grid
+      const steps = 5;
+      ctx.strokeStyle = '#F1F2F4';
+      ctx.lineWidth = 1;
+      ctx.font = '10px system-ui, sans-serif';
+      ctx.fillStyle = '#8F95A3';
+      for (let i = 0; i <= steps; i++) {
+        const y = pad.top + plotH - (plotH * i / steps);
+        const val = minV + (maxV - minV) * i / steps;
+        ctx.beginPath(); ctx.moveTo(pad.left, y); ctx.lineTo(W - pad.right, y); ctx.stroke();
+        ctx.textAlign = 'right';
+        ctx.fillText(val.toFixed(0), pad.left - 6, y + 3);
+      }
+
+      // Draw Bars
+      players.forEach((p, i) => {
+        const x = pad.left + gap * i + gap / 2;
+        const hpH = ((p[hpKey] - minV) / (maxV - minV)) * plotH;
+        const lpH = ((p[lpKey] - minV) / (maxV - minV)) * plotH;
+
+        // LP Normal (Blue)
+        ctx.fillStyle = '#1A2456';
+        ctx.fillRect(x - barW - 1, pad.top + plotH - lpH, barW, lpH);
+
+        // HP Pressure (Pink)
+        ctx.fillStyle = '#EA1A85';
+        ctx.fillRect(x + 1, pad.top + plotH - hpH, barW, hpH);
+
+        // Player Label
+        ctx.save();
+        ctx.translate(x, pad.top + plotH + 8);
+        ctx.rotate(-Math.PI / 4);
+        ctx.textAlign = 'right';
+        ctx.fillStyle = '#2C3038';
+        ctx.font = '9px system-ui, sans-serif';
+        const shortName = p.name.length > 13 ? p.name.substring(0, 11) + '..' : p.name;
+        ctx.fillText(shortName, 0, 0);
+        ctx.restore();
+      });
+
+      // Legend
+      ctx.fillStyle = '#1A2456';
+      ctx.fillRect(W - 160, 10, 12, 10);
+      ctx.fillStyle = '#374151'; ctx.font = '10px system-ui'; ctx.textAlign = 'left';
+      ctx.fillText('Normal State', W - 142, 19);
+
+      ctx.fillStyle = '#EA1A85';
+      ctx.fillRect(W - 75, 10, 12, 10);
+      ctx.fillStyle = '#374151';
+      ctx.fillText('Pressure', W - 58, 19);
+    }
+
+    drawComparisonChart('bat-sr-chart', DATA.top_batters, 'sr_hp', 'sr_lp', 'Strike Rate', false);
+    drawComparisonChart('bowl-econ-chart', DATA.top_bowlers, 'econ_hp', 'econ_lp', 'Economy', true);
+
+    // Canvas Chart 3 & 4: 90% Confidence Interval Spread (Error Bars)
+    function drawCIChart(canvasId, players, valKey, ciLowKey, ciHighKey, yLabel) {
+      const canvas = document.getElementById(canvasId);
+      const ctx = canvas.getContext('2d');
+      const W = canvas.width, H = canvas.height;
+      const pad = { top: 25, right: 20, bottom: 65, left: 45 };
+      const plotW = W - pad.left - pad.right;
+      const plotH = H - pad.top - pad.bottom;
+      const n = players.length;
+      const gap = plotW / n;
+
+      const allLow = players.map(p => p[ciLowKey]);
+      const allHigh = players.map(p => p[ciHighKey]);
+      let minV = Math.floor(Math.min(...allLow) * 0.9);
+      let maxV = Math.ceil(Math.max(...allHigh) * 1.1);
+
+      ctx.fillStyle = '#FFFFFF';
+      ctx.fillRect(0, 0, W, H);
+
+      // Grid
+      const steps = 4;
+      ctx.strokeStyle = '#F1F2F4';
+      ctx.lineWidth = 1;
+      ctx.font = '10px system-ui';
+      ctx.fillStyle = '#8F95A3';
+      for (let i = 0; i <= steps; i++) {
+        const y = pad.top + plotH - (plotH * i / steps);
+        const val = minV + (maxV - minV) * i / steps;
+        ctx.beginPath(); ctx.moveTo(pad.left, y); ctx.lineTo(W - pad.right, y); ctx.stroke();
+        ctx.textAlign = 'right';
+        ctx.fillText(val.toFixed(0), pad.left - 6, y + 3);
+      }
+
+      players.forEach((p, i) => {
+        const x = pad.left + gap * i + gap / 2;
+        const yMid = pad.top + plotH - ((p[valKey] - minV) / (maxV - minV)) * plotH;
+        const yLow = pad.top + plotH - ((p[ciLowKey] - minV) / (maxV - minV)) * plotH;
+        const yHigh = pad.top + plotH - ((p[ciHighKey] - minV) / (maxV - minV)) * plotH;
+
+        // Error bar line
+        ctx.strokeStyle = '#1A2456';
+        ctx.lineWidth = 2;
+        ctx.beginPath();
+        ctx.moveTo(x, yLow);
+        ctx.lineTo(x, yHigh);
+        ctx.stroke();
+
+        // Caps
+        ctx.beginPath();
+        ctx.moveTo(x - 4, yLow); ctx.lineTo(x + 4, yLow);
+        ctx.moveTo(x - 4, yHigh); ctx.lineTo(x + 4, yHigh);
+        ctx.stroke();
+
+        // Center dot
+        ctx.fillStyle = '#EA1A85';
+        ctx.beginPath();
+        ctx.arc(x, yMid, 4, 0, Math.PI * 2);
+        ctx.fill();
+
+        // Label
+        ctx.save();
+        ctx.translate(x, pad.top + plotH + 8);
+        ctx.rotate(-Math.PI / 4);
+        ctx.textAlign = 'right';
+        ctx.fillStyle = '#2C3038';
+        ctx.font = '9px system-ui';
+        const shortName = p.name.length > 13 ? p.name.substring(0, 11) + '..' : p.name;
+        ctx.fillText(shortName, 0, 0);
+        ctx.restore();
+      });
+    }
+
+    drawCIChart('bat-ci-chart', DATA.top_batters, 'sr_hp', 'ci_low', 'ci_high', 'SR');
+    drawCIChart('bowl-ci-chart', DATA.top_bowlers, 'econ_hp', 'ci_low', 'ci_high', 'Econ');
+
+    // Populate War Room Squad Fit Cards
+    const fitContainer = document.getElementById('fit-cards');
+    const allPlayers = [
+      ...DATA.top_batters.map(b => ({ ...b, type: 'Batter' })),
+      ...DATA.top_bowlers.map(b => ({ ...b, type: 'Bowler' }))
+    ];
+
+    allPlayers.forEach(p => {
+      const card = document.createElement('div');
+      card.className = 'fit-card';
+      const slotClass = p.slot === 'Indian' ? 'slot-indian' : 'slot-overseas';
+      const statDisplay = p.type === 'Batter'
+        ? `SR <strong>${p.sr_hp.toFixed(1)}</strong> vs ${p.sr_lp.toFixed(1)} (HP Vol: ${p.hp_balls}b)`
+        : `Econ <strong>${p.econ_hp.toFixed(1)}</strong> vs ${p.econ_lp.toFixed(1)} (HP Vol: ${p.hp_balls}b)`;
+
+      card.innerHTML = `
+        <div class="player-header">
+          <h4>${p.type} #${p.rank}: ${p.name}</h4>
+          <span class="slot-badge ${slotClass}">${p.slot}</span>
+        </div>
+        <p class="fit-detail"><strong>Role & Profile:</strong> ${p.role || 'Player'} (${p.age || 'N/A'}) · ${p.status || 'Active'}</p>
+        <p class="fit-detail"><strong>Pressure Metric:</strong> ${statDisplay}</p>
+        <p class="fit-detail"><strong>War Room Action:</strong> ${p.rr_fit || 'Evaluated for depth.'}</p>
+        <p class="fit-detail"><strong>Valuation Band:</strong> ${p.price_band || 'Retained / Established Core'}</p>
+        <p class="fit-detail" style="color:var(--rr-pink);font-size:0.8rem;"><strong>Risk Audit:</strong> ${p.risk || 'Standard volatility.'}</p>
+      `;
+      fitContainer.appendChild(card);
+    });
+  </script>
+</body>
+</html>

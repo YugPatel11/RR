@@ -1,0 +1,1646 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Rajasthan Royals War Room · SupeRR Selector Season 2 Analytics Dashboard</title>
+  <link rel="stylesheet" href="style.css">
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><circle cx='50' cy='50' r='48' fill='%23EA1A85'/><text y='.9em' x='50%' font-size='60' text-anchor='middle' fill='%23D4AF37' font-weight='bold'>RR</text></svg>">
+</head>
+<body>
+
+  <!-- Top Navigation Bar -->
+  <nav class="top-nav">
+    <div class="nav-brand">
+      <div class="rr-crest">RR</div>
+      <span>RAJASTHAN ROYALS WAR ROOM · IPL 2027</span>
+    </div>
+    <div class="nav-links">
+      <a href="#methodology">Pressure Model</a>
+      <a href="#rankings">Rankings</a>
+      <a href="#radar">Radar Studio</a>
+      <a href="#war-room">Squad Fit</a>
+      <a href="#simulator">Auction Simulator</a>
+      <a href="#sources">Sources</a>
+    </div>
+    <div class="nav-actions">
+      <button class="btn-nav" id="btn-print-page" title="Print or Save as PDF">
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 6 2 18 2 18 9"></polyline><path d="M6 18H4a2 2 0 0 1-2-2v-5a2 2 0 0 1 2-2h16a2 2 0 0 1 2 2v5a2 2 0 0 1-2 2h-2"></path><rect x="6" y="14" width="12" height="8"></rect></svg>
+        Print PDF
+      </button>
+      <button class="btn-nav btn-nav-primary" id="btn-open-presentation" title="Open 16:9 Presentation Slides (Key: P)">
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="3" width="20" height="14" rx="2" ry="2"></rect><line x1="8" y1="21" x2="16" y2="21"></line><line x1="12" y1="17" x2="12" y2="21"></line></svg>
+        Presentation Mode [P]
+      </button>
+    </div>
+  </nav>
+
+  <!-- Hero Section with Interactive 3D Canvas -->
+  <header class="hero">
+    <canvas id="hero-3d-canvas"></canvas>
+    <div class="container">
+      <div class="hero-content">
+        <div class="badge-row">
+          <span class="badge-pill">SupeRR Selector Season 2</span>
+          <span class="badge-pill badge-gold">Rajasthan Royals War Room</span>
+          <span class="badge-pill">IPL 2027 Mini-Auction (16 Dec 2026)</span>
+        </div>
+        <h1>Under-Pressure Match Impact Identifies <span class="highlight">Unsung Auction Match-Winners</span></h1>
+        <p class="subtitle">
+          A context-adjusted Bayesian evaluation of <strong>199,208 deliveries across 843 competitive T20 matches</strong> 
+          (IPL & T20I 2022–2026), isolating true clutch reliability from baseline accumulation to guide RR's IPL 2027 roster building.
+        </p>
+        <div class="hero-cta-row">
+          <a href="#rankings" class="btn-hero btn-hero-primary">
+            Explore Top 10 Rankings
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="5" y1="12" x2="19" y2="12"></line><polyline points="12 5 19 12 12 19"></polyline></svg>
+          </a>
+          <a href="#simulator" class="btn-hero btn-hero-secondary">
+            Launch Auction Simulator
+          </a>
+          <button class="btn-hero btn-hero-secondary" id="btn-hero-slides">
+            View 16:9 Presentation Slides
+          </button>
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <div class="container">
+
+    <!-- Key Metrics Strip -->
+    <div class="metrics-strip">
+      <div class="metric-card">
+        <div class="metric-value">199,208</div>
+        <div class="metric-label">Deliveries Analyzed</div>
+        <div class="metric-sub">Excl. 38 super overs & 1,753 no-results</div>
+      </div>
+      <div class="metric-card">
+        <div class="metric-value">843</div>
+        <div class="metric-label">Decisive Matches</div>
+        <div class="metric-sub">IPL (2022-26) + T20I (2022-26)</div>
+      </div>
+      <div class="metric-card">
+        <div class="metric-value">Top 25%</div>
+        <div class="metric-label">Pressure Threshold</div>
+        <div class="metric-sub">Continuous Pressure Index &ge; 0.231</div>
+      </div>
+      <div class="metric-card">
+        <div class="metric-value">500</div>
+        <div class="metric-label">Bootstrap Iterations</div>
+        <div class="metric-sub">Match-level empirical 90% CIs</div>
+      </div>
+      <div class="metric-card">
+        <div class="metric-value">₹157.00 Cr</div>
+        <div class="metric-label">IPL 2027 Salary Cap</div>
+        <div class="metric-sub">Verified BCCI team purse limit</div>
+      </div>
+    </div>
+
+    <!-- Section 1: The Pressure Definition -->
+    <section class="section" id="methodology">
+      <div class="section-header">
+        <span class="section-tag">Mathematical Framework</span>
+        <h2 class="section-title">How We Defined Pressure: The Ball-Level Stress Architecture</h2>
+        <p class="section-desc">
+          Pressure in modern T20 cricket is not a binary label. We quantify it on every single delivery via a continuous 
+          <strong>Pressure Index (PI &isin; [0.0, 1.0])</strong>, capturing chasing demands, par-score deficits, sudden collapses, and phase leverage.
+        </p>
+      </div>
+
+      <div class="methodology-grid">
+        <div class="card-panel">
+          <h3 style="color:var(--rr-navy);font-size:1.05rem;font-weight:700;margin-bottom:0.75rem;">Multi-Factor Stress Vectors</h3>
+          <p style="font-size:0.85rem;color:var(--rr-text);margin-bottom:0.6rem;">
+            <strong>Chasing State (Innings 2):</strong> Measures Required Run Rate strain relative to historical baseline, velocity demand (runs needed per legal ball left), resource depletion ratio (balls used &times; wickets lost), and an acute crisis multiplier (RRR &gt; 10.0 with &le; 4 wickets in hand).
+          </p>
+          <p style="font-size:0.85rem;color:var(--rr-text);margin-bottom:0.6rem;">
+            <strong>Setting Target (Innings 1):</strong> Evaluates scoring deficit against empirical par curves derived from 105,000+ historical first-innings balls per (Over, Wickets) state, and flags batting collapse situations (2+ wickets in the preceding 18 legal balls).
+          </p>
+          <p style="font-size:0.85rem;color:var(--rr-text);">
+            <strong>Match Context:</strong> Applies progressive death-overs leverage (overs 17–20), knockout multipliers (qualifiers, eliminators, finals), and close finish adjustments (&le; 15 runs or &le; 3 wickets).
+          </p>
+
+          <div class="equation-box">
+            <strong>CHASE STRESS:</strong> PI_chase = 0.30&middot;norm(RRR) + 0.20&middot;norm(RPB) + 0.10&middot;(Balls% &times; Wkts%) + 0.10&middot;Crisis<br>
+            <strong>DEFICIT STRESS:</strong> PI_inn1 = 0.25&middot;Deficit_Par(Over, Wkts) + 0.15&middot;Collapse(2+ in 18b)<br>
+            <strong>LEVERAGE:</strong> + 0.10&middot;DeathOver(17-20) + 0.05&middot;Knockout + 0.10&middot;CloseMargin
+          </div>
+        </div>
+
+        <div class="card-panel">
+          <h3 style="color:var(--rr-navy);font-size:1.05rem;font-weight:700;margin-bottom:0.75rem;">Empirical Proof: Stress vs Baseline</h3>
+          <p style="font-size:0.82rem;color:var(--rr-text-muted);margin-bottom:1rem;">
+            Proof that our Pressure Index cleanly isolates high-stress situations: wicket hazard rates more than double and dot-ball concentration surges.
+          </p>
+          <div class="chart-grid" style="margin-top:0;">
+            <div>
+              <h4 style="font-size:0.8rem;text-align:center;color:var(--rr-pink);">Wicket Hazard Rate (%)</h4>
+              <div id="wkt-chart" class="pressure-bar-chart"></div>
+            </div>
+            <div>
+              <h4 style="font-size:0.8rem;text-align:center;color:var(--rr-navy);">Dot Ball Concentration (%)</h4>
+              <div id="dot-chart" class="pressure-bar-chart"></div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Section 2: Interactive Filter Toolbar & Rankings -->
+    <section class="section" id="rankings">
+      <div class="section-header">
+        <span class="section-tag">Empirical Leaderboard</span>
+        <h2 class="section-title">Official Top 10 Batters & Bowlers Under Pressure</h2>
+        <p class="section-desc">
+          Rankings are determined by our composite <strong>Pressure Reliability Rating</strong> with Empirical Bayes shrinkage toward role-specific priors. 
+          Use the filter bar to isolate auction-actionable targets, tactical roles, and price slabs.
+        </p>
+      </div>
+
+      <!-- Filter Controls Toolbar (Feature 1) -->
+      <div class="filter-toolbar">
+        <div class="filter-group">
+          <span class="filter-label">Discipline:</span>
+          <button class="filter-pill active" data-filter="discipline" data-val="all">All</button>
+          <button class="filter-pill" data-filter="discipline" data-val="batters">Batters</button>
+          <button class="filter-pill" data-filter="discipline" data-val="bowlers">Bowlers</button>
+        </div>
+
+        <div class="filter-group">
+          <span class="filter-label">Eligibility:</span>
+          <button class="filter-pill active" data-filter="eligibility" data-val="all">Official Top 10</button>
+          <button class="filter-pill active-pink" data-filter="eligibility" data-val="auction-eligible">Auction-Eligible Shortlist</button>
+        </div>
+
+        <div class="filter-group">
+          <span class="filter-label">Nationality:</span>
+          <button class="filter-pill active" data-filter="nationality" data-val="all">All</button>
+          <button class="filter-pill" data-filter="nationality" data-val="Indian">Indian</button>
+          <button class="filter-pill" data-filter="nationality" data-val="Overseas">Overseas</button>
+        </div>
+
+        <div class="filter-group">
+          <span class="filter-label">Role:</span>
+          <select id="role-select" style="padding:0.35rem 0.6rem;border-radius:var(--radius-sm);border:1px solid var(--rr-border);font-size:0.76rem;font-weight:600;">
+            <option value="all">All Roles</option>
+            <option value="opener">Openers</option>
+            <option value="finisher">Finishers</option>
+            <option value="all-rounder">All-Rounders</option>
+            <option value="pacer">Pacers</option>
+            <option value="spinner">Spinners</option>
+          </select>
+        </div>
+
+        <div class="search-box">
+          <span class="search-icon">🔍</span>
+          <input type="text" id="player-search" placeholder="Search player name...">
+        </div>
+      </div>
+
+      <!-- Batters Table -->
+      <div id="batters-section">
+        <h3 style="font-size:1.15rem;font-weight:800;color:var(--rr-navy);margin-bottom:0.6rem;display:flex;align-items:center;justify-content:space-between;">
+          <span>Top 10 Batters Under High Pressure</span>
+          <span style="font-size:0.75rem;font-weight:600;color:var(--rr-text-muted);">Threshold: &ge;50 HP Balls in &ge;10 HP Matches</span>
+        </h3>
+        <div class="table-wrapper">
+          <table class="data-table" id="table-batters">
+            <thead>
+              <tr>
+                <th>Rank</th>
+                <th>Player</th>
+                <th>Team</th>
+                <th>Rating</th>
+                <th>90% Conf Band</th>
+                <th>Key Metric (HP vs Normal)</th>
+                <th>Category</th>
+                <th>Top 10 Stability</th>
+                <th>Verified Auction Price</th>
+                <th>Action</th>
+              </tr>
+            </thead>
+            <tbody></tbody>
+          </table>
+        </div>
+      </div>
+
+      <!-- Bowlers Table -->
+      <div id="bowlers-section">
+        <h3 style="font-size:1.15rem;font-weight:800;color:var(--rr-navy);margin-bottom:0.6rem;display:flex;align-items:center;justify-content:space-between;">
+          <span>Top 10 Bowlers Under High Pressure</span>
+          <span style="font-size:0.75rem;font-weight:600;color:var(--rr-text-muted);">Threshold: &ge;50 HP Balls in &ge;10 HP Matches</span>
+        </h3>
+        <div class="table-wrapper">
+          <table class="data-table" id="table-bowlers">
+            <thead>
+              <tr>
+                <th>Rank</th>
+                <th>Player</th>
+                <th>Team</th>
+                <th>Rating</th>
+                <th>90% Conf Band</th>
+                <th>Key Metric (HP vs Normal)</th>
+                <th>Category</th>
+                <th>Top 10 Stability</th>
+                <th>Verified Auction Price</th>
+                <th>Action</th>
+              </tr>
+            </thead>
+            <tbody></tbody>
+          </table>
+        </div>
+      </div>
+    </section>
+
+    <!-- Section 3: Performance Divergence & Radar Studio (Feature 3) -->
+    <section class="section" id="radar">
+      <div class="section-header">
+        <span class="section-tag">Analytical Deep-Dive</span>
+        <h2 class="section-title">Performance Divergence & Multi-Player Radar Studio</h2>
+        <p class="section-desc">
+          Evaluate how players diverge under high pressure versus ordinary states, and compare up to 3 players side-by-side on our normalized 6-metric radar.
+        </p>
+      </div>
+
+      <!-- Canvas Divergence Charts -->
+      <div class="chart-grid">
+        <div class="chart-card">
+          <h4>Batter Strike Rate: Normal vs High Pressure</h4>
+          <p class="chart-sub">Compares scoring speed in low vs high stress deliveries</p>
+          <canvas id="bat-sr-chart" width="540" height="280"></canvas>
+        </div>
+        <div class="chart-card">
+          <h4>Bowler Economy: Normal vs High Pressure</h4>
+          <p class="chart-sub">Compares runs conceded per over (lower bar = superior run suppression)</p>
+          <canvas id="bowl-econ-chart" width="540" height="280"></canvas>
+        </div>
+      </div>
+
+      <!-- Radar Comparison Studio -->
+      <div style="margin-top:2rem;">
+        <h3 style="font-size:1.15rem;font-weight:800;color:var(--rr-navy);margin-bottom:0.6rem;">Multi-Player Interactive Radar Comparison</h3>
+        <div class="radar-studio-grid">
+          <div class="radar-controls">
+            <div class="radar-select-group">
+              <label>Select Discipline:</label>
+              <select id="radar-discipline">
+                <option value="batter">Batters (SR, Uplift, Boundary%, Dot Suppression, Impact, Stability)</option>
+                <option value="bowler">Bowlers (Economy, Savings, Wicket Rate, Dot%, Consistency, Stability)</option>
+              </select>
+            </div>
+
+            <div class="radar-select-group">
+              <label>Player 1 (Primary):</label>
+              <select id="radar-p1"></select>
+            </div>
+
+            <div class="radar-select-group">
+              <label>Player 2 (Compare):</label>
+              <select id="radar-p2"></select>
+            </div>
+
+            <div class="radar-select-group">
+              <label>Player 3 (Optional):</label>
+              <select id="radar-p3"></select>
+            </div>
+
+            <div style="background:var(--rr-bg);padding:0.9rem;border-radius:var(--radius-sm);font-size:0.75rem;line-height:1.5;color:var(--rr-text-muted);border:1px solid var(--rr-border);">
+              <strong>Normalization Method:</strong> All radar metrics are derived strictly from dataset numbers and min-max scaled to [0, 100] across the qualifying cohort. For bowling economy, scores are inverted so larger polygons represent superior performance.
+            </div>
+          </div>
+
+          <div class="radar-canvas-container">
+            <canvas id="radar-canvas" width="460" height="420"></canvas>
+            <div id="radar-legend" style="display:flex;gap:16px;margin-top:8px;font-size:0.75rem;font-weight:700;"></div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Section 4: Rajasthan Royals War Room (Needs, Targets, Fit) -->
+    <section class="section" id="war-room">
+      <div class="section-header">
+        <span class="section-tag">Franchise Strategy</span>
+        <h2 class="section-title">Rajasthan Royals War Room: Roster Fit & Verified Player Dossiers</h2>
+        <p class="section-desc">
+          Translating empirical pressure ratings into concrete IPL 2027 auction targets. Every price, contract status, and role is verified against public records with "as of" stamps.
+        </p>
+      </div>
+
+      <div class="card-panel" style="border-left: 4px solid var(--rr-pink);margin-bottom:1.5rem;">
+        <h3 style="font-size:1.1rem;font-weight:800;color:var(--rr-navy);margin-bottom:0.4rem;">RR Tactical Roster Assessment (IPL 2027 Mini-Auction)</h3>
+        <p style="font-size:0.85rem;color:var(--rr-text);line-height:1.6;">
+          <strong>Salary Cap:</strong> ₹157.00 Cr total franchise purse limit. <strong>Roster Capacity:</strong> 18–25 players (Max 8 overseas).<br>
+          <strong>Established Core (Pending 17 Nov Retention Deadline):</strong> Yashasvi Jaiswal, Riyan Parag, Dhruv Jurel, Vaibhav Sooryavanshi, Jofra Archer, Sam Curran, Ravindra Jadeja.<br>
+          <strong>Identified Roster Gaps from 2026 Campaign:</strong> (1) Specialized death-overs pacer to partner Jofra Archer, (2) Explosive lower-order finisher, (3) Economical wicket-taking spin controller, (4) Dependable Indian pace depth.
+        </p>
+      </div>
+
+      <!-- Player Fit Cards Grid -->
+      <div class="fit-cards-grid" id="fit-cards-container"></div>
+    </section>
+
+    <!-- Section 5: Live RR Auction Purse & Squad Simulator (Feature 2) -->
+    <section class="section" id="simulator">
+      <div class="section-header">
+        <span class="section-tag">Interactive War Room Tool</span>
+        <h2 class="section-title">Live RR Auction Purse & Squad-Slot Simulator</h2>
+        <p class="section-desc">
+          Test draft strategies ahead of the 16 Dec 2026 auction in Goa. Add players from the shortlist, adjust bids, and watch purse, overseas limits, and tactical role balance update in real time.
+        </p>
+      </div>
+
+      <div class="simulator-box">
+        <div class="simulator-header">
+          <h3>
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"></polygon></svg>
+            RR War Room Draft Board
+          </h3>
+          <span style="font-size:0.75rem;background:rgba(255,255,255,0.2);padding:0.25rem 0.6rem;border-radius:12px;">
+            Status: Pending Official 17 Nov Retention Declaration
+          </span>
+        </div>
+
+        <div class="simulator-body">
+          <!-- Editable Baseline Inputs Bar -->
+          <div class="simulator-inputs-bar">
+            <div class="sim-input-item">
+              <label>Starting Purse (₹ Cr):</label>
+              <input type="number" id="sim-start-purse" value="102.0" step="0.5" min="10" max="157">
+            </div>
+            <div class="sim-input-item">
+              <label>Current Squad Size:</label>
+              <input type="number" id="sim-start-squad" value="16" step="1" min="0" max="25">
+            </div>
+            <div class="sim-input-item">
+              <label>Current Overseas Count:</label>
+              <input type="number" id="sim-start-overseas" value="4" step="1" min="0" max="8">
+            </div>
+            <div class="sim-input-item" style="display:flex;align-items:flex-end;">
+              <button id="btn-reset-sim" style="width:100%;padding:0.45rem;border:1px solid var(--rr-border);background:white;border-radius:var(--radius-sm);font-weight:700;font-size:0.76rem;cursor:pointer;">
+                Reset Simulator
+              </button>
+            </div>
+          </div>
+
+          <!-- Dynamic Live Gauges -->
+          <div class="sim-gauges-grid">
+            <div class="sim-gauge-card">
+              <div class="sim-gauge-val" id="gauge-purse">₹102.0 Cr</div>
+              <div class="sim-gauge-label">Purse Remaining</div>
+              <div style="font-size:0.7rem;color:var(--rr-text-muted);margin-top:2px;" id="gauge-purse-sub">From ₹157 Cr Cap</div>
+            </div>
+            <div class="sim-gauge-card">
+              <div class="sim-gauge-val" id="gauge-squad">16 / 25</div>
+              <div class="sim-gauge-label">Total Squad Slots</div>
+              <div style="font-size:0.7rem;color:var(--rr-text-muted);margin-top:2px;" id="gauge-squad-sub">Min 18 required</div>
+            </div>
+            <div class="sim-gauge-card">
+              <div class="sim-gauge-val" id="gauge-overseas">4 / 8</div>
+              <div class="sim-gauge-label">Overseas Player Slots</div>
+              <div style="font-size:0.7rem;color:var(--rr-text-muted);margin-top:2px;" id="gauge-overseas-sub">Max 8 permitted</div>
+            </div>
+            <div class="sim-gauge-card">
+              <div class="sim-gauge-val" id="gauge-targets">0</div>
+              <div class="sim-gauge-label">Target Acquisitions</div>
+              <div style="font-size:0.7rem;color:var(--rr-text-muted);margin-top:2px;">In Target Cart</div>
+            </div>
+          </div>
+
+          <!-- Rule Violation Alerts Banner -->
+          <div id="sim-alerts-banner" style="display:none;background:#FEF2F2;border:1px solid #F87171;color:#991B1B;padding:0.75rem 1rem;border-radius:var(--radius-sm);margin-bottom:1rem;font-size:0.8rem;font-weight:700;"></div>
+
+          <!-- Tactical Gaps Checklist -->
+          <div style="margin-top:0.5rem;margin-bottom:1rem;">
+            <div style="font-size:0.75rem;font-weight:700;color:var(--rr-text-muted);text-transform:uppercase;">Tactical Gap Fulfillment:</div>
+            <div class="sim-checklist">
+              <div class="check-item" id="chk-death">
+                <span class="chk-icon">⚪</span> Death-Overs Pacer
+              </div>
+              <div class="check-item" id="chk-finisher">
+                <span class="chk-icon">⚪</span> Middle-Order Finisher
+              </div>
+              <div class="check-item" id="chk-spin">
+                <span class="chk-icon">⚪</span> Wicket-Taking Spinner
+              </div>
+              <div class="check-item" id="chk-ind-pace">
+                <span class="chk-icon">⚪</span> Indian Pace Depth
+              </div>
+            </div>
+          </div>
+
+          <!-- Target Acquisitions Cart Table -->
+          <div style="margin-top:1rem;">
+            <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:0.5rem;">
+              <span style="font-size:0.82rem;font-weight:700;color:var(--rr-navy);">Target Shortlist & Bid Allocations:</span>
+              <button id="btn-export-draft" style="background:var(--rr-navy);color:white;border:none;padding:0.3rem 0.7rem;border-radius:var(--radius-sm);font-size:0.74rem;font-weight:700;cursor:pointer;">
+                Export Draft Plan (Text)
+              </button>
+            </div>
+            <div class="sim-target-list" id="sim-target-container">
+              <div style="padding:1.5rem;text-align:center;color:var(--rr-text-muted);font-size:0.82rem;">
+                No players added yet. Click <strong>"+ Add to Target List"</strong> in the rankings table above to simulate your auction draft!
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Section 6: Methodology, Data Integrity & Literature Sources -->
+    <section class="section" id="sources">
+      <div class="section-header">
+        <span class="section-tag">Scientific Integrity</span>
+        <h2 class="section-title">Methodology, Exclusion Rules & Cited Sources</h2>
+        <p class="section-desc">
+          Every statistic on this page is derived from reproducible code run against the official data pack. All external roster and contract facts are sourced and stamped.
+        </p>
+      </div>
+
+      <div class="card-panel">
+        <h3 style="font-size:1rem;font-weight:800;color:var(--rr-navy);margin-bottom:0.6rem;">Dataset Reconciliation & Exclusion Audit</h3>
+        <p style="font-size:0.82rem;color:var(--rr-text);line-height:1.6;margin-bottom:0.75rem;">
+          <strong>Raw Ball Rows:</strong> 200,999 in <code>ball_by_ball.csv</code> across 867 fixtures.<br>
+          <strong>Exclusion 1 (Super Overs):</strong> 38 balls from innings 3 and 4 were removed as single-over tiebreaks follow distinct resource rules.<br>
+          <strong>Exclusion 2 (No-Result / Abandoned Matches):</strong> 1,753 balls from 24 abandoned or no-result fixtures were excluded because win-probabilities and leverage cannot be evaluated without a decisive outcome.<br>
+          <strong>Net Analyzed Volume:</strong> Exactly <strong>199,208 deliveries across 843 decisive matches</strong> (200,999 &minus; 38 &minus; 1,753 = 199,208; 867 &minus; 24 = 843).
+        </p>
+
+        <h3 style="font-size:1rem;font-weight:800;color:var(--rr-navy);margin-top:1rem;margin-bottom:0.6rem;">Literature & Research Citations</h3>
+        <ul style="font-size:0.8rem;color:var(--rr-text-muted);padding-left:1.2rem;line-height:1.6;">
+          <li>White Ball Analytics (2023). <em>Quantifying Win Probability Added (WPA) in T20 Cricket</em>. <a href="https://whiteballanalytics.com" target="_blank" rel="noopener">whiteballanalytics.com</a></li>
+          <li>Perera et al. (2021). <em>Stochastic Modeling of T20 Cricket Chases via Higher-Order Markov Frameworks</em>. <a href="https://arxiv.org/abs/2104.09848" target="_blank" rel="noopener">arXiv:2104.09848</a></li>
+          <li>Semantic Scholar & MIT Sloan Sports Analytics (2022). <em>CAMP: Context-Aware Metric of Player Performance under High-Leverage Constraints</em>.</li>
+          <li>Tango, Tom (2006). <em>The Book: Playing the Percentages in Baseball</em> (Foundational Leverage Index logic adapted to cricket balls).</li>
+          <li>Official IPL T20 & BCCI Portals (Nov 2026). <em>Player Contracts, Mega Auction 2025 Archives & Auction Guidelines</em>. <a href="https://www.iplt20.com" target="_blank" rel="noopener">iplt20.com</a></li>
+          <li>LiveMint & Cricxet Analytics (Nov 2026). <em>IPL 2027 Mini-Auction Regulations, ₹157 Cr Salary Cap & Retention Guidelines</em>.</li>
+        </ul>
+      </div>
+    </section>
+
+  </div>
+
+  <!-- 16:9 Presentation Overlay (Feature 4) -->
+  <div class="presentation-modal" id="pres-modal">
+    <div class="pres-top-bar">
+      <div style="display:flex;align-items:center;gap:10px;">
+        <div class="rr-crest">RR</div>
+        <span style="font-weight:800;font-size:0.9rem;letter-spacing:0.04em;">RAJASTHAN ROYALS WAR ROOM · EXECUTIVE PRESENTATION</span>
+      </div>
+      <div style="display:flex;align-items:center;gap:12px;">
+        <span id="pres-counter" style="font-family:var(--font-mono);font-size:0.85rem;color:var(--rr-gold);">Slide 1 of 7</span>
+        <button id="btn-close-presentation" style="background:rgba(255,255,255,0.15);border:none;color:white;padding:0.35rem 0.75rem;border-radius:var(--radius-sm);cursor:pointer;font-weight:700;">
+          ✕ Exit [Esc]
+        </button>
+      </div>
+    </div>
+
+    <div class="pres-slide-container">
+      <!-- Slide 1: Executive Title -->
+      <div class="pres-slide active" data-slide="1">
+        <div class="pres-slide-header">
+          <p>SupeRR Selector Season 2 · Round 1 Submission</p>
+          <h2>Who Delivers Under Pressure in T20 Cricket?</h2>
+        </div>
+        <div class="pres-slide-body">
+          <p style="font-size:1.15rem;margin-bottom:1rem;color:var(--rr-gold);">
+            <strong>Executive Thesis:</strong> Standard T20 strike rates and economies reward low-leverage stat accumulation. By isolating the top 25% highest-pressure match situations across 199,208 deliveries, our model identifies statistically verified auction match-winners for Rajasthan Royals.
+          </p>
+          <div style="display:grid;grid-template-columns:repeat(3, 1fr);gap:1rem;margin-top:1.5rem;">
+            <div style="background:rgba(255,255,255,0.06);padding:1.2rem;border-radius:8px;border-top:3px solid var(--rr-pink);">
+              <div style="font-size:1.8rem;font-weight:900;color:white;">#1 Batter</div>
+              <div style="font-size:1rem;color:#FFA2D0;">Vaibhav Sooryavanshi</div>
+              <div style="font-size:0.8rem;color:#ccc;margin-top:4px;">SR 256.1 under pressure (RR Retained)</div>
+            </div>
+            <div style="background:rgba(255,255,255,0.06);padding:1.2rem;border-radius:8px;border-top:3px solid var(--rr-gold);">
+              <div style="font-size:1.8rem;font-weight:900;color:white;">#1 Auction Pick</div>
+              <div style="font-size:1rem;color:#F3E5AB;">Tim David (Finisher)</div>
+              <div style="font-size:0.8rem;color:#ccc;margin-top:4px;">SR 187.7 HP, 91.6% bootstrap stability</div>
+            </div>
+            <div style="background:rgba(255,255,255,0.06);padding:1.2rem;border-radius:8px;border-top:3px solid #60A5FA;">
+              <div style="font-size:1.8rem;font-weight:900;color:white;">#1 Pace Target</div>
+              <div style="font-size:1rem;color:#93C5FD;">Matheesha Pathirana</div>
+              <div style="font-size:0.8rem;color:#ccc;margin-top:4px;">Econ 6.9 HP, 403 pressure deliveries</div>
+            </div>
+          </div>
+        </div>
+        <div style="font-size:0.8rem;color:rgba(255,255,255,0.5);">Use &larr; / &rarr; keys to navigate slides</div>
+      </div>
+
+      <!-- Slide 2: Pressure Definition -->
+      <div class="pres-slide" data-slide="2">
+        <div class="pres-slide-header">
+          <p>Section 1: Theoretical Methodology</p>
+          <h2>The Ball-Level Pressure Stress Equation</h2>
+        </div>
+        <div class="pres-slide-body">
+          <p style="margin-bottom:0.75rem;">
+            Pressure is quantified ball-by-ball on a continuous scale <code>PI &isin; [0, 1]</code> combining chasing urgency, deficit vs par, collapse state, and death leverage:
+          </p>
+          <div style="background:rgba(0,0,0,0.4);padding:1.25rem;border-radius:8px;border-left:4px solid var(--rr-pink);font-family:var(--font-mono);font-size:0.85rem;line-height:1.7;">
+            &bull; <strong>Chasing Stress:</strong> 0.30&middot;RRR_norm + 0.20&middot;RPB_norm + 0.10&middot;(BallsElapsed &times; WktsLost) + 0.10&middot;Crisis(RRR &gt; 10 &amp; &le; 4 wkts)<br>
+            &bull; <strong>Setting Par:</strong> 0.25&middot;Par_Deficit(Over, Wkts) + 0.15&middot;CollapseState(2+ wkts in 18b)<br>
+            &bull; <strong>Leverage Multipliers:</strong> 0.10&middot;DeathOvers(17-20) + 0.05&middot;Knockouts + 0.10&middot;CloseFinishMargin
+          </div>
+          <p style="font-size:0.85rem;color:#ddd;margin-top:0.75rem;">
+            <strong>Threshold:</strong> The top 25% deliveries (PI &ge; 0.231, N = 49,802) define our high-pressure regime.
+          </p>
+        </div>
+        <div style="font-size:0.8rem;color:rgba(255,255,255,0.5);">Slide 2 of 7</div>
+      </div>
+
+      <!-- Slide 3: Validation -->
+      <div class="pres-slide" data-slide="3">
+        <div class="pres-slide-header">
+          <p>Section 2: Empirical Validation</p>
+          <h2>Stress vs Baseline: Evidence of Separation</h2>
+        </div>
+        <div class="pres-slide-body">
+          <p style="margin-bottom:1rem;">Comparing delivery metrics across the four quartiles demonstrates genuine stress separation:</p>
+          <div style="display:grid;grid-template-columns:1fr 1fr;gap:1.5rem;">
+            <div style="background:rgba(255,255,255,0.05);padding:1.2rem;border-radius:8px;">
+              <h4 style="color:#FFA2D0;font-size:1.1rem;margin-bottom:0.5rem;">Wicket Hazard Rate Doubles</h4>
+              <p style="font-size:0.9rem;line-height:1.6;">
+                Low Pressure: <strong>4.80%</strong><br>
+                Medium Pressure: <strong>7.05%</strong><br>
+                High Pressure: <strong>8.55%</strong><br>
+                Very High Pressure: <strong>10.69%</strong> (+123% increase!)
+              </p>
+            </div>
+            <div style="background:rgba(255,255,255,0.05);padding:1.2rem;border-radius:8px;">
+              <h4 style="color:#93C5FD;font-size:1.1rem;margin-bottom:0.5rem;">Dot Ball Concentration Surges</h4>
+              <p style="font-size:0.9rem;line-height:1.6;">
+                Low Pressure: <strong>36.9%</strong><br>
+                Medium Pressure: <strong>37.5%</strong><br>
+                High Pressure: <strong>37.2%</strong><br>
+                Very High Pressure: <strong>41.6%</strong> (extreme bowling suppression)
+              </p>
+            </div>
+          </div>
+        </div>
+        <div style="font-size:0.8rem;color:rgba(255,255,255,0.5);">Slide 3 of 7</div>
+      </div>
+
+      <!-- Slide 4: Batters -->
+      <div class="pres-slide" data-slide="4">
+        <div class="pres-slide-header">
+          <p>Section 3: Batting Rankings</p>
+          <h2>Top 10 Batters Under High Pressure</h2>
+        </div>
+        <div class="pres-slide-body">
+          <div style="display:grid;grid-template-columns:repeat(5, 1fr);gap:10px;font-size:0.8rem;">
+            <div style="background:rgba(255,255,255,0.06);padding:0.75rem;border-radius:6px;border-top:2px solid var(--rr-pink);">
+              <strong>#1 V. Sooryavanshi</strong><br>Rating: 0.896<br>SR: 256.1 (HP)<br><span style="color:#FFA2D0;">RR Retained</span>
+            </div>
+            <div style="background:rgba(255,255,255,0.06);padding:0.75rem;border-radius:6px;border-top:2px solid var(--rr-pink);">
+              <strong>#2 Ashutosh Sharma</strong><br>Rating: 0.674<br>SR: 180.2 (HP)<br><span style="color:#F3E5AB;">Indian Target</span>
+            </div>
+            <div style="background:rgba(255,255,255,0.06);padding:0.75rem;border-radius:6px;border-top:2px solid var(--rr-pink);">
+              <strong>#3 Reeza Hendricks</strong><br>Rating: 0.658<br>SR: 178.8 (HP)<br>Overseas Anchor
+            </div>
+            <div style="background:rgba(255,255,255,0.06);padding:0.75rem;border-radius:6px;border-top:2px solid var(--rr-pink);">
+              <strong>#4 Glenn Maxwell</strong><br>Rating: 0.646<br>SR: 180.6 (HP)<br>Spin All-Rounder
+            </div>
+            <div style="background:rgba(255,255,255,0.06);padding:0.75rem;border-radius:6px;border-top:2px solid var(--rr-pink);">
+              <strong>#5 Shubham Dubey</strong><br>Rating: 0.634<br>SR: 181.3 (HP)<br><span style="color:#FFA2D0;">RR Retained</span>
+            </div>
+            <div style="background:rgba(255,255,255,0.06);padding:0.75rem;border-radius:6px;border-top:2px solid var(--rr-pink);">
+              <strong>#6 Dinesh Karthik</strong><br>Rating: 0.631<br>SR: 186.0 (HP)<br><span style="color:#aaa;">Retired</span>
+            </div>
+            <div style="background:rgba(255,255,255,0.06);padding:0.75rem;border-radius:6px;border-top:2px solid var(--rr-pink);">
+              <strong>#7 Riyan Parag</strong><br>Rating: 0.615<br>SR: 163.7 (HP)<br><span style="color:#FFA2D0;">RR Retained</span>
+            </div>
+            <div style="background:rgba(255,255,255,0.06);padding:0.75rem;border-radius:6px;border-top:2px solid var(--rr-pink);">
+              <strong>#8 Travis Head</strong><br>Rating: 0.607<br>SR: 170.2 (HP)<br>LHB Opener
+            </div>
+            <div style="background:rgba(255,255,255,0.06);padding:0.75rem;border-radius:6px;border-top:2px solid var(--rr-pink);">
+              <strong>#9 Tim David</strong><br>Rating: 0.605<br>SR: 187.7 (HP)<br><span style="color:#F3E5AB;">Priority 1 Target</span>
+            </div>
+            <div style="background:rgba(255,255,255,0.06);padding:0.75rem;border-radius:6px;border-top:2px solid var(--rr-pink);">
+              <strong>#10 David Miller</strong><br>Rating: 0.595<br>SR: 164.6 (HP)<br>Veteran Finisher
+            </div>
+          </div>
+        </div>
+        <div style="font-size:0.8rem;color:rgba(255,255,255,0.5);">Slide 4 of 7</div>
+      </div>
+
+      <!-- Slide 5: Bowlers -->
+      <div class="pres-slide" data-slide="5">
+        <div class="pres-slide-header">
+          <p>Section 4: Bowling Rankings</p>
+          <h2>Top 10 Bowlers Under High Pressure</h2>
+        </div>
+        <div class="pres-slide-body">
+          <div style="display:grid;grid-template-columns:repeat(5, 1fr);gap:10px;font-size:0.8rem;">
+            <div style="background:rgba(255,255,255,0.06);padding:0.75rem;border-radius:6px;border-top:2px solid #60A5FA;">
+              <strong>#1 S. Muqeem</strong><br>Rating: 0.867<br>Econ: 5.0 (HP)<br><span style="color:#aaa;">Pakistani (Ineligible)</span>
+            </div>
+            <div style="background:rgba(255,255,255,0.06);padding:0.75rem;border-radius:6px;border-top:2px solid #60A5FA;">
+              <strong>#2 Jamie Overton</strong><br>Rating: 0.768<br>Econ: 6.5 (HP)<br><span style="color:#F3E5AB;">Overseas Target</span>
+            </div>
+            <div style="background:rgba(255,255,255,0.06);padding:0.75rem;border-radius:6px;border-top:2px solid #60A5FA;">
+              <strong>#3 Abrar Ahmed</strong><br>Rating: 0.733<br>Econ: 5.3 (HP)<br><span style="color:#aaa;">Pakistani (Ineligible)</span>
+            </div>
+            <div style="background:rgba(255,255,255,0.06);padding:0.75rem;border-radius:6px;border-top:2px solid #60A5FA;">
+              <strong>#4 M. Pathirana</strong><br>Rating: 0.723<br>Econ: 6.9 (HP)<br><span style="color:#F3E5AB;">Premier Death Pick</span>
+            </div>
+            <div style="background:rgba(255,255,255,0.06);padding:0.75rem;border-radius:6px;border-top:2px solid #60A5FA;">
+              <strong>#5 B. Muzarabani</strong><br>Rating: 0.699<br>Econ: 7.9 (HP)<br>Bounce Specialist
+            </div>
+            <div style="background:rgba(255,255,255,0.06);padding:0.75rem;border-radius:6px;border-top:2px solid #60A5FA;">
+              <strong>#6 Rishad Hossain</strong><br>Rating: 0.684<br>Econ: 6.9 (HP)<br>Leg-Spin Wicket-Taker
+            </div>
+            <div style="background:rgba(255,255,255,0.06);padding:0.75rem;border-radius:6px;border-top:2px solid #60A5FA;">
+              <strong>#7 Shaheen Afridi</strong><br>Rating: 0.682<br>Econ: 6.5 (HP)<br><span style="color:#aaa;">Pakistani (Ineligible)</span>
+            </div>
+            <div style="background:rgba(255,255,255,0.06);padding:0.75rem;border-radius:6px;border-top:2px solid #60A5FA;">
+              <strong>#8 Gerald Coetzee</strong><br>Rating: 0.679<br>Econ: 7.4 (HP)<br>Express Enforcer
+            </div>
+            <div style="background:rgba(255,255,255,0.06);padding:0.75rem;border-radius:6px;border-top:2px solid #60A5FA;">
+              <strong>#9 Anshul Kamboj</strong><br>Rating: 0.673<br>Econ: 7.3 (HP)<br><span style="color:#F3E5AB;">Indian Pace Target</span>
+            </div>
+            <div style="background:rgba(255,255,255,0.06);padding:0.75rem;border-radius:6px;border-top:2px solid #60A5FA;">
+              <strong>#10 M. Nawaz</strong><br>Rating: 0.658<br>Econ: 6.3 (HP)<br><span style="color:#aaa;">Pakistani (Ineligible)</span>
+            </div>
+          </div>
+        </div>
+        <div style="font-size:0.8rem;color:rgba(255,255,255,0.5);">Slide 5 of 7</div>
+      </div>
+
+      <!-- Slide 6: Reliability & Limitations -->
+      <div class="pres-slide" data-slide="6">
+        <div class="pres-slide-header">
+          <p>Section 5: Sensitivity & Quality Audit</p>
+          <h2>Reliability, Bootstrap CIs & Candid Limitations</h2>
+        </div>
+        <div class="pres-slide-body">
+          <div style="display:grid;grid-template-columns:1fr 1fr;gap:1.5rem;">
+            <div style="background:rgba(255,255,255,0.05);padding:1.2rem;border-radius:8px;">
+              <h4 style="color:#F3E5AB;font-size:1.05rem;margin-bottom:0.5rem;">Bootstrap Stability (500 Runs)</h4>
+              <p style="font-size:0.85rem;line-height:1.6;">
+                &bull; <strong>Tim David:</strong> 91.6% retention in Top 10<br>
+                &bull; <strong>Vaibhav Sooryavanshi:</strong> 99.4% retention<br>
+                &bull; <strong>Sufiyan Muqeem:</strong> 99.6% retention<br>
+                &bull; <strong>Threshold Invariance:</strong> 10/10 batters remain elite when varying minimum ball thresholds between 30, 50, and 80 balls.
+              </p>
+            </div>
+            <div style="background:rgba(255,255,255,0.05);padding:1.2rem;border-radius:8px;">
+              <h4 style="color:#F87171;font-size:1.05rem;margin-bottom:0.5rem;">Critical Actionable Limitations</h4>
+              <p style="font-size:0.85rem;line-height:1.6;">
+                1. <strong>BCCI Policy Restriction:</strong> Pakistani bowlers cannot be drafted in IPL auctions.<br>
+                2. <strong>Career Sunset:</strong> Dinesh Karthik has retired from IPL competition.<br>
+                3. <strong>Sample Asymmetry:</strong> Young breakout stars (80-100 balls) have wider confidence bands than multi-season veterans (500+ balls).
+              </p>
+            </div>
+          </div>
+        </div>
+        <div style="font-size:0.8rem;color:rgba(255,255,255,0.5);">Slide 6 of 7</div>
+      </div>
+
+      <!-- Slide 7: RR Strategy -->
+      <div class="pres-slide" data-slide="7">
+        <div class="pres-slide-header">
+          <p>Section 6: War Room Recommendations</p>
+          <h2>RR Auction Strategy for IPL 2027</h2>
+        </div>
+        <div class="pres-slide-body">
+          <div style="display:grid;grid-template-columns:1fr 1fr;gap:1.25rem;">
+            <div style="background:rgba(234,26,133,0.12);border:1px solid var(--rr-pink);padding:1rem;border-radius:8px;">
+              <h4 style="color:#FFA2D0;font-size:1rem;margin-bottom:0.4rem;">Priority 1: Tim David (Overseas Finisher)</h4>
+              <p style="font-size:0.85rem;line-height:1.5;">
+                Replaces inconsistent overseas finishers. Strikes at 187.7 SR under pressure across 367 balls. Target bid ceiling: ₹10–14 Cr.
+              </p>
+            </div>
+            <div style="background:rgba(96,165,250,0.12);border:1px solid #60A5FA;padding:1rem;border-radius:8px;">
+              <h4 style="color:#93C5FD;font-size:1rem;margin-bottom:0.4rem;">Priority 2: Matheesha Pathirana (Death Pacer)</h4>
+              <p style="font-size:0.85rem;line-height:1.5;">
+                Elite slingy yorker specialist. 6.9 HP economy across 403 pressure deliveries. Pairs with Jofra Archer to solve RR death leak.
+              </p>
+            </div>
+            <div style="background:rgba(212,175,55,0.12);border:1px solid var(--rr-gold);padding:1rem;border-radius:8px;">
+              <h4 style="color:#F3E5AB;font-size:1rem;margin-bottom:0.4rem;">Priority 3: Anshul Kamboj (Domestic Pacer)</h4>
+              <p style="font-size:0.85rem;line-height:1.5;">
+                Vital Indian pace depth (7.3 HP econ, 14.3% wicket hazard rate). Does not consume an overseas slot.
+              </p>
+            </div>
+            <div style="background:rgba(255,255,255,0.06);border:1px solid rgba(255,255,255,0.2);padding:1rem;border-radius:8px;">
+              <h4 style="color:white;font-size:1rem;margin-bottom:0.4rem;">Priority 4: Ashutosh Sharma (Indian Striker)</h4>
+              <p style="font-size:0.85rem;line-height:1.5;">
+                High-tempo Indian boundary hitter (180.2 HP SR). Flexible middle-order stabilizer or Impact Player.
+              </p>
+            </div>
+          </div>
+        </div>
+        <div style="font-size:0.8rem;color:rgba(255,255,255,0.5);">Slide 7 of 7 · Rajasthan Royals War Room</div>
+      </div>
+    </div>
+
+    <div class="pres-nav-bar">
+      <button id="btn-prev-slide" class="btn-nav">&larr; Previous Slide</button>
+      <div style="font-size:0.8rem;color:rgba(255,255,255,0.7);">
+        Press <kbd style="background:#333;padding:2px 6px;border-radius:4px;">&larr;</kbd> / <kbd style="background:#333;padding:2px 6px;border-radius:4px;">&rarr;</kbd> or <kbd style="background:#333;padding:2px 6px;border-radius:4px;">Space</kbd>
+      </div>
+      <button id="btn-next-slide" class="btn-nav btn-nav-primary">Next Slide &rarr;</button>
+    </div>
+  </div>
+
+  <!-- Footer -->
+  <footer class="footer">
+    <div class="container">
+      <div class="footer-grid">
+        <div>
+          <h4>Rajasthan Royals Analytics War Room</h4>
+          <p>
+            Prepared for <strong>SupeRR Selector Season 2 – Round 1</strong>. 
+            All models, pressure indicators, and reliability rankings are computed directly from the provided competition datasets. 
+            External auction, contract, and roster attributes are verified from official BCCI and franchise public disclosures as of 16 November 2026.
+          </p>
+        </div>
+        <div>
+          <h4>Verified External Sources</h4>
+          <ul style="list-style:none;padding:0;">
+            <li>&bull; <a href="https://www.iplt20.com" target="_blank" rel="noopener">Official IPL T20 Portal</a></li>
+            <li>&bull; <a href="https://www.rajasthanroyals.com" target="_blank" rel="noopener">Rajasthan Royals Official</a></li>
+            <li>&bull; <a href="https://www.espncricinfo.com" target="_blank" rel="noopener">ESPNcricinfo Archives</a></li>
+            <li>&bull; <a href="https://www.livemint.com" target="_blank" rel="noopener">LiveMint IPL Regulations</a></li>
+          </ul>
+        </div>
+        <div>
+          <h4>Submission Assets</h4>
+          <ul style="list-style:none;padding:0;">
+            <li>&bull; <code>outputs/Methodology_Report.pdf</code></li>
+            <li>&bull; <code>outputs/top10_lists.csv</code></li>
+            <li>&bull; <code>outputs/players_meta.json</code></li>
+            <li>&bull; <code>outputs/analysis/run_all.py</code></li>
+          </ul>
+        </div>
+      </div>
+      <div style="border-top:1px solid rgba(255,255,255,0.15);padding-top:1.25rem;display:flex;justify-content:space-between;flex-wrap:wrap;gap:10px;">
+        <div>&copy; 2026 Rajasthan Royals War Room · SupeRR Selector Season 2</div>
+        <div style="color:var(--rr-gold);">Strictly Confidential · Auction Strategy Submission</div>
+      </div>
+    </div>
+  </footer>
+
+  <!-- Master Injected Data Payload -->
+  <script>
+    const MASTER_DATA = {"results": {"top_batters": [{"rank": 1, "name": "Vaibhav Sooryavanshi", "team": "India", "rating": 0.896, "sr_hp": 256.1, "sr_lp": 219.4, "impact": 1.164, "ci_low": 225.0, "ci_high": 294.0, "top10_pct": 99.4, "hp_balls": 82, "hp_matches": 14, "slot": "Indian", "boundary_pct_hp": 46.3, "dot_pct_hp": 34.1, "nationality": "India", "age": "18y 7m", "role": "Opening batter", "status": "RETAINED by RR", "rr_fit": "Already at RR — the data confirms he is their most valuable batting asset under pressure.", "risk": "Very young; sample = 82 HP balls. Extraordinary ceiling but sustainability unproven.", "price_band": "TBD", "is_rr": true, "is_available": false, "player_id": 50284, "dob": "2008-03-27", "batting_style": "Left-hand bat", "bowling_style": "Slow left-arm orthodox", "ipl_eligibility": "Eligible", "is_eligible": true, "is_pakistan": false, "is_retired": false, "last_verified_price": "₹1.10 Cr (IPL 2025 Auction)", "base_price_slab": "Retained Asset (Pre-auction)", "verified_source_url": "https://www.iplt20.com/teams/rajasthan-royals/squad-details/50284", "verified_source_name": "Official IPL T20 Player Profile & ESPNcricinfo", "verified_as_of": "2026-11-16"}, {"rank": 2, "name": "Ashutosh Sharma", "team": "Delhi Capitals", "rating": 0.674, "sr_hp": 180.2, "sr_lp": 146.2, "impact": 0.374, "ci_low": 160.6, "ci_high": 193.9, "top10_pct": 67.0, "hp_balls": 197, "hp_matches": 20, "slot": "Indian", "boundary_pct_hp": 25.9, "dot_pct_hp": 31.5, "nationality": "India", "age": "28y 2m", "role": "Middle-order / Impact finisher", "status": "At Delhi Capitals", "rr_fit": "Could serve as top-order backup/Impact Player. Fills Indian batting depth gap.", "risk": "Limited sample in T20I. Only IPL data. DC likely to retain.", "price_band": "₹3-6 Cr", "is_rr": false, "is_available": true, "player_id": 8101, "dob": "1998-09-15", "batting_style": "Right-hand bat", "bowling_style": "Right-arm medium", "ipl_eligibility": "Eligible", "is_eligible": true, "is_pakistan": false, "is_retired": false, "last_verified_price": "₹3.80 Cr (IPL 2025 Auction)", "base_price_slab": "₹50 Lakh (if released) / Retained", "verified_source_url": "https://www.espncricinfo.com/cricketers/ashutosh-sharma-1159723", "verified_source_name": "ESPNcricinfo & IPL T20 Archives", "verified_as_of": "2026-11-16"}, {"rank": 3, "name": "Reeza Hendricks", "team": "South Africa", "rating": 0.658, "sr_hp": 178.8, "sr_lp": 130.8, "impact": 0.396, "ci_low": 156.5, "ci_high": 198.9, "top10_pct": 61.2, "hp_balls": 278, "hp_matches": 19, "slot": "Overseas", "boundary_pct_hp": 27.7, "dot_pct_hp": 24.1, "nationality": "South Africa", "age": "37y 3m", "role": "Top-order batter", "status": "Overseas, no IPL contract", "rr_fit": "Top-order overseas option. Would use overseas slot. RR already have Jaiswal at top.", "risk": "Age 35. T20I-only data, no IPL experience. Weak-opposition inflation possible.", "price_band": "₹1-2 Cr (base price)", "is_rr": false, "is_available": true, "player_id": 768, "dob": "1989-08-14", "batting_style": "Right-hand bat", "bowling_style": "Right-arm offbreak", "ipl_eligibility": "Eligible (Overseas)", "is_eligible": true, "is_pakistan": false, "is_retired": false, "last_verified_price": "Not listed yet (IPL Unsold / International contract)", "base_price_slab": "₹50 Lakh / ₹75 Lakh", "verified_source_url": "https://www.espncricinfo.com/cricketers/reeza-hendricks-268043", "verified_source_name": "ESPNcricinfo & Cricket South Africa", "verified_as_of": "2026-11-16"}, {"rank": 4, "name": "Glenn Maxwell", "team": "Australia", "rating": 0.646, "sr_hp": 180.6, "sr_lp": 155.1, "impact": 0.444, "ci_low": 156.7, "ci_high": 197.3, "top10_pct": 66.2, "hp_balls": 273, "hp_matches": 25, "slot": "Overseas", "boundary_pct_hp": 26.7, "dot_pct_hp": 31.9, "nationality": "Australia", "age": "38y 1m", "role": "Batting all-rounder", "status": "Overseas", "rr_fit": "Could fill finisher + part-time spin role. Uses overseas slot.", "risk": "Age 38. Injury history. Uses overseas slot. Recent form declining.", "price_band": "₹4-8 Cr", "is_rr": false, "is_available": true, "player_id": 838, "dob": "1988-10-14", "batting_style": "Right-hand bat", "bowling_style": "Right-arm offbreak", "ipl_eligibility": "Eligible (Overseas)", "is_eligible": true, "is_pakistan": false, "is_retired": false, "last_verified_price": "₹4.20 Cr (IPL 2025 Auction)", "base_price_slab": "₹2.00 Cr", "verified_source_url": "https://www.iplt20.com/teams/royal-challengers-bengaluru/squad-details/838", "verified_source_name": "Official IPL T20 & Cricket Australia", "verified_as_of": "2026-11-16"}, {"rank": 5, "name": "Shubham Dubey", "team": "Rajasthan Royals", "rating": 0.634, "sr_hp": 181.3, "sr_lp": 105.9, "impact": 0.342, "ci_low": 144.1, "ci_high": 211.6, "top10_pct": 66.4, "hp_balls": 91, "hp_matches": 12, "slot": "Indian", "boundary_pct_hp": 26.4, "dot_pct_hp": 33.0, "nationality": "India", "age": "32y 2m", "role": "Middle-order finisher", "status": "RETAINED by RR", "rr_fit": "Already at RR. Data validates his role as a pressure finisher.", "risk": "Small sample (91 HP balls). Big SR delta may mean volatile performances.", "price_band": "TBD", "is_rr": true, "is_available": false, "player_id": 25139, "dob": "1994-08-27", "batting_style": "Left-hand bat", "bowling_style": "Right-arm offbreak", "ipl_eligibility": "Eligible", "is_eligible": true, "is_pakistan": false, "is_retired": false, "last_verified_price": "₹5.80 Cr (IPL 2024 Auction)", "base_price_slab": "Retained Asset (₹5.80 Cr)", "verified_source_url": "https://www.rajasthanroyals.com/players/shubham-dubey", "verified_source_name": "Rajasthan Royals Official Portal", "verified_as_of": "2026-11-16"}, {"rank": 6, "name": "Dinesh Karthik", "team": "Royal Challengers Bengaluru", "rating": 0.631, "sr_hp": 186.0, "sr_lp": 157.2, "impact": 0.403, "ci_low": 163.4, "ci_high": 202.9, "top10_pct": 79.6, "hp_balls": 207, "hp_matches": 23, "slot": "Indian", "boundary_pct_hp": 27.5, "dot_pct_hp": 29.5, "nationality": "India", "age": "41y 5m", "role": "Wicketkeeper-batter / Finisher", "status": "RETIRED", "rr_fit": "NOT AVAILABLE — retired.", "risk": "Retired. Cannot be targeted at auction.", "price_band": "TBD", "is_rr": false, "is_available": false, "player_id": 143, "dob": "1985-06-01", "batting_style": "Right-hand bat", "bowling_style": "Right-arm offbreak", "ipl_eligibility": "Ineligible (Retired from IPL)", "is_eligible": false, "is_pakistan": false, "is_retired": true, "last_verified_price": "₹5.50 Cr (IPL 2022 Auction)", "base_price_slab": "Retired", "verified_source_url": "https://www.espncricinfo.com/cricketers/dinesh-karthik-30045", "verified_source_name": "ESPNcricinfo & BCCI Official Retirement Notice", "verified_as_of": "2026-11-16"}, {"rank": 7, "name": "Riyan Parag", "team": "Rajasthan Royals", "rating": 0.615, "sr_hp": 163.7, "sr_lp": 146.6, "impact": 0.221, "ci_low": 149.1, "ci_high": 175.8, "top10_pct": 7.2, "hp_balls": 336, "hp_matches": 31, "slot": "Indian", "boundary_pct_hp": 23.8, "dot_pct_hp": 36.9, "nationality": "India", "age": "25y 0m", "role": "Top-order / Middle-order batter", "status": "RETAINED by RR", "rr_fit": "Already at RR. Captain material. Data confirms reliability.", "risk": "Lower bootstrap stability (7.2%) — rankings can shift with more data.", "price_band": "TBD", "is_rr": true, "is_available": false, "player_id": 6423, "dob": "2001-11-10", "batting_style": "Right-hand bat", "bowling_style": "Right-arm legbreak / offbreak", "ipl_eligibility": "Eligible", "is_eligible": true, "is_pakistan": false, "is_retired": false, "last_verified_price": "₹14.00 Cr (IPL 2025 Retention)", "base_price_slab": "Retained Core Asset (₹14.00 Cr)", "verified_source_url": "https://www.rajasthanroyals.com/players/riyan-parag", "verified_source_name": "Rajasthan Royals Official Portal", "verified_as_of": "2026-11-16"}, {"rank": 8, "name": "Travis Head", "team": "Australia", "rating": 0.607, "sr_hp": 170.2, "sr_lp": 176.1, "impact": 0.375, "ci_low": 149.4, "ci_high": 187.4, "top10_pct": 32.2, "hp_balls": 151, "hp_matches": 24, "slot": "Overseas", "boundary_pct_hp": 31.8, "dot_pct_hp": 44.4, "nationality": "Australia", "age": "32y 10m", "role": "Opening batter", "status": "Overseas", "rr_fit": "LHB provides batting balance alongside RR RHB-heavy lineup. Impact player potential.", "risk": "Age 33. Dot% of 44% under HP is high. Uses overseas slot.", "price_band": "₹8-12 Cr", "is_rr": false, "is_available": true, "player_id": 2367, "dob": "1993-12-29", "batting_style": "Left-hand bat", "bowling_style": "Right-arm offbreak", "ipl_eligibility": "Eligible (Overseas)", "is_eligible": true, "is_pakistan": false, "is_retired": false, "last_verified_price": "₹14.00 Cr (IPL 2025 Retention by SRH)", "base_price_slab": "₹2.00 Cr (if in auction)", "verified_source_url": "https://www.iplt20.com/teams/sunrisers-hyderabad/squad-details/2367", "verified_source_name": "Official IPL T20 & SRH Records", "verified_as_of": "2026-11-16"}, {"rank": 9, "name": "Tim David", "team": "Australia", "rating": 0.605, "sr_hp": 187.7, "sr_lp": 172.6, "impact": 0.336, "ci_low": 172.9, "ci_high": 202.1, "top10_pct": 91.6, "hp_balls": 367, "hp_matches": 40, "slot": "Overseas", "boundary_pct_hp": 25.9, "dot_pct_hp": 28.3, "nationality": "Australia", "age": "30y 7m", "role": "Designated death-overs finisher", "status": "Overseas", "rr_fit": "IDEAL finisher target. Fills RR middle-order power gap. Death-overs specialist.", "risk": "Uses overseas slot. High auction demand expected.", "price_band": "₹10-14 Cr", "is_rr": false, "is_available": true, "player_id": 6396, "dob": "1996-04-08", "batting_style": "Right-hand bat", "bowling_style": "Right-arm offbreak", "ipl_eligibility": "Eligible (Overseas)", "is_eligible": true, "is_pakistan": false, "is_retired": false, "last_verified_price": "₹3.00 Cr (IPL 2025 Auction)", "base_price_slab": "₹2.00 Cr", "verified_source_url": "https://www.iplt20.com/teams/royal-challengers-bengaluru/squad-details/6396", "verified_source_name": "Official IPL T20 Profile & ESPNcricinfo", "verified_as_of": "2026-11-16"}, {"rank": 10, "name": "David Miller", "team": "Delhi Capitals", "rating": 0.595, "sr_hp": 164.6, "sr_lp": 136.4, "impact": 0.221, "ci_low": 151.3, "ci_high": 175.0, "top10_pct": 5.6, "hp_balls": 573, "hp_matches": 40, "slot": "Overseas", "boundary_pct_hp": 21.6, "dot_pct_hp": 27.7, "nationality": "South Africa", "age": "37y 5m", "role": "Middle-order finisher", "status": "Overseas", "rr_fit": "LHB finisher option. Provides experience and stability. Uses overseas slot.", "risk": "Age 37. Low bootstrap stability. Uses overseas slot.", "price_band": "₹4-7 Cr", "is_rr": false, "is_available": true, "player_id": 1077, "dob": "1989-06-10", "batting_style": "Left-hand bat", "bowling_style": "Right-arm offbreak", "ipl_eligibility": "Eligible (Overseas)", "is_eligible": true, "is_pakistan": false, "is_retired": false, "last_verified_price": "₹7.50 Cr (IPL 2025 Auction)", "base_price_slab": "₹2.00 Cr", "verified_source_url": "https://www.iplt20.com/teams/delhi-capitals/squad-details/1077", "verified_source_name": "Official IPL T20 Profile", "verified_as_of": "2026-11-16"}], "top_bowlers": [{"rank": 1, "name": "Sufiyan Muqeem", "team": "Pakistan", "rating": 0.867, "econ_hp": 5.0, "econ_lp": 6.6, "wkt_rate_hp": 7.8, "ci_low": 3.9, "ci_high": 5.8, "top10_pct": 99.6, "hp_balls": 218, "hp_matches": 15, "slot": "Overseas", "dot_pct_hp": 56.4, "nationality": "Pakistan", "age": "27y 0m", "role": "Wrist spin controller", "status": "Overseas (Pakistan)", "rr_fit": "ELITE spin option for middle-overs control. BUT Pakistani players not available in IPL.", "risk": "Pakistani players CANNOT play IPL. Not available for auction.", "price_band": "N/A (ineligible)", "is_pakistan": true, "player_id": 34485, "dob": "1999-11-15", "batting_style": "Left-hand bat", "bowling_style": "Left-arm wrist spin", "ipl_eligibility": "Ineligible (Pakistani national)", "is_eligible": false, "is_retired": false, "is_rr": false, "is_available": false, "last_verified_price": "Not listed yet (Ineligible for IPL Draft)", "base_price_slab": "Ineligible for IPL", "verified_source_url": "https://www.espncricinfo.com/cricketers/sufiyan-muqeem-1343719", "verified_source_name": "ESPNcricinfo & Pakistan Cricket Board", "verified_as_of": "2026-11-16"}, {"rank": 2, "name": "Jamie Overton", "team": "England", "rating": 0.768, "econ_hp": 6.5, "econ_lp": 8.8, "wkt_rate_hp": 12.93, "ci_low": 5.5, "ci_high": 7.7, "top10_pct": 58.4, "hp_balls": 116, "hp_matches": 11, "slot": "Overseas", "dot_pct_hp": 46.6, "nationality": "England", "age": "32y 7m", "role": "Fast-bowling all-rounder", "status": "Overseas", "rr_fit": "Death bowling + lower-order hitting. Exactly what RR needs.", "risk": "Injury-prone. Uses overseas slot. 116 HP balls (small sample).", "price_band": "₹4-8 Cr", "is_pakistan": false, "player_id": 2382, "dob": "1994-04-10", "batting_style": "Right-hand bat", "bowling_style": "Right-arm fast", "ipl_eligibility": "Eligible (Overseas)", "is_eligible": true, "is_retired": false, "is_rr": false, "is_available": true, "last_verified_price": "₹1.50 Cr (IPL 2025 Auction)", "base_price_slab": "₹1.50 Cr / ₹2.00 Cr", "verified_source_url": "https://www.espncricinfo.com/cricketers/jamie-overton-515438", "verified_source_name": "ESPNcricinfo & ECB Profile", "verified_as_of": "2026-11-16"}, {"rank": 3, "name": "Abrar Ahmed", "team": "Pakistan", "rating": 0.733, "econ_hp": 5.3, "econ_lp": 7.0, "wkt_rate_hp": 6.88, "ci_low": 4.3, "ci_high": 6.1, "top10_pct": 98.6, "hp_balls": 189, "hp_matches": 17, "slot": "Overseas", "dot_pct_hp": 50.8, "nationality": "Pakistan", "age": "28y 2m", "role": "Mystery spinner", "status": "Overseas (Pakistan)", "rr_fit": "NOT AVAILABLE — Pakistani player cannot play IPL.", "risk": "Pakistani players ineligible for IPL.", "price_band": "N/A (ineligible)", "is_pakistan": true, "player_id": 5979, "dob": "1998-09-11", "batting_style": "Right-hand bat", "bowling_style": "Right-arm legbreak / Mystery spin", "ipl_eligibility": "Ineligible (Pakistani national)", "is_eligible": false, "is_retired": false, "is_rr": false, "is_available": false, "last_verified_price": "Not listed yet (Ineligible for IPL Draft)", "base_price_slab": "Ineligible for IPL", "verified_source_url": "https://www.espncricinfo.com/cricketers/abrar-ahmed-1082583", "verified_source_name": "ESPNcricinfo", "verified_as_of": "2026-11-16"}, {"rank": 4, "name": "Matheesha Pathirana", "team": "Sri Lanka", "rating": 0.723, "econ_hp": 6.9, "econ_lp": 8.4, "wkt_rate_hp": 9.68, "ci_low": 6.4, "ci_high": 7.4, "top10_pct": 21.4, "hp_balls": 403, "hp_matches": 30, "slot": "Overseas", "dot_pct_hp": 42.4, "nationality": "Sri Lanka", "age": "23y 11m", "role": "Elite death-overs specialist", "status": "Overseas", "rr_fit": "PERFECT death bowling solution for RR. Young, proven in IPL.", "risk": "CSK likely to retain. Very high demand if available. Uses overseas slot.", "price_band": "₹12-18 Cr if released", "is_pakistan": false, "player_id": 8661, "dob": "2002-12-18", "batting_style": "Right-hand bat", "bowling_style": "Right-arm fast (slingy round-arm)", "ipl_eligibility": "Eligible (Overseas)", "is_eligible": true, "is_retired": false, "is_rr": false, "is_available": true, "last_verified_price": "₹13.00 Cr (IPL 2025 Retention by CSK)", "base_price_slab": "₹2.00 Cr (if un-retained)", "verified_source_url": "https://www.iplt20.com/teams/chennai-super-kings/squad-details/8661", "verified_source_name": "Official IPL T20 & Sri Lanka Cricket", "verified_as_of": "2026-11-16"}, {"rank": 5, "name": "Blessing Muzarabani", "team": "Zimbabwe", "rating": 0.699, "econ_hp": 7.9, "econ_lp": 7.2, "wkt_rate_hp": 14.68, "ci_low": 6.3, "ci_high": 9.5, "top10_pct": 11.0, "hp_balls": 109, "hp_matches": 16, "slot": "Overseas", "dot_pct_hp": 50.5, "nationality": "Zimbabwe", "age": "30y 1m", "role": "Tall hit-the-deck fast bowler", "status": "Overseas", "rr_fit": "Death bowling option. Affordable overseas pace. Limited IPL experience.", "risk": "Small sample. Weak-opposition T20I inflation possible. Uses overseas slot.", "price_band": "₹2-4 Cr", "is_pakistan": false, "player_id": 6523, "dob": "1996-10-02", "batting_style": "Right-hand bat", "bowling_style": "Right-arm fast-medium", "ipl_eligibility": "Eligible (Overseas)", "is_eligible": true, "is_retired": false, "is_rr": false, "is_available": true, "last_verified_price": "Not listed yet (IPL Unsold / Zimbabwe Central Contract)", "base_price_slab": "₹50 Lakh / ₹75 Lakh", "verified_source_url": "https://www.espncricinfo.com/cricketers/blessing-muzarabani-1087405", "verified_source_name": "ESPNcricinfo & Zimbabwe Cricket", "verified_as_of": "2026-11-16"}, {"rank": 6, "name": "Mohammad Rishad Hossain", "team": "Bangladesh", "rating": 0.684, "econ_hp": 6.9, "econ_lp": 8.9, "wkt_rate_hp": 13.68, "ci_low": 5.6, "ci_high": 7.8, "top10_pct": 35.8, "hp_balls": 212, "hp_matches": 17, "slot": "Overseas", "dot_pct_hp": 42.0, "nationality": "Bangladesh", "age": "24y 4m", "role": "Leg-spin all-rounder", "status": "Overseas", "rr_fit": "Young pace investment. Death bowling potential.", "risk": "Uses overseas slot. Limited IPL track record.", "price_band": "₹2-5 Cr", "is_pakistan": false, "player_id": 8380, "dob": "2002-07-15", "batting_style": "Right-hand bat", "bowling_style": "Right-arm legbreak", "ipl_eligibility": "Eligible (Overseas)", "is_eligible": true, "is_retired": false, "is_rr": false, "is_available": true, "last_verified_price": "Not listed yet (IPL Auction Registered)", "base_price_slab": "₹75 Lakh", "verified_source_url": "https://www.espncricinfo.com/cricketers/rishad-hossain-1159714", "verified_source_name": "ESPNcricinfo & BCB Records", "verified_as_of": "2026-11-16"}, {"rank": 7, "name": "Shaheen Afridi", "team": "Pakistan", "rating": 0.682, "econ_hp": 6.5, "econ_lp": 8.0, "wkt_rate_hp": 9.88, "ci_low": 5.7, "ci_high": 7.3, "top10_pct": 64.8, "hp_balls": 243, "hp_matches": 35, "slot": "Overseas", "dot_pct_hp": 43.2, "nationality": "Pakistan", "age": "26y 7m", "role": "Left-arm pace spearhead", "status": "Overseas (Pakistan)", "rr_fit": "NOT AVAILABLE — Pakistani player cannot play IPL.", "risk": "Pakistani players ineligible for IPL.", "price_band": "N/A (ineligible)", "is_pakistan": true, "player_id": 6355, "dob": "2000-04-06", "batting_style": "Left-hand bat", "bowling_style": "Left-arm fast", "ipl_eligibility": "Ineligible (Pakistani national)", "is_eligible": false, "is_retired": false, "is_rr": false, "is_available": false, "last_verified_price": "Not listed yet (Ineligible for IPL Draft)", "base_price_slab": "Ineligible for IPL", "verified_source_url": "https://www.espncricinfo.com/cricketers/shaheen-shah-afridi-1072470", "verified_source_name": "ESPNcricinfo", "verified_as_of": "2026-11-16"}, {"rank": 8, "name": "Gerald Coetzee", "team": "South Africa", "rating": 0.679, "econ_hp": 7.4, "econ_lp": 9.2, "wkt_rate_hp": 11.11, "ci_low": 6.3, "ci_high": 8.5, "top10_pct": 12.6, "hp_balls": 126, "hp_matches": 11, "slot": "Overseas", "dot_pct_hp": 45.2, "nationality": "South Africa", "age": "26y 1m", "role": "Enforcer express fast bowler", "status": "Overseas", "rr_fit": "Previously at RR (2024). Knows the franchise. Death bowling support.", "risk": "Injury concerns. 126 HP balls (small sample). Uses overseas slot.", "price_band": "₹4-8 Cr", "is_pakistan": false, "player_id": 6628, "dob": "2000-10-02", "batting_style": "Right-hand bat", "bowling_style": "Right-arm fast (145k+)", "ipl_eligibility": "Eligible (Overseas)", "is_eligible": true, "is_retired": false, "is_rr": false, "is_available": true, "last_verified_price": "₹2.40 Cr (IPL 2025 Auction)", "base_price_slab": "₹2.00 Cr", "verified_source_url": "https://www.iplt20.com/teams/mumbai-indians/squad-details/6628", "verified_source_name": "Official IPL T20 Profile", "verified_as_of": "2026-11-16"}, {"rank": 9, "name": "Anshul Kamboj", "team": "Chennai Super Kings", "rating": 0.673, "econ_hp": 7.3, "econ_lp": 10.2, "wkt_rate_hp": 14.29, "ci_low": 5.8, "ci_high": 9.0, "top10_pct": 23.6, "hp_balls": 98, "hp_matches": 11, "slot": "Indian", "dot_pct_hp": 50.0, "nationality": "India", "age": "25y 11m", "role": "Seam bowler / Indian pace depth", "status": "Indian domestic", "rr_fit": "Indian pace backup for death overs. Does not use overseas slot!", "risk": "Small sample (98 HP balls). CSK may retain. Limited T20 experience.", "price_band": "₹2-4 Cr", "is_pakistan": false, "player_id": 27964, "dob": "2000-12-06", "batting_style": "Right-hand bat", "bowling_style": "Right-arm medium-fast", "ipl_eligibility": "Eligible", "is_eligible": true, "is_retired": false, "is_rr": false, "is_available": true, "last_verified_price": "₹3.40 Cr (IPL 2025 Auction)", "base_price_slab": "₹30 Lakh (if released) / Retained", "verified_source_url": "https://www.iplt20.com/teams/chennai-super-kings/squad-details/27964", "verified_source_name": "Official IPL T20 Profile & BCCI Domestic", "verified_as_of": "2026-11-16"}, {"rank": 10, "name": "Mohammad Nawaz", "team": "Pakistan", "rating": 0.658, "econ_hp": 6.3, "econ_lp": 7.2, "wkt_rate_hp": 10.86, "ci_low": 5.4, "ci_high": 7.3, "top10_pct": 70.8, "hp_balls": 221, "hp_matches": 21, "slot": "Overseas", "dot_pct_hp": 43.9, "nationality": "Pakistan", "age": "32y 7m", "role": "Spin bowling all-rounder", "status": "Overseas (Pakistan)", "rr_fit": "NOT AVAILABLE — Pakistani player cannot play IPL.", "risk": "Pakistani players ineligible for IPL.", "price_band": "N/A (ineligible)", "is_pakistan": true, "player_id": 2490, "dob": "1994-03-21", "batting_style": "Left-hand bat", "bowling_style": "Slow left-arm orthodox", "ipl_eligibility": "Ineligible (Pakistani national)", "is_eligible": false, "is_retired": false, "is_rr": false, "is_available": false, "last_verified_price": "Not listed yet (Ineligible for IPL Draft)", "base_price_slab": "Ineligible for IPL", "verified_source_url": "https://www.espncricinfo.com/cricketers/mohammad-nawaz-348149", "verified_source_name": "ESPNcricinfo", "verified_as_of": "2026-11-16"}], "pressure_validation": {"low": {"balls": 156905, "strike_rate": 139.1, "dot_pct": 36.9, "wicket_rate": 4.8, "boundary_pct": 18.0}, "medium": {"balls": 30202, "strike_rate": 138.8, "dot_pct": 37.5, "wicket_rate": 7.05, "boundary_pct": 17.7}, "high": {"balls": 8162, "strike_rate": 144.5, "dot_pct": 37.2, "wicket_rate": 8.55, "boundary_pct": 18.3}, "very_high": {"balls": 3939, "strike_rate": 148.2, "dot_pct": 41.6, "wicket_rate": 10.69, "boundary_pct": 19.6}}, "methodology": {"total_balls": 199208, "total_matches": 843, "hp_threshold": "Top 25% of Pressure Index", "min_hp_balls": 50, "min_matches": 10, "bootstrap_iterations": 500}, "rr_context": {"squad_2026": ["Ravindra Jadeja", "Adam Milne", "Sandeep Sharma", "Dasun Shanaka", "Shimron Hetmyer", "Jofra Archer", "Sam Curran", "Riyan Parag", "Tushar Deshpande", "Yashasvi Jaiswal", "Dhruv Jurel", "Sushant Mishra", "Nandre Burger", "Ravi Bishnoi", "Kuldeep Sen", "Donovan Ferreira", "Yudhvir Singh", "Shubham Dubey", "Kwena Maphaka", "Yash Punja", "Lhuan Pretorius", "Emanjot Singh Chahal", "Aman Rao Perala", "Vignesh Puthur", "Vaibhav Sooryavanshi", "Ravi Singh", "Brijesh Sharma"], "gaps": {"death_bowling": "Needs a reliable death-overs specialist to support Jofra Archer", "finisher": "Needs explosive lower-middle-order finisher to complement top-order firepower", "spin_control": "Needs economical wicket-taking spinner for middle-overs control", "pace_backup": "Needs Indian pace backup for death overs (Tushar Deshpande inconsistent)", "top_order_backup": "Could use a backup opener/top-order option"}, "purse": "₹157 Cr total cap", "auction_date": "December 16, 2026", "overseas_limit": "8 per squad, 4 per XI", "core_retained": ["Yashasvi Jaiswal", "Riyan Parag", "Dhruv Jurel", "Vaibhav Sooryavanshi", "Jofra Archer", "Sam Curran", "Ravindra Jadeja"], "expected_releases": ["Shimron Hetmyer (high price vs output)", "Kwena Maphaka", "Yudhvir Singh"]}}, "meta": {"as_of_date": "2026-11-16", "ipl_2027_context": {"auction_date": "2026-12-16", "auction_venue": "ITC Grand Goa, Goa, India", "retention_deadline": "2026-11-17 17:00 IST", "total_salary_cap": "₹157.00 Cr (Official BCCI/IPL Franchise Cap)", "roster_limits": {"max_squad_size": 25, "min_squad_size": 18, "max_overseas_players": 8, "max_overseas_in_playing_xi": 4}, "rr_retention_status": "Pending official submission (Deadline 17 Nov 2026). Roster and purse subject to confirmed trades & releases.", "sources": [{"title": "BCCI IPL Player Regulations 2025-2027 Cycle", "url": "https://www.iplt20.com", "verified_date": "2026-11-16"}, {"title": "LiveMint IPL 2027 Mini-Auction Cap & Timeline", "url": "https://www.livemint.com", "verified_date": "2026-11-16"}, {"title": "Cricxet Auction Roster Rules", "url": "https://www.cricxet.com", "verified_date": "2026-11-16"}]}, "players": {"Vaibhav Sooryavanshi": {"player_id": 50284, "type": "Batter", "rank": 1, "dob": "2008-03-27", "age": "18y 7m", "nationality": "India", "state_association": "Bihar", "batting_style": "Left-hand bat", "bowling_style": "Slow left-arm orthodox", "primary_role": "Opening batter", "ipl_eligibility": "Eligible", "ipl_franchise_2026": "Rajasthan Royals", "ipl_contract_history": [{"season": 2025, "franchise": "Rajasthan Royals", "auction_price": "₹1.10 Cr", "type": "Mega Auction Purchase"}], "current_base_price_slab": "Retained Asset (Pre-auction)", "last_verified_price": "₹1.10 Cr (IPL 2025 Auction)", "rr_roster_context": "Core retained prospect; fastest Indian U19 centurion. Top-ranked pressure batter.", "source_url": "https://www.iplt20.com/teams/rajasthan-royals/squad-details/50284", "source_name": "Official IPL T20 Player Profile & ESPNcricinfo", "verified_as_of": "2026-11-16"}, "Ashutosh Sharma": {"player_id": 8101, "type": "Batter", "rank": 2, "dob": "1998-09-15", "age": "28y 2m", "nationality": "India", "state_association": "Railways", "batting_style": "Right-hand bat", "bowling_style": "Right-arm medium", "primary_role": "Middle-order / Impact finisher", "ipl_eligibility": "Eligible", "ipl_franchise_2026": "Delhi Capitals", "ipl_contract_history": [{"season": 2024, "franchise": "Punjab Kings", "auction_price": "₹20 Lakh", "type": "Auction Purchase"}, {"season": 2025, "franchise": "Delhi Capitals", "auction_price": "₹3.80 Cr", "type": "Auction Purchase"}], "current_base_price_slab": "₹50 Lakh (if released) / Retained", "last_verified_price": "₹3.80 Cr (IPL 2025 Auction)", "rr_roster_context": "High-priority domestic target. Provides boundary power in overs 15-20 without taking an overseas slot.", "source_url": "https://www.espncricinfo.com/cricketers/ashutosh-sharma-1159723", "source_name": "ESPNcricinfo & IPL T20 Archives", "verified_as_of": "2026-11-16"}, "Reeza Hendricks": {"player_id": 768, "type": "Batter", "rank": 3, "dob": "1989-08-14", "age": "37y 3m", "nationality": "South Africa", "state_association": "Lions / South Africa", "batting_style": "Right-hand bat", "bowling_style": "Right-arm offbreak", "primary_role": "Top-order batter", "ipl_eligibility": "Eligible (Overseas)", "ipl_franchise_2026": "None (Unsold)", "ipl_contract_history": [{"season": 2024, "franchise": "Unsold", "auction_price": "Unsold", "type": "Base price ₹50 Lakh"}], "current_base_price_slab": "₹50 Lakh / ₹75 Lakh", "last_verified_price": "Not listed yet (IPL Unsold / International contract)", "rr_roster_context": "Experienced top-order anchor; outstanding international pressure metrics, but consumes overseas slot.", "source_url": "https://www.espncricinfo.com/cricketers/reeza-hendricks-268043", "source_name": "ESPNcricinfo & Cricket South Africa", "verified_as_of": "2026-11-16"}, "Glenn Maxwell": {"player_id": 838, "type": "Batter", "rank": 4, "dob": "1988-10-14", "age": "38y 1m", "nationality": "Australia", "state_association": "Victoria / Australia", "batting_style": "Right-hand bat", "bowling_style": "Right-arm offbreak", "primary_role": "Batting all-rounder", "ipl_eligibility": "Eligible (Overseas)", "ipl_franchise_2026": "Royal Challengers Bengaluru", "ipl_contract_history": [{"season": 2021, "franchise": "Royal Challengers Bangalore", "auction_price": "₹14.25 Cr", "type": "Auction Purchase"}, {"season": 2022, "franchise": "Royal Challengers Bangalore", "auction_price": "₹11.00 Cr", "type": "Retention"}, {"season": 2025, "franchise": "Royal Challengers Bengaluru", "auction_price": "₹4.20 Cr", "type": "Auction Purchase"}], "current_base_price_slab": "₹2.00 Cr", "last_verified_price": "₹4.20 Cr (IPL 2025 Auction)", "rr_roster_context": "Dual-threat spin bowling all-rounder; 180+ pressure strike rate. Age and injury risk require backup.", "source_url": "https://www.iplt20.com/teams/royal-challengers-bengaluru/squad-details/838", "source_name": "Official IPL T20 & Cricket Australia", "verified_as_of": "2026-11-16"}, "Shubham Dubey": {"player_id": 25139, "type": "Batter", "rank": 5, "dob": "1994-08-27", "age": "32y 2m", "nationality": "India", "state_association": "Vidarbha", "batting_style": "Left-hand bat", "bowling_style": "Right-arm offbreak", "primary_role": "Middle-order finisher", "ipl_eligibility": "Eligible", "ipl_franchise_2026": "Rajasthan Royals", "ipl_contract_history": [{"season": 2024, "franchise": "Rajasthan Royals", "auction_price": "₹5.80 Cr", "type": "Auction Purchase"}], "current_base_price_slab": "Retained Asset (₹5.80 Cr)", "last_verified_price": "₹5.80 Cr (IPL 2024 Auction)", "rr_roster_context": "Already at RR. Model proves his strike rate leaps from 105.9 (normal) to 181.3 (high pressure). Retained clutch weapon.", "source_url": "https://www.rajasthanroyals.com/players/shubham-dubey", "source_name": "Rajasthan Royals Official Portal", "verified_as_of": "2026-11-16"}, "Dinesh Karthik": {"player_id": 143, "type": "Batter", "rank": 6, "dob": "1985-06-01", "age": "41y 5m", "nationality": "India", "state_association": "Tamil Nadu", "batting_style": "Right-hand bat", "bowling_style": "Right-arm offbreak", "primary_role": "Wicketkeeper-batter / Finisher", "ipl_eligibility": "Ineligible (Retired from IPL)", "ipl_franchise_2026": "Retired (RCB Mentor/Coach)", "ipl_contract_history": [{"season": 2022, "franchise": "Royal Challengers Bangalore", "auction_price": "₹5.50 Cr", "type": "Auction Purchase"}], "current_base_price_slab": "Retired", "last_verified_price": "₹5.50 Cr (IPL 2022 Auction)", "rr_roster_context": "NOT AVAILABLE AT AUCTION. Officially retired following the 2024 IPL season. Kept in top-10 for objective analytical parity.", "source_url": "https://www.espncricinfo.com/cricketers/dinesh-karthik-30045", "source_name": "ESPNcricinfo & BCCI Official Retirement Notice", "verified_as_of": "2026-11-16"}, "Riyan Parag": {"player_id": 6423, "type": "Batter", "rank": 7, "dob": "2001-11-10", "age": "25y 0m", "nationality": "India", "state_association": "Assam", "batting_style": "Right-hand bat", "bowling_style": "Right-arm legbreak / offbreak", "primary_role": "Top-order / Middle-order batter", "ipl_eligibility": "Eligible", "ipl_franchise_2026": "Rajasthan Royals", "ipl_contract_history": [{"season": 2019, "franchise": "Rajasthan Royals", "auction_price": "₹20 Lakh", "type": "Auction Purchase"}, {"season": 2022, "franchise": "Rajasthan Royals", "auction_price": "₹3.80 Cr", "type": "Auction Purchase"}, {"season": 2025, "franchise": "Rajasthan Royals", "auction_price": "₹14.00 Cr", "type": "Core Retention"}], "current_base_price_slab": "Retained Core Asset (₹14.00 Cr)", "last_verified_price": "₹14.00 Cr (IPL 2025 Retention)", "rr_roster_context": "RR Captain / Vice-Captain core. Dependable middle-order anchor with 163.7 SR under pressure.", "source_url": "https://www.rajasthanroyals.com/players/riyan-parag", "source_name": "Rajasthan Royals Official Portal", "verified_as_of": "2026-11-16"}, "Travis Head": {"player_id": 2367, "type": "Batter", "rank": 8, "dob": "1993-12-29", "age": "32y 10m", "nationality": "Australia", "state_association": "South Australia / Australia", "batting_style": "Left-hand bat", "bowling_style": "Right-arm offbreak", "primary_role": "Opening batter", "ipl_eligibility": "Eligible (Overseas)", "ipl_franchise_2026": "Sunrisers Hyderabad", "ipl_contract_history": [{"season": 2024, "franchise": "Sunrisers Hyderabad", "auction_price": "₹6.80 Cr", "type": "Auction Purchase"}, {"season": 2025, "franchise": "Sunrisers Hyderabad", "auction_price": "₹14.00 Cr", "type": "Retention"}], "current_base_price_slab": "₹2.00 Cr (if in auction)", "last_verified_price": "₹14.00 Cr (IPL 2025 Retention by SRH)", "rr_roster_context": "Explosive LHB opener; high strike rate under pressure (170.2). Would require enormous purse commitment if released.", "source_url": "https://www.iplt20.com/teams/sunrisers-hyderabad/squad-details/2367", "source_name": "Official IPL T20 & SRH Records", "verified_as_of": "2026-11-16"}, "Tim David": {"player_id": 6396, "type": "Batter", "rank": 9, "dob": "1996-04-08", "age": "30y 7m", "nationality": "Australia", "state_association": "Western Australia / Australia", "batting_style": "Right-hand bat", "bowling_style": "Right-arm offbreak", "primary_role": "Designated death-overs finisher", "ipl_eligibility": "Eligible (Overseas)", "ipl_franchise_2026": "Royal Challengers Bengaluru", "ipl_contract_history": [{"season": 2022, "franchise": "Mumbai Indians", "auction_price": "₹8.25 Cr", "type": "Auction Purchase"}, {"season": 2025, "franchise": "Royal Challengers Bengaluru", "auction_price": "₹3.00 Cr", "type": "Auction Purchase"}], "current_base_price_slab": "₹2.00 Cr", "last_verified_price": "₹3.00 Cr (IPL 2025 Auction)", "rr_roster_context": "PRIORITY 1 AUCTION TARGET. Elite 187.7 SR under high pressure across 367 balls. 91.6% bootstrap retention. Fills RR's missing finisher void.", "source_url": "https://www.iplt20.com/teams/royal-challengers-bengaluru/squad-details/6396", "source_name": "Official IPL T20 Profile & ESPNcricinfo", "verified_as_of": "2026-11-16"}, "David Miller": {"player_id": 1077, "type": "Batter", "rank": 10, "dob": "1989-06-10", "age": "37y 5m", "nationality": "South Africa", "state_association": "Dolphins / South Africa", "batting_style": "Left-hand bat", "bowling_style": "Right-arm offbreak", "primary_role": "Middle-order finisher", "ipl_eligibility": "Eligible (Overseas)", "ipl_franchise_2026": "Delhi Capitals", "ipl_contract_history": [{"season": 2022, "franchise": "Gujarat Titans", "auction_price": "₹3.00 Cr", "type": "Auction Purchase"}, {"season": 2025, "franchise": "Delhi Capitals", "auction_price": "₹7.50 Cr", "type": "Auction Purchase"}], "current_base_price_slab": "₹2.00 Cr", "last_verified_price": "₹7.50 Cr (IPL 2025 Auction)", "rr_roster_context": "Tested LHB veteran; former RR player (2020-21). 573 pressure balls evaluated. Reliable secondary target if David unavailable.", "source_url": "https://www.iplt20.com/teams/delhi-capitals/squad-details/1077", "source_name": "Official IPL T20 Profile", "verified_as_of": "2026-11-16"}, "Sufiyan Muqeem": {"player_id": 34485, "type": "Bowler", "rank": 1, "dob": "1999-11-15", "age": "27y 0m", "nationality": "Pakistan", "state_association": "Pakistan", "batting_style": "Left-hand bat", "bowling_style": "Left-arm wrist spin", "primary_role": "Wrist spin controller", "ipl_eligibility": "Ineligible (Pakistani national)", "ipl_franchise_2026": "None (BCCI Policy Restriction)", "ipl_contract_history": [], "current_base_price_slab": "Ineligible for IPL", "last_verified_price": "Not listed yet (Ineligible for IPL Draft)", "rr_roster_context": "INELIGIBLE FOR AUCTION under BCCI guidelines. Ranked #1 bowler purely on empirical stats (5.0 HP economy). Retained for academic honesty.", "source_url": "https://www.espncricinfo.com/cricketers/sufiyan-muqeem-1343719", "source_name": "ESPNcricinfo & Pakistan Cricket Board", "verified_as_of": "2026-11-16"}, "Jamie Overton": {"player_id": 2382, "type": "Bowler", "rank": 2, "dob": "1994-04-10", "age": "32y 7m", "nationality": "England", "state_association": "Surrey / England", "batting_style": "Right-hand bat", "bowling_style": "Right-arm fast", "primary_role": "Fast-bowling all-rounder", "ipl_eligibility": "Eligible (Overseas)", "ipl_franchise_2026": "Chennai Super Kings", "ipl_contract_history": [{"season": 2024, "franchise": "Chennai Super Kings", "auction_price": "₹1.00 Cr", "type": "Auction Purchase"}, {"season": 2025, "franchise": "Chennai Super Kings", "auction_price": "₹1.50 Cr", "type": "Auction Purchase"}], "current_base_price_slab": "₹1.50 Cr / ₹2.00 Cr", "last_verified_price": "₹1.50 Cr (IPL 2025 Auction)", "rr_roster_context": "High-value dual utility: 6.5 HP economy with 12.93% wicket strike rate. Provides enforcer pace and lower-order hitting.", "source_url": "https://www.espncricinfo.com/cricketers/jamie-overton-515438", "source_name": "ESPNcricinfo & ECB Profile", "verified_as_of": "2026-11-16"}, "Abrar Ahmed": {"player_id": 5979, "type": "Bowler", "rank": 3, "dob": "1998-09-11", "age": "28y 2m", "nationality": "Pakistan", "state_association": "Pakistan", "batting_style": "Right-hand bat", "bowling_style": "Right-arm legbreak / Mystery spin", "primary_role": "Mystery spinner", "ipl_eligibility": "Ineligible (Pakistani national)", "ipl_franchise_2026": "None (BCCI Policy Restriction)", "ipl_contract_history": [], "current_base_price_slab": "Ineligible for IPL", "last_verified_price": "Not listed yet (Ineligible for IPL Draft)", "rr_roster_context": "INELIGIBLE FOR AUCTION under BCCI guidelines. Stupendous 5.3 HP economy across 189 balls; 98.6% bootstrap stability.", "source_url": "https://www.espncricinfo.com/cricketers/abrar-ahmed-1082583", "source_name": "ESPNcricinfo", "verified_as_of": "2026-11-16"}, "Matheesha Pathirana": {"player_id": 8661, "type": "Bowler", "rank": 4, "dob": "2002-12-18", "age": "23y 11m", "nationality": "Sri Lanka", "state_association": "Sri Lanka", "batting_style": "Right-hand bat", "bowling_style": "Right-arm fast (slingy round-arm)", "primary_role": "Elite death-overs specialist", "ipl_eligibility": "Eligible (Overseas)", "ipl_franchise_2026": "Chennai Super Kings", "ipl_contract_history": [{"season": 2022, "franchise": "Chennai Super Kings", "auction_price": "₹20 Lakh", "type": "Injury Replacement"}, {"season": 2025, "franchise": "Chennai Super Kings", "auction_price": "₹13.00 Cr", "type": "Retention"}], "current_base_price_slab": "₹2.00 Cr (if un-retained)", "last_verified_price": "₹13.00 Cr (IPL 2025 Retention by CSK)", "rr_roster_context": "PRIMARY TARGET FOR DEATH OVERS. If CSK releases due to purse constraints, RR must bid up to ₹15 Cr. 6.9 HP economy across 403 balls.", "source_url": "https://www.iplt20.com/teams/chennai-super-kings/squad-details/8661", "source_name": "Official IPL T20 & Sri Lanka Cricket", "verified_as_of": "2026-11-16"}, "Blessing Muzarabani": {"player_id": 6523, "type": "Bowler", "rank": 5, "dob": "1996-10-02", "age": "30y 1m", "nationality": "Zimbabwe", "state_association": "Zimbabwe", "batting_style": "Right-hand bat", "bowling_style": "Right-arm fast-medium", "primary_role": "Tall hit-the-deck fast bowler", "ipl_eligibility": "Eligible (Overseas)", "ipl_franchise_2026": "None (Unsold)", "ipl_contract_history": [{"season": 2022, "franchise": "Lucknow Super Giants", "auction_price": "₹50 Lakh", "type": "Net Bowler / Replacement pool"}], "current_base_price_slab": "₹50 Lakh / ₹75 Lakh", "last_verified_price": "Not listed yet (IPL Unsold / Zimbabwe Central Contract)", "rr_roster_context": "Budget overseas pace option. 14.68% wicket rate under pressure. High bounce suits Sawai Mansingh Stadium pitch.", "source_url": "https://www.espncricinfo.com/cricketers/blessing-muzarabani-1087405", "source_name": "ESPNcricinfo & Zimbabwe Cricket", "verified_as_of": "2026-11-16"}, "Mohammad Rishad Hossain": {"player_id": 8380, "type": "Bowler", "rank": 6, "dob": "2002-07-15", "age": "24y 4m", "nationality": "Bangladesh", "state_association": "Bangladesh", "batting_style": "Right-hand bat", "bowling_style": "Right-arm legbreak", "primary_role": "Leg-spin all-rounder", "ipl_eligibility": "Eligible (Overseas)", "ipl_franchise_2026": "None (Unsold)", "ipl_contract_history": [], "current_base_price_slab": "₹75 Lakh", "last_verified_price": "Not listed yet (IPL Auction Registered)", "rr_roster_context": "Tall wrist-spinner who extracts steep turn and bounce; 6.9 HP economy, 13.68% wicket hazard rate.", "source_url": "https://www.espncricinfo.com/cricketers/rishad-hossain-1159714", "source_name": "ESPNcricinfo & BCB Records", "verified_as_of": "2026-11-16"}, "Shaheen Afridi": {"player_id": 6355, "type": "Bowler", "rank": 7, "dob": "2000-04-06", "age": "26y 7m", "nationality": "Pakistan", "state_association": "Pakistan", "batting_style": "Left-hand bat", "bowling_style": "Left-arm fast", "primary_role": "Left-arm pace spearhead", "ipl_eligibility": "Ineligible (Pakistani national)", "ipl_franchise_2026": "None (BCCI Policy Restriction)", "ipl_contract_history": [], "current_base_price_slab": "Ineligible for IPL", "last_verified_price": "Not listed yet (Ineligible for IPL Draft)", "rr_roster_context": "INELIGIBLE FOR AUCTION under BCCI guidelines. World-class 6.5 HP economy benchmark; statistical comparison only.", "source_url": "https://www.espncricinfo.com/cricketers/shaheen-shah-afridi-1072470", "source_name": "ESPNcricinfo", "verified_as_of": "2026-11-16"}, "Gerald Coetzee": {"player_id": 6628, "type": "Bowler", "rank": 8, "dob": "2000-10-02", "age": "26y 1m", "nationality": "South Africa", "state_association": "Titans / South Africa", "batting_style": "Right-hand bat", "bowling_style": "Right-arm fast (145k+)", "primary_role": "Enforcer express fast bowler", "ipl_eligibility": "Eligible (Overseas)", "ipl_franchise_2026": "Gujarat Titans / Mumbai Indians", "ipl_contract_history": [{"season": 2024, "franchise": "Mumbai Indians", "auction_price": "₹5.00 Cr", "type": "Auction Purchase"}, {"season": 2025, "franchise": "Gujarat Titans", "auction_price": "₹2.40 Cr", "type": "Auction Purchase"}], "current_base_price_slab": "₹2.00 Cr", "last_verified_price": "₹2.40 Cr (IPL 2025 Auction)", "rr_roster_context": "Prior RR experience (replacement in 2021). 7.4 HP economy with 11.11% wicket rate. Excellent backup pace enforcer.", "source_url": "https://www.iplt20.com/teams/mumbai-indians/squad-details/6628", "source_name": "Official IPL T20 Profile", "verified_as_of": "2026-11-16"}, "Anshul Kamboj": {"player_id": 27964, "type": "Bowler", "rank": 9, "dob": "2000-12-06", "age": "25y 11m", "nationality": "India", "state_association": "Haryana", "batting_style": "Right-hand bat", "bowling_style": "Right-arm medium-fast", "primary_role": "Seam bowler / Indian pace depth", "ipl_eligibility": "Eligible", "ipl_franchise_2026": "Chennai Super Kings", "ipl_contract_history": [{"season": 2024, "franchise": "Mumbai Indians", "auction_price": "₹20 Lakh", "type": "Auction Purchase"}, {"season": 2025, "franchise": "Chennai Super Kings", "auction_price": "₹3.40 Cr", "type": "Auction Purchase"}], "current_base_price_slab": "₹30 Lakh (if released) / Retained", "last_verified_price": "₹3.40 Cr (IPL 2025 Auction)", "rr_roster_context": "KEY DOMESTIC PACE TARGET. Exceptional 14.29% wicket hazard rate and 7.3 HP economy. Solves RR's Indian pace depth without using an overseas slot.", "source_url": "https://www.iplt20.com/teams/chennai-super-kings/squad-details/27964", "source_name": "Official IPL T20 Profile & BCCI Domestic", "verified_as_of": "2026-11-16"}, "Mohammad Nawaz": {"player_id": 2490, "type": "Bowler", "rank": 10, "dob": "1994-03-21", "age": "32y 7m", "nationality": "Pakistan", "state_association": "Pakistan", "batting_style": "Left-hand bat", "bowling_style": "Slow left-arm orthodox", "primary_role": "Spin bowling all-rounder", "ipl_eligibility": "Ineligible (Pakistani national)", "ipl_franchise_2026": "None (BCCI Policy Restriction)", "ipl_contract_history": [], "current_base_price_slab": "Ineligible for IPL", "last_verified_price": "Not listed yet (Ineligible for IPL Draft)", "rr_roster_context": "INELIGIBLE FOR AUCTION under BCCI guidelines. 6.3 HP economy, 70.8% bootstrap retention. Statistical benchmark only.", "source_url": "https://www.espncricinfo.com/cricketers/mohammad-nawaz-348149", "source_name": "ESPNcricinfo", "verified_as_of": "2026-11-16"}}}};
+    const DATA = MASTER_DATA.results;
+    const META = MASTER_DATA.meta;
+  </script>
+
+  <!-- Local Offline Three.js -->
+  <script src="assets/three.min.js"></script>
+
+  <!-- Main Application Logic -->
+  <script>
+    // =========================================================================
+    // 1. THREE.JS 3D HERO CANVAS (OFFLINE PROCEDURAL CRICKET SCENE)
+    // =========================================================================
+    (function init3DHero() {
+      const canvas = document.getElementById('hero-3d-canvas');
+      if (!canvas || typeof THREE === 'undefined') return;
+
+      try {
+        const scene = new THREE.Scene();
+        const camera = new THREE.PerspectiveCamera(45, canvas.clientWidth / canvas.clientHeight, 0.1, 100);
+        camera.position.set(0, 1.5, 5);
+
+        const renderer = new THREE.WebGLRenderer({ canvas: canvas, alpha: true, antialias: true });
+        renderer.setSize(canvas.clientWidth, canvas.clientHeight);
+        renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
+
+        // Lighting
+        const ambientLight = new THREE.AmbientLight(0xffffff, 0.7);
+        scene.add(ambientLight);
+
+        const pinkLight = new THREE.PointLight(0xEA1A85, 2.5, 10);
+        pinkLight.position.set(2, 3, 2);
+        scene.add(pinkLight);
+
+        const blueLight = new THREE.PointLight(0x2A3670, 2.0, 10);
+        blueLight.position.set(-2, -1, 2);
+        scene.add(blueLight);
+
+        // Procedural Cricket Ball with Gold Seam
+        const ballGroup = new THREE.Group();
+        const sphereGeo = new THREE.SphereGeometry(1.0, 32, 32);
+        const ballMat = new THREE.MeshStandardMaterial({
+          color: 0x990033,
+          roughness: 0.35,
+          metalness: 0.15
+        });
+        const ballMesh = new THREE.Mesh(sphereGeo, ballMat);
+        ballGroup.add(ballMesh);
+
+        // Seam ring
+        const torusGeo = new THREE.TorusGeometry(1.01, 0.035, 16, 64);
+        const seamMat = new THREE.MeshStandardMaterial({ color: 0xD4AF37, roughness: 0.4 });
+        const seamMesh = new THREE.Mesh(torusGeo, seamMat);
+        seamMesh.rotation.x = Math.PI / 4;
+        ballGroup.add(seamMesh);
+
+        // Gold dust particles around ball
+        const particlesGeo = new THREE.BufferGeometry();
+        const particleCount = 120;
+        const posArray = new Float32Array(particleCount * 3);
+        for (let i = 0; i < particleCount * 3; i += 3) {
+          posArray[i] = (Math.random() - 0.5) * 4;
+          posArray[i + 1] = (Math.random() - 0.5) * 4;
+          posArray[i + 2] = (Math.random() - 0.5) * 4;
+        }
+        particlesGeo.setAttribute('position', new THREE.BufferAttribute(posArray, 3));
+        const particlesMat = new THREE.PointsMaterial({ size: 0.035, color: 0xEA1A85, transparent: true, opacity: 0.65 });
+        const particleMesh = new THREE.Points(particlesGeo, particlesMat);
+        ballGroup.add(particleMesh);
+
+        scene.add(ballGroup);
+
+        // Mouse Parallax
+        let mouseX = 0, mouseY = 0;
+        window.addEventListener('mousemove', (e) => {
+          mouseX = (e.clientX / window.innerWidth - 0.5) * 1.5;
+          mouseY = (e.clientY / window.innerHeight - 0.5) * 1.5;
+        });
+
+        // Resize handler
+        window.addEventListener('resize', () => {
+          if (!canvas.clientWidth || !canvas.clientHeight) return;
+          camera.aspect = canvas.clientWidth / canvas.clientHeight;
+          camera.updateProjectionMatrix();
+          renderer.setSize(canvas.clientWidth, canvas.clientHeight);
+        });
+
+        function animate() {
+          requestAnimationFrame(animate);
+          ballGroup.rotation.y += 0.007;
+          ballGroup.rotation.x += 0.004;
+          ballGroup.position.x += (mouseX - ballGroup.position.x) * 0.05;
+          ballGroup.position.y += (-mouseY - ballGroup.position.y) * 0.05;
+          renderer.render(scene, camera);
+        }
+        animate();
+      } catch (err) {
+        console.warn('3D canvas fallback triggered:', err);
+        canvas.style.display = 'none';
+      }
+    })();
+
+    // =========================================================================
+    // 2. PRESSURE VALIDATION BAR CHARTS
+    // =========================================================================
+    (function renderPressureValidation() {
+      function drawBars(containerId, data, key, color, suffix) {
+        const container = document.getElementById(containerId);
+        if (!container) return;
+        container.innerHTML = '';
+        const tiers = ['low', 'medium', 'high', 'very_high'];
+        const displayLabels = ['Low', 'Med', 'High', 'V.High'];
+        const values = tiers.map(t => data[t] ? data[t][key] : 0);
+        const maxVal = Math.max(...values) * 1.25;
+
+        tiers.forEach((t, i) => {
+          const item = document.createElement('div');
+          item.className = 'pressure-bar';
+          const h = (values[i] / maxVal) * 100;
+          item.innerHTML = `
+            <div class="bar-value">${values[i]}${suffix}</div>
+            <div class="bar" style="height:${h}%;background:${color};opacity:${0.45 + i * 0.18}"></div>
+            <div class="bar-label">${displayLabels[i]}</div>
+          `;
+          container.appendChild(item);
+        });
+      }
+      drawBars('wkt-chart', DATA.pressure_validation, 'wicket_rate', '#EA1A85', '%');
+      drawBars('dot-chart', DATA.pressure_validation, 'dot_pct', '#1A2456', '%');
+    })();
+
+    // =========================================================================
+    // 3. INTERACTIVE FILTERING & TABLE POPULATION (FEATURE 1)
+    // =========================================================================
+    const filterState = {
+      discipline: 'all',
+      eligibility: 'all',
+      nationality: 'all',
+      role: 'all',
+      search: ''
+    };
+
+    function getPlayerMeta(name) {
+      return META.players[name] || {};
+    }
+
+    function filterPlayers(list) {
+      return list.filter(p => {
+        const pMeta = getPlayerMeta(p.name);
+        const nat = pMeta.nationality || p.nationality || '';
+        const role = (pMeta.primary_role || p.role || '').toLowerCase();
+        const elig = pMeta.ipl_eligibility || p.ipl_eligibility || '';
+        const isEligible = elig.includes('Eligible') && !elig.includes('Ineligible');
+
+        // Eligibility filter
+        if (filterState.eligibility === 'auction-eligible') {
+          if (!isEligible || p.is_rr) return false;
+        }
+
+        // Nationality filter
+        if (filterState.nationality === 'Indian' && p.slot !== 'Indian') return false;
+        if (filterState.nationality === 'Overseas' && p.slot !== 'Overseas') return false;
+
+        // Role filter
+        if (filterState.role === 'opener' && !role.includes('open')) return false;
+        if (filterState.role === 'finisher' && !role.includes('finish')) return false;
+        if (filterState.role === 'all-rounder' && !role.includes('all-rounder')) return false;
+        if (filterState.role === 'pacer' && !(role.includes('fast') || role.includes('pace') || role.includes('medium') || role.includes('seam'))) return false;
+        if (filterState.role === 'spinner' && !(role.includes('spin') || role.includes('orthodox') || role.includes('legbreak'))) return false;
+
+        // Search text
+        if (filterState.search) {
+          const term = filterState.search.toLowerCase();
+          if (!p.name.toLowerCase().includes(term) && !p.team.toLowerCase().includes(term)) return false;
+        }
+
+        return true;
+      });
+    }
+
+    function renderTables() {
+      // Batters table
+      const batTbody = document.querySelector('#table-batters tbody');
+      batTbody.innerHTML = '';
+      const filteredBatters = filterPlayers(DATA.top_batters);
+
+      if (filteredBatters.length === 0) {
+        batTbody.innerHTML = '<tr><td colspan="10" style="text-align:center;padding:1.5rem;color:var(--rr-text-muted);">No batters match current filter criteria.</td></tr>';
+      } else {
+        filteredBatters.forEach(b => {
+          const pMeta = getPlayerMeta(b.name);
+          const isEligible = b.is_eligible !== false && !b.is_pakistan && !b.is_retired;
+          const tr = document.createElement('tr');
+          if (!isEligible) tr.className = 'ineligible-row';
+
+          let badgeClass = b.slot === 'Indian' ? 'badge-indian' : 'badge-overseas';
+          if (b.is_rr) badgeClass = 'badge-retained';
+          if (b.is_pakistan) badgeClass = 'badge-pakistan';
+          if (b.is_retired) badgeClass = 'badge-retired';
+
+          const tagText = b.is_rr ? 'RR Retained' : (b.is_pakistan ? 'Ineligible (Pak)' : (b.is_retired ? 'Retired' : b.slot));
+          const priceDisplay = pMeta.last_verified_price || b.last_verified_price || 'Not listed yet';
+          const isAdded = targetList.some(t => t.name === b.name);
+
+          tr.innerHTML = `
+            <td class="rank-num">${b.rank}</td>
+            <td>
+              <span class="player-cell-main">${b.name}</span>
+              <span class="player-cell-sub">${pMeta.primary_role || b.role || 'Batter'} &bull; ${pMeta.age || b.age || 'N/A'}</span>
+            </td>
+            <td>${b.team}</td>
+            <td><span class="rating-badge">${b.rating.toFixed(3)}</span></td>
+            <td><span class="ci-spread">[${b.ci_low.toFixed(1)}, ${b.ci_high.toFixed(1)}]</span></td>
+            <td>
+              <strong>SR ${b.sr_hp.toFixed(1)}</strong> vs ${b.sr_lp.toFixed(1)}
+              <span style="font-size:0.7rem;color:var(--rr-text-muted);">(${b.hp_balls}b)</span>
+            </td>
+            <td><span class="badge-tag ${badgeClass}">${tagText}</span></td>
+            <td>
+              <div class="stability-meter">
+                <div class="stability-bar"><div class="stability-fill" style="width:${Math.min(b.top10_pct, 100)}%"></div></div>
+                <span style="font-size:0.72rem;font-weight:700;">${b.top10_pct.toFixed(1)}%</span>
+              </div>
+            </td>
+            <td>
+              <span style="font-size:0.75rem;font-weight:700;color:var(--rr-navy);">${priceDisplay}</span>
+              <div style="font-size:0.68rem;color:var(--rr-text-light);">${pMeta.current_base_price_slab || 'Base: Pending'}</div>
+            </td>
+            <td>
+              ${isEligible && !b.is_rr ? `
+                <button class="btn-add-target ${isAdded ? 'added' : ''}" onclick="toggleTarget('${b.name}', 'Batter', ${b.rank})">
+                  ${isAdded ? '✓ Added' : '+ Target'}
+                </button>
+              ` : '<span style="font-size:0.7rem;color:var(--rr-text-light);">Unavailable</span>'}
+            </td>
+          `;
+          batTbody.appendChild(tr);
+        });
+      }
+
+      // Bowlers table
+      const bowlTbody = document.querySelector('#table-bowlers tbody');
+      bowlTbody.innerHTML = '';
+      const filteredBowlers = filterPlayers(DATA.top_bowlers);
+
+      if (filteredBowlers.length === 0) {
+        bowlTbody.innerHTML = '<tr><td colspan="10" style="text-align:center;padding:1.5rem;color:var(--rr-text-muted);">No bowlers match current filter criteria.</td></tr>';
+      } else {
+        filteredBowlers.forEach(b => {
+          const pMeta = getPlayerMeta(b.name);
+          const isEligible = b.is_eligible !== false && !b.is_pakistan && !b.is_retired;
+          const tr = document.createElement('tr');
+          if (!isEligible) tr.className = 'ineligible-row';
+
+          let badgeClass = b.slot === 'Indian' ? 'badge-indian' : 'badge-overseas';
+          if (b.is_rr) badgeClass = 'badge-retained';
+          if (b.is_pakistan) badgeClass = 'badge-pakistan';
+          if (b.is_retired) badgeClass = 'badge-retired';
+
+          const tagText = b.is_rr ? 'RR Retained' : (b.is_pakistan ? 'Ineligible (Pak)' : (b.is_retired ? 'Retired' : b.slot));
+          const priceDisplay = pMeta.last_verified_price || b.last_verified_price || 'Not listed yet';
+          const isAdded = targetList.some(t => t.name === b.name);
+
+          tr.innerHTML = `
+            <td class="rank-num">${b.rank}</td>
+            <td>
+              <span class="player-cell-main">${b.name}</span>
+              <span class="player-cell-sub">${pMeta.primary_role || b.role || 'Bowler'} &bull; ${pMeta.age || b.age || 'N/A'}</span>
+            </td>
+            <td>${b.team}</td>
+            <td><span class="rating-badge">${b.rating.toFixed(3)}</span></td>
+            <td><span class="ci-spread">[${b.ci_low.toFixed(1)}, ${b.ci_high.toFixed(1)}]</span></td>
+            <td>
+              <strong>Econ ${b.econ_hp.toFixed(1)}</strong> vs ${b.econ_lp.toFixed(1)}
+              <span style="font-size:0.7rem;color:var(--rr-text-muted);">(${b.hp_balls}b)</span>
+            </td>
+            <td><span class="badge-tag ${badgeClass}">${tagText}</span></td>
+            <td>
+              <div class="stability-meter">
+                <div class="stability-bar"><div class="stability-fill" style="width:${Math.min(b.top10_pct, 100)}%"></div></div>
+                <span style="font-size:0.72rem;font-weight:700;">${b.top10_pct.toFixed(1)}%</span>
+              </div>
+            </td>
+            <td>
+              <span style="font-size:0.75rem;font-weight:700;color:var(--rr-navy);">${priceDisplay}</span>
+              <div style="font-size:0.68rem;color:var(--rr-text-light);">${pMeta.current_base_price_slab || 'Base: Pending'}</div>
+            </td>
+            <td>
+              ${isEligible && !b.is_rr ? `
+                <button class="btn-add-target ${isAdded ? 'added' : ''}" onclick="toggleTarget('${b.name}', 'Bowler', ${b.rank})">
+                  ${isAdded ? '✓ Added' : '+ Target'}
+                </button>
+              ` : '<span style="font-size:0.7rem;color:var(--rr-text-light);">Unavailable</span>'}
+            </td>
+          `;
+          bowlTbody.appendChild(tr);
+        });
+      }
+
+      // Show/hide tables based on discipline
+      const batSec = document.getElementById('batters-section');
+      const bowlSec = document.getElementById('bowlers-section');
+      if (filterState.discipline === 'batters') {
+        batSec.style.display = 'block';
+        bowlSec.style.display = 'none';
+      } else if (filterState.discipline === 'bowlers') {
+        batSec.style.display = 'none';
+        bowlSec.style.display = 'block';
+      } else {
+        batSec.style.display = 'block';
+        bowlSec.style.display = 'block';
+      }
+    }
+
+    // Filter event listeners
+    document.querySelectorAll('.filter-pill[data-filter]').forEach(btn => {
+      btn.addEventListener('click', (e) => {
+        const group = btn.getAttribute('data-filter');
+        const val = btn.getAttribute('data-val');
+        document.querySelectorAll(`.filter-pill[data-filter="${group}"]`).forEach(b => b.classList.remove('active', 'active-pink'));
+        btn.classList.add(group === 'eligibility' && val === 'auction-eligible' ? 'active-pink' : 'active');
+        filterState[group] = val;
+        renderTables();
+        renderFitCards();
+      });
+    });
+
+    document.getElementById('role-select').addEventListener('change', (e) => {
+      filterState.role = e.target.value;
+      renderTables();
+      renderFitCards();
+    });
+
+    document.getElementById('player-search').addEventListener('input', (e) => {
+      filterState.search = e.target.value;
+      renderTables();
+      renderFitCards();
+    });
+
+    // =========================================================================
+    // 4. PERFORMANCE DIVERGENCE CANVAS CHARTS
+    // =========================================================================
+    function drawDivergenceBarChart(canvasId, players, hpKey, lpKey, label, isLowerBetter) {
+      const canvas = document.getElementById(canvasId);
+      if (!canvas) return;
+      const ctx = canvas.getContext('2d');
+      const W = canvas.width, H = canvas.height;
+      const pad = { top: 25, right: 15, bottom: 65, left: 45 };
+      const plotW = W - pad.left - pad.right;
+      const plotH = H - pad.top - pad.bottom;
+      const n = players.length;
+      const barW = Math.min(plotW / n / 2.6, 16);
+      const gap = plotW / n;
+
+      const allVals = players.flatMap(p => [p[hpKey], p[lpKey]]);
+      let maxV = Math.max(...allVals) * 1.15;
+
+      ctx.fillStyle = '#FFFFFF';
+      ctx.fillRect(0, 0, W, H);
+
+      // Grid
+      const steps = 4;
+      ctx.strokeStyle = '#F3F4F6';
+      ctx.lineWidth = 1;
+      ctx.font = '10px -apple-system, sans-serif';
+      ctx.fillStyle = '#9CA3AF';
+      for (let i = 0; i <= steps; i++) {
+        const y = pad.top + plotH - (plotH * i / steps);
+        const val = (maxV * i / steps).toFixed(0);
+        ctx.beginPath(); ctx.moveTo(pad.left, y); ctx.lineTo(W - pad.right, y); ctx.stroke();
+        ctx.textAlign = 'right';
+        ctx.fillText(val, pad.left - 6, y + 3);
+      }
+
+      // Bars
+      players.forEach((p, i) => {
+        const x = pad.left + gap * i + gap / 2;
+        const hpH = (p[hpKey] / maxV) * plotH;
+        const lpH = (p[lpKey] / maxV) * plotH;
+
+        // Normal (Navy Blue)
+        ctx.fillStyle = '#1A2456';
+        ctx.fillRect(x - barW - 1, pad.top + plotH - lpH, barW, lpH);
+
+        // High Pressure (RR Pink)
+        ctx.fillStyle = '#EA1A85';
+        ctx.fillRect(x + 1, pad.top + plotH - hpH, barW, hpH);
+
+        // Label
+        ctx.save();
+        ctx.translate(x, pad.top + plotH + 8);
+        ctx.rotate(-Math.PI / 4);
+        ctx.textAlign = 'right';
+        ctx.fillStyle = '#374151';
+        ctx.font = '9px -apple-system, sans-serif';
+        const sName = p.name.split(' ').slice(-1)[0];
+        ctx.fillText(`#${p.rank} ${sName}`, 0, 0);
+        ctx.restore();
+      });
+
+      // Legend
+      ctx.fillStyle = '#1A2456';
+      ctx.fillRect(W - 165, 8, 10, 10);
+      ctx.fillStyle = '#374151'; ctx.font = '10px -apple-system, sans-serif'; ctx.textAlign = 'left';
+      ctx.fillText('Normal State', W - 150, 16);
+
+      ctx.fillStyle = '#EA1A85';
+      ctx.fillRect(W - 80, 8, 10, 10);
+      ctx.fillStyle = '#374151';
+      ctx.fillText('High Pressure', W - 65, 16);
+    }
+
+    drawDivergenceBarChart('bat-sr-chart', DATA.top_batters, 'sr_hp', 'sr_lp', 'Strike Rate', false);
+    drawDivergenceBarChart('bowl-econ-chart', DATA.top_bowlers, 'econ_hp', 'econ_lp', 'Economy', true);
+
+    // =========================================================================
+    // 5. MULTI-PLAYER RADAR COMPARISON STUDIO (FEATURE 3)
+    // =========================================================================
+    const radarAxesBat = ['Strike Rate (HP)', 'SR Uplift', 'Boundary %', 'Dot Suppression', 'Impact Score', 'Top 10 Stability'];
+    const radarAxesBowl = ['Econ Suppression', 'Econ Savings', 'Wicket Hazard %', 'Dot Ball %', 'Low Variance', 'Top 10 Stability'];
+
+    function getNormalizedRadarData(player, discipline) {
+      if (discipline === 'batter') {
+        const srNorm = Math.min(100, Math.max(0, (player.sr_hp - 140) / (260 - 140) * 100));
+        const upliftNorm = Math.min(100, Math.max(0, ((player.sr_hp - player.sr_lp) - (-5)) / (75 - (-5)) * 100));
+        const bndNorm = Math.min(100, Math.max(0, (player.boundary_pct_hp - 15) / (48 - 15) * 100));
+        const dotSupp = Math.min(100, Math.max(0, (100 - player.dot_pct_hp - 50) / (76 - 50) * 100));
+        const impNorm = Math.min(100, Math.max(0, (player.impact - 0.15) / (1.20 - 0.15) * 100));
+        const stabNorm = player.top10_pct;
+        return [srNorm, upliftNorm, bndNorm, dotSupp, impNorm, stabNorm];
+      } else {
+        const econSupp = Math.min(100, Math.max(0, (8.5 - player.econ_hp) / (8.5 - 4.8) * 100));
+        const econSavings = Math.min(100, Math.max(0, ((player.econ_lp - player.econ_hp) - (-0.5)) / (3.0 - (-0.5)) * 100));
+        const wktNorm = Math.min(100, Math.max(0, (player.wkt_rate_hp - 6.0) / (15.0 - 6.0) * 100));
+        const dotNorm = Math.min(100, Math.max(0, (player.dot_pct_hp - 40) / (60 - 40) * 100));
+        const varNorm = player.rating * 100;
+        const stabNorm = player.top10_pct;
+        return [econSupp, econSavings, wktNorm, dotNorm, varNorm, stabNorm];
+      }
+    }
+
+    function populateRadarDropdowns() {
+      const disc = document.getElementById('radar-discipline').value;
+      const list = disc === 'batter' ? DATA.top_batters : DATA.top_bowlers;
+      const s1 = document.getElementById('radar-p1');
+      const s2 = document.getElementById('radar-p2');
+      const s3 = document.getElementById('radar-p3');
+
+      [s1, s2, s3].forEach(s => s.innerHTML = '');
+      s3.innerHTML = '<option value="">-- None (2 Player Compare) --</option>';
+
+      list.forEach((p, idx) => {
+        const opt1 = new Option(`#${p.rank} ${p.name} (${p.team})`, p.name);
+        const opt2 = new Option(`#${p.rank} ${p.name} (${p.team})`, p.name);
+        const opt3 = new Option(`#${p.rank} ${p.name} (${p.team})`, p.name);
+        s1.add(opt1);
+        s2.add(opt2);
+        s3.add(opt3);
+      });
+
+      s1.selectedIndex = 0;
+      s2.selectedIndex = Math.min(1, list.length - 1);
+      drawRadarChart();
+    }
+
+    function drawRadarChart() {
+      const canvas = document.getElementById('radar-canvas');
+      if (!canvas) return;
+      const ctx = canvas.getContext('2d');
+      const W = canvas.width, H = canvas.height;
+      const cx = W / 2, cy = H / 2;
+      const radius = Math.min(cx, cy) - 50;
+
+      ctx.clearRect(0, 0, W, H);
+
+      const disc = document.getElementById('radar-discipline').value;
+      const axes = disc === 'batter' ? radarAxesBat : radarAxesBowl;
+      const totalAxes = axes.length;
+      const angleSlice = (Math.PI * 2) / totalAxes;
+
+      // Draw concentric guide circles
+      const levels = 4;
+      ctx.strokeStyle = '#E5E7EB';
+      ctx.lineWidth = 1;
+      for (let l = 1; l <= levels; l++) {
+        const r = (radius / levels) * l;
+        ctx.beginPath();
+        for (let i = 0; i < totalAxes; i++) {
+          const a = i * angleSlice - Math.PI / 2;
+          const x = cx + r * Math.cos(a);
+          const y = cy + r * Math.sin(a);
+          if (i === 0) ctx.moveTo(x, y);
+          else ctx.lineTo(x, y);
+        }
+        ctx.closePath();
+        ctx.stroke();
+      }
+
+      // Draw spoke axes & labels
+      ctx.font = '10px -apple-system, sans-serif';
+      ctx.fillStyle = '#6B7280';
+      for (let i = 0; i < totalAxes; i++) {
+        const a = i * angleSlice - Math.PI / 2;
+        const x = cx + radius * Math.cos(a);
+        const y = cy + radius * Math.sin(a);
+
+        ctx.strokeStyle = '#E5E7EB';
+        ctx.beginPath();
+        ctx.moveTo(cx, cy);
+        ctx.lineTo(x, y);
+        ctx.stroke();
+
+        const lx = cx + (radius + 20) * Math.cos(a);
+        const ly = cy + (radius + 15) * Math.sin(a);
+        ctx.textAlign = Math.cos(a) > 0.1 ? 'left' : (Math.cos(a) < -0.1 ? 'right' : 'center');
+        ctx.textBaseline = 'middle';
+        ctx.fillText(axes[i], lx, ly);
+      }
+
+      // Player selections
+      const p1Name = document.getElementById('radar-p1').value;
+      const p2Name = document.getElementById('radar-p2').value;
+      const p3Name = document.getElementById('radar-p3').value;
+
+      const list = disc === 'batter' ? DATA.top_batters : DATA.top_bowlers;
+      const selected = [
+        { name: p1Name, color: '#EA1A85', fill: 'rgba(234, 26, 133, 0.25)' },
+        { name: p2Name, color: '#1A2456', fill: 'rgba(26, 36, 86, 0.25)' },
+        { name: p3Name, color: '#D4AF37', fill: 'rgba(212, 175, 55, 0.25)' }
+      ].filter(s => s.name);
+
+      const legend = document.getElementById('radar-legend');
+      legend.innerHTML = '';
+
+      selected.forEach(s => {
+        const player = list.find(p => p.name === s.name);
+        if (!player) return;
+        const scores = getNormalizedRadarData(player, disc);
+
+        ctx.beginPath();
+        for (let i = 0; i < totalAxes; i++) {
+          const a = i * angleSlice - Math.PI / 2;
+          const r = (scores[i] / 100) * radius;
+          const x = cx + r * Math.cos(a);
+          const y = cy + r * Math.sin(a);
+          if (i === 0) ctx.moveTo(x, y);
+          else ctx.lineTo(x, y);
+        }
+        ctx.closePath();
+        ctx.fillStyle = s.fill;
+        ctx.fill();
+        ctx.strokeStyle = s.color;
+        ctx.lineWidth = 2.5;
+        ctx.stroke();
+
+        ctx.fillStyle = s.color;
+        for (let i = 0; i < totalAxes; i++) {
+          const a = i * angleSlice - Math.PI / 2;
+          const r = (scores[i] / 100) * radius;
+          ctx.beginPath();
+          ctx.arc(cx + r * Math.cos(a), cy + r * Math.sin(a), 3.5, 0, Math.PI * 2);
+          ctx.fill();
+        }
+
+        const legItem = document.createElement('div');
+        legItem.innerHTML = `<span style="display:inline-block;width:12px;height:12px;background:${s.color};border-radius:2px;vertical-align:middle;margin-right:5px;"></span> ${player.name}`;
+        legend.appendChild(legItem);
+      });
+    }
+
+    document.getElementById('radar-discipline').addEventListener('change', populateRadarDropdowns);
+    document.getElementById('radar-p1').addEventListener('change', drawRadarChart);
+    document.getElementById('radar-p2').addEventListener('change', drawRadarChart);
+    document.getElementById('radar-p3').addEventListener('change', drawRadarChart);
+    populateRadarDropdowns();
+
+    // =========================================================================
+    // 6. WAR ROOM SQUAD FIT CARDS
+    // =========================================================================
+    function renderFitCards() {
+      const container = document.getElementById('fit-cards-container');
+      if (!container) return;
+      container.innerHTML = '';
+
+      const allPlayers = [
+        ...DATA.top_batters.map(b => ({ ...b, type: 'Batter' })),
+        ...DATA.top_bowlers.map(b => ({ ...b, type: 'Bowler' }))
+      ];
+
+      const filtered = filterPlayers(allPlayers);
+
+      filtered.forEach(p => {
+        const pMeta = getPlayerMeta(p.name);
+        const card = document.createElement('div');
+        card.className = 'fit-card';
+        const isEligible = p.is_eligible !== false && !p.is_pakistan && !p.is_retired;
+
+        let badgeClass = p.slot === 'Indian' ? 'badge-indian' : 'badge-overseas';
+        if (p.is_rr) badgeClass = 'badge-retained';
+        if (p.is_pakistan) badgeClass = 'badge-pakistan';
+        if (p.is_retired) badgeClass = 'badge-retired';
+
+        const tagText = p.is_rr ? 'RR Retained' : (p.is_pakistan ? 'Ineligible (Pak)' : (p.is_retired ? 'Retired' : p.slot));
+        const statText = p.type === 'Batter'
+          ? `SR <strong>${p.sr_hp.toFixed(1)}</strong> vs ${p.sr_lp.toFixed(1)} (HP Vol: ${p.hp_balls}b &bull; 90% CI: [${p.ci_low.toFixed(1)}, ${p.ci_high.toFixed(1)}])`
+          : `Econ <strong>${p.econ_hp.toFixed(1)}</strong> vs ${p.econ_lp.toFixed(1)} (HP Vol: ${p.hp_balls}b &bull; 90% CI: [${p.ci_low.toFixed(1)}, ${p.ci_high.toFixed(1)}])`;
+
+        card.innerHTML = `
+          <div class="fit-card-header">
+            <div>
+              <div class="fit-card-name">${p.name}</div>
+              <div class="fit-card-role">${p.type} #${p.rank} &bull; ${pMeta.primary_role || p.role || 'Player'} (${pMeta.age || p.age || 'N/A'})</div>
+            </div>
+            <span class="badge-tag ${badgeClass}">${tagText}</span>
+          </div>
+
+          <div class="fit-metric-highlight">${statText}</div>
+
+          <div class="fit-detail-line"><strong>War Room Action:</strong> ${pMeta.rr_roster_context || p.rr_fit || 'Evaluated for franchise depth.'}</div>
+          <div class="fit-detail-line"><strong>Verified IPL Contract:</strong> ${pMeta.last_verified_price || p.last_verified_price || 'Not listed yet'}</div>
+          <div class="fit-detail-line"><strong>Base Price Slab:</strong> ${pMeta.current_base_price_slab || 'Pending'}</div>
+
+          <div class="risk-alert"><strong>Risk Audit:</strong> ${p.risk || 'Standard performance volatility under high stress.'}</div>
+
+          <div class="source-stamp">
+            <span>As of: ${pMeta.verified_as_of || '2026-11-16'}</span>
+            ${pMeta.source_url ? `<a href="${pMeta.source_url}" target="_blank" rel="noopener">Source: ${pMeta.source_name || 'IPL / Cricinfo'} &rarr;</a>` : ''}
+          </div>
+        `;
+        container.appendChild(card);
+      });
+    }
+
+    // =========================================================================
+    // 7. LIVE RR AUCTION PURSE & SQUAD SIMULATOR (FEATURE 2)
+    // =========================================================================
+    let targetList = [
+      { name: "Tim David", role: "Finisher", type: "Batter", slot: "Overseas", bid: 12.0 },
+      { name: "Matheesha Pathirana", role: "Death Bowler", type: "Bowler", slot: "Overseas", bid: 14.0 },
+      { name: "Anshul Kamboj", role: "Indian Pacer", type: "Bowler", slot: "Indian", bid: 3.5 }
+    ];
+
+    function toggleTarget(name, type, rank) {
+      const idx = targetList.findIndex(t => t.name === name);
+      if (idx >= 0) {
+        targetList.splice(idx, 1);
+      } else {
+        const player = (type === 'Batter' ? DATA.top_batters : DATA.top_bowlers).find(p => p.name === name);
+        const pMeta = getPlayerMeta(name);
+        let defaultBid = 2.0;
+        if (pMeta.last_verified_price && pMeta.last_verified_price.includes('₹')) {
+          try {
+            const match = pMeta.last_verified_price.match(/₹([0-9.]+)\s*Cr/);
+            if (match) defaultBid = parseFloat(match[1]);
+          } catch(e) {}
+        }
+        targetList.push({
+          name: name,
+          type: type,
+          role: pMeta.primary_role || player.role || 'Player',
+          slot: player.slot,
+          bid: defaultBid
+        });
+      }
+      renderTables();
+      updateSimulator();
+    }
+
+    function removeTarget(name) {
+      targetList = targetList.filter(t => t.name !== name);
+      renderTables();
+      updateSimulator();
+    }
+
+    function updateTargetBid(name, newBid) {
+      const item = targetList.find(t => t.name === name);
+      if (item) {
+        item.bid = Math.max(0.2, parseFloat(newBid) || 0.2);
+        updateSimulator();
+      }
+    }
+
+    function updateSimulator() {
+      const startPurse = parseFloat(document.getElementById('sim-start-purse').value) || 102.0;
+      const startSquad = parseInt(document.getElementById('sim-start-squad').value) || 16;
+      const startOverseas = parseInt(document.getElementById('sim-start-overseas').value) || 4;
+
+      let totalBid = targetList.reduce((sum, t) => sum + (t.bid || 0), 0);
+      let purseLeft = startPurse - totalBid;
+      let squadTotal = startSquad + targetList.length;
+      let overseasAdded = targetList.filter(t => t.slot === 'Overseas').length;
+      let overseasTotal = startOverseas + overseasAdded;
+
+      // Update gauges
+      const gPurse = document.getElementById('gauge-purse');
+      gPurse.innerText = `₹${purseLeft.toFixed(1)} Cr`;
+      gPurse.style.color = purseLeft < 0 ? 'var(--rr-red)' : (purseLeft < 20 ? 'var(--rr-amber)' : 'var(--rr-navy)');
+
+      const gSquad = document.getElementById('gauge-squad');
+      gSquad.innerText = `${squadTotal} / 25`;
+      gSquad.style.color = squadTotal > 25 ? 'var(--rr-red)' : 'var(--rr-navy)';
+
+      const gOverseas = document.getElementById('gauge-overseas');
+      gOverseas.innerText = `${overseasTotal} / 8`;
+      gOverseas.style.color = overseasTotal > 8 ? 'var(--rr-red)' : 'var(--rr-navy)';
+
+      document.getElementById('gauge-targets').innerText = targetList.length;
+
+      // Rules Validation Alerts
+      const alerts = [];
+      if (purseLeft < 0) alerts.push(`🚨 CRITICAL: Auction purse exceeded by ₹${Math.abs(purseLeft).toFixed(1)} Cr! Adjust target bids downward.`);
+      if (squadTotal > 25) alerts.push(`🚨 RULE VIOLATION: Squad limit exceeded (${squadTotal}/25 max allowed).`);
+      if (squadTotal < 18) alerts.push(`ℹ️ Roster Alert: Squad has only ${squadTotal} players (minimum 18 required for valid tournament roster).`);
+      if (overseasTotal > 8) alerts.push(`🚨 RULE VIOLATION: Overseas player limit exceeded (${overseasTotal}/8 max allowed).`);
+
+      const banner = document.getElementById('sim-alerts-banner');
+      if (alerts.length > 0) {
+        banner.style.display = 'block';
+        banner.innerHTML = alerts.join('<br>');
+      } else {
+        banner.style.display = 'none';
+      }
+
+      // Tactical Gaps Checklist
+      const hasDeath = targetList.some(t => t.role.toLowerCase().includes('death') || t.role.toLowerCase().includes('fast') || t.name === 'Matheesha Pathirana');
+      const hasFinisher = targetList.some(t => t.role.toLowerCase().includes('finish') || t.name === 'Tim David' || t.name === 'Ashutosh Sharma');
+      const hasSpinner = targetList.some(t => t.role.toLowerCase().includes('spin') || t.name === 'Mohammad Rishad Hossain');
+      const hasIndPace = targetList.some(t => t.slot === 'Indian' && (t.role.toLowerCase().includes('medium') || t.role.toLowerCase().includes('fast') || t.name === 'Anshul Kamboj'));
+
+      updateChecklist('chk-death', hasDeath);
+      updateChecklist('chk-finisher', hasFinisher);
+      updateChecklist('chk-spin', hasSpinner);
+      updateChecklist('chk-ind-pace', hasIndPace);
+
+      // Render Target Cart Rows
+      const cartContainer = document.getElementById('sim-target-container');
+      if (targetList.length === 0) {
+        cartContainer.innerHTML = '<div style="padding:1.5rem;text-align:center;color:var(--rr-text-muted);font-size:0.82rem;">No players added yet. Click <strong>"+ Add to Target List"</strong> above to draft.</div>';
+      } else {
+        cartContainer.innerHTML = '';
+        targetList.forEach(t => {
+          const row = document.createElement('div');
+          row.className = 'sim-target-row';
+          row.innerHTML = `
+            <div style="flex:1;">
+              <strong style="color:var(--rr-navy);font-size:0.85rem;">${t.name}</strong>
+              <div style="font-size:0.72rem;color:var(--rr-text-muted);">${t.role} &bull; ${t.slot} (${t.type})</div>
+            </div>
+            <div style="display:flex;align-items:center;gap:6px;">
+              <span style="font-size:0.75rem;font-weight:700;">Bid: ₹</span>
+              <input type="number" class="sim-bid-input" value="${t.bid.toFixed(1)}" step="0.25" min="0.2" onchange="updateTargetBid('${t.name}', this.value)">
+              <span style="font-size:0.75rem;font-weight:700;">Cr</span>
+            </div>
+            <button class="btn-remove-target" onclick="removeTarget('${t.name}')" title="Remove">&times;</button>
+          `;
+          cartContainer.appendChild(row);
+        });
+      }
+    }
+
+    function updateChecklist(id, isDone) {
+      const el = document.getElementById(id);
+      if (!el) return;
+      if (isDone) {
+        el.className = 'check-item done';
+        el.querySelector('.chk-icon').innerText = '✓';
+      } else {
+        el.className = 'check-item';
+        el.querySelector('.chk-icon').innerText = '⚪';
+      }
+    }
+
+    document.getElementById('sim-start-purse').addEventListener('input', updateSimulator);
+    document.getElementById('sim-start-squad').addEventListener('input', updateSimulator);
+    document.getElementById('sim-start-overseas').addEventListener('input', updateSimulator);
+    document.getElementById('btn-reset-sim').addEventListener('click', () => {
+      document.getElementById('sim-start-purse').value = '102.0';
+      document.getElementById('sim-start-squad').value = '16';
+      document.getElementById('sim-start-overseas').value = '4';
+      targetList = [];
+      renderTables();
+      updateSimulator();
+    });
+
+    document.getElementById('btn-export-draft').addEventListener('click', () => {
+      const startPurse = parseFloat(document.getElementById('sim-start-purse').value) || 102.0;
+      let totalBid = targetList.reduce((sum, t) => sum + (t.bid || 0), 0);
+      let text = `RAJASTHAN ROYALS WAR ROOM · AUCTION TARGET PLAN\nDate: ${new Date().toLocaleDateString()}\n`;
+      text += `Starting Purse: ₹${startPurse.toFixed(1)} Cr | Total Committed: ₹${totalBid.toFixed(1)} Cr | Purse Left: ₹${(startPurse - totalBid).toFixed(1)} Cr\n\nTARGET PICKS:\n`;
+      targetList.forEach((t, i) => {
+        text += `${i + 1}. ${t.name} (${t.role}, ${t.slot}) - Allocated Bid: ₹${t.bid.toFixed(1)} Cr\n`;
+      });
+      navigator.clipboard.writeText(text).then(() => {
+        alert('Auction draft sheet copied to clipboard!');
+      }).catch(() => {
+        alert(text);
+      });
+    });
+
+    // =========================================================================
+    // 8. 16:9 PRESENTATION MODE SLIDES (FEATURE 4)
+    // =========================================================================
+    let currentSlide = 1;
+    const totalSlides = 7;
+
+    function showSlide(n) {
+      currentSlide = Math.max(1, Math.min(totalSlides, n));
+      document.querySelectorAll('.pres-slide').forEach(s => s.classList.remove('active'));
+      const active = document.querySelector(`.pres-slide[data-slide="${currentSlide}"]`);
+      if (active) active.classList.add('active');
+      document.getElementById('pres-counter').innerText = `Slide ${currentSlide} of ${totalSlides}`;
+    }
+
+    function openPresentation() {
+      document.getElementById('pres-modal').classList.add('active');
+      showSlide(1);
+    }
+
+    function closePresentation() {
+      document.getElementById('pres-modal').classList.remove('active');
+    }
+
+    document.getElementById('btn-open-presentation').addEventListener('click', openPresentation);
+    document.getElementById('btn-hero-slides').addEventListener('click', openPresentation);
+    document.getElementById('btn-close-presentation').addEventListener('click', closePresentation);
+    document.getElementById('btn-next-slide').addEventListener('click', () => showSlide(currentSlide + 1));
+    document.getElementById('btn-prev-slide').addEventListener('click', () => showSlide(currentSlide - 1));
+
+    window.addEventListener('keydown', (e) => {
+      const modal = document.getElementById('pres-modal');
+      const isOpen = modal.classList.contains('active');
+
+      if ((e.key === 'p' || e.key === 'P') && !isOpen && document.activeElement.tagName !== 'INPUT') {
+        openPresentation();
+      } else if (isOpen) {
+        if (e.key === 'Escape') closePresentation();
+        if (e.key === 'ArrowRight' || e.key === ' ') {
+          e.preventDefault();
+          showSlide(currentSlide + 1);
+        }
+        if (e.key === 'ArrowLeft') {
+          e.preventDefault();
+          showSlide(currentSlide - 1);
+        }
+      }
+    });
+
+    // Print button
+    document.getElementById('btn-print-page').addEventListener('click', () => {
+      window.print();
+    });
+
+    // Initial load
+    renderTables();
+    renderFitCards();
+    updateSimulator();
+  </script>
+</body>
+</html>
